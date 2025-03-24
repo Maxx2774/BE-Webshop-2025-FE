@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <title>Document</title>
 </head>
 <body style="background-color: #f9fafb;">
@@ -28,66 +30,73 @@
     <!-- Main Content-->
     <main class="container d-flex flex-nowrap gap-4 mt-4">
         <!-- Aside links -->
-        <div class="flex-shrink-0 p-3" style="width: 280px;">
-            <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
-              <svg class="bi pe-none me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-              <span class="fs-5 fw-semibold">Collapsible</span>
-            </a>
-            <ul class="list-unstyled ps-0">
-              <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-                  Home
-                </button>
-                <div class="collapse show" id="home-collapse">
-                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Updates</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Reports</a></li>
-                  </ul>
-                </div>
-              </li>
-              <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                  Dashboard
-                </button>
-                <div class="collapse" id="dashboard-collapse">
-                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Overview</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Weekly</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Monthly</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Annually</a></li>
-                  </ul>
-                </div>
-              </li>
-              <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-                  Orders
-                </button>
-                <div class="collapse" id="orders-collapse">
-                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Processed</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Shipped</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Returned</a></li>
-                  </ul>
-                </div>
-              </li>
-              <li class="border-top my-3"></li>
-              <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-                  Account
-                </button>
-                <div class="collapse" id="account-collapse">
-                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New...</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Settings</a></li>
-                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign out</a></li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
-        </div>
+      <div class="flex-shrink-0 p-3" style="width: 280px; background-color: transparent;">
+        <a href="/" class="d-flex align-items-center pb-3 mb-0 link-body-emphasis text-decoration-none">
+          <span class="fs-5 fw-semibold">Rekommenderat</span>
+      </a>
+      <ul class="list-unstyled">
+          <li>
+              <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                <i class="bi bi-heart-fill me-2 text-danger"></i> Sparade Produkter
+              </a>
+          </li>
+          <li>
+              <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                <i class="bi bi-star-fill me-2 text-warning"></i> Aktuella Erbjudanden
+              </a>
+          </li>
+          <li>
+              <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                  <i class="bi bi-cart3 me-2"></i> Alla produkter
+              </a>
+          </li>
+      </ul>
+        <a href="/" class="d-flex align-items-center pb-3 mb-0 link-body-emphasis text-decoration-none">
+            <span class="fs-5 fw-semibold">Kategorier</span>
+        </a>
+        <ul class="list-unstyled">
+            <li>
+                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                    <i class="bi bi-cup-straw me-2"></i> Drycker
+                </a>
+            </li>
+            <li>
+                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                  <i class="fa fa-candy-cane me-2"></i> Godis & Snacks
+                </a>
+            </li>
+            <li>
+                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                  <i class="bi bi-box-seam me-2"></i> Mejeri
+                </a>
+            </li>
+            <li>
+                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                    <i class="bi bi-egg-fried me-2"></i> Frukost
+                </a>
+            </li>
+            <li>
+                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                    <i class="bi bi-box-seam me-2"></i> Frysta Varor
+                </a>
+            </li>
+            <li>
+                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                    <i class="bi bi-apple me-2"></i> Frukt & Grönsaker
+                </a>
+            </li>
+            <li>
+                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                    <i class="bi bi-emoji-smile me-2"></i> Barn & Baby
+                </a>
+            </li>
+            <li>
+                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                    <i class="bi bi-heart-pulse me-2"></i> Träning & Hälsa
+                </a>
+            </li>
+        </ul>
+      </div>
 
         <!-- Product cards -->
         <div class="row row-cols-1 row-cols-md-4 g-4 mt-4">
@@ -131,6 +140,25 @@
     </main>
 
       <!-- Footer -->
-      
+      <script>
+        document.querySelectorAll(".category-link").forEach(item => {
+            item.addEventListener("click", function(event) {
+                event.preventDefault(); // Prevent link from navigating
+                document.querySelectorAll(".category-link").forEach(link => {
+                    link.classList.remove("border", "border-primary", "bg-white", "rounded", "px-2");
+                });
+                this.classList.add("border", "border-primary", "bg-white", "rounded", "px-2");
+            });
+        });
+        document.querySelectorAll(".category-link").forEach(item => {
+        item.addEventListener("mouseover", function() {
+            this.style.backgroundColor = "white";
+        });
+
+        item.addEventListener("mouseout", function() {
+            this.style.backgroundColor = "transparent"; // Återställ färgen när musen lämnar
+        });
+    });
+    </script>
 </body>
 </html>
