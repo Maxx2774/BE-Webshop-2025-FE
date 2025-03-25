@@ -104,3 +104,8 @@ body {
 footer a:hover {
   text-decoration: underline !important;
 }
+
+.card {
+  border: 0;
+  padding-top: 10px;
+}

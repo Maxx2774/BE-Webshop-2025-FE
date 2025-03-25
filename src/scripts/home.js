@@ -5,7 +5,7 @@ const productData = [
       category: "Mat",
       name: "Laxfilé",
       description: "Fräsch och saftig laxfilé, perfekt för stekning eller grillning, full av omega-3.",
-      in_stock: 50,
+      in_stock: false,
       image_url: "https://bilder.kolonial.no/prod/local_products/2dd8e210-c8c5-48bc-8fc7-2a198fdcf7f6.jpg?auto=format&fit=max&w=1000&s=8462918ce26a92366dab12cfba5cf37c",
       price: 149,
       discount: 10 // i procent
@@ -126,66 +126,73 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const loadProducts = (sectionId) => {
-    const productListDiv = document.getElementById(`${sectionId}-product-list`);
-    const products = productData.slice(0,4);
+  const productListDiv = document.getElementById(`${sectionId}-product-list`);
+  const products = productData.slice(0,4);
     
-    products.forEach(product => {
-        const productCard = createProductCard(product);
-        productListDiv.append(productCard)
-    });
+  products.forEach(product => {
+    const productCard = createProductCard(product);
+    productListDiv.append(productCard)
+  });
 }
 
 // Skapa produktkort
 const createProductCard = (product) => {
-    const currencySek = new Intl.NumberFormat('sv-SE', { style: 'currency', currency: 'SEK' });
+  const currencySek = new Intl.NumberFormat('sv-SE', { style: 'currency', currency: 'SEK' });
 
-    const colDiv = document.createElement("div");
-    colDiv.classList.add("col");
+  const colDiv = document.createElement("div");
+  colDiv.classList.add("col");
 
-    const anchor = document.createElement("a");
-    anchor.classList.add("text-decoration-none");
-    anchor.setAttribute("data-id", product.id)
-    anchor.setAttribute("data-bs-toggle", "modal")
-    anchor.setAttribute("data-bs-target", "#productModal")
-    anchor.href = "#"
+  const anchor = document.createElement("a");
+  anchor.classList.add("text-decoration-none");
+  anchor.setAttribute("data-id", product.id)
+  anchor.setAttribute("data-bs-toggle", "modal")
+  anchor.setAttribute("data-bs-target", "#productModal")
+  anchor.href = "#"
 
-    const cardDiv = document.createElement("div");
-    cardDiv.classList.add("card");
+  const cardDiv = document.createElement("div");
+  cardDiv.classList.add("card", "shadow-sm");
 
-    const cardImg = document.createElement("img");
-    cardImg.classList.add("card-img-top");
-    cardImg.style.height = "200px";
-    cardImg.src = product.image_url;
+  const cardImg = document.createElement("img");
+  cardImg.classList.add("card-img-top");
+  cardImg.style.height = "200px";
+  cardImg.src = product.image_url;
 
-    const cardBody = document.createElement("div");
-    cardBody.classList.add("card-body");
+  const cardBody = document.createElement("div");
+  cardBody.classList.add("card-body");
 
-    const cardTitle = document.createElement("p");
-    cardTitle.classList.add("card-title", "text-center");
-    cardTitle.textContent = product.name;
+  const cardTitle = document.createElement("p");
+  cardTitle.classList.add("card-title", "text-center");
+  cardTitle.textContent = product.name;
 
-    const cardPrice = document.createElement("p");
-    cardPrice.classList.add("card-text", "text-center", "text-danger", "h5");
-    cardPrice.textContent = currencySek.format(product.price);
+  const cardPrice = document.createElement("p");
+  cardPrice.classList.add("card-text", "text-center", "text-danger", "h5");
+  cardPrice.textContent = currencySek.format(product.price);
 
-    const cardAddToCartButton = document.createElement("button");
-    cardAddToCartButton.classList.add("btn", "btn-primary", "w-100", "shadow-sm")
-    cardAddToCartButton.textContent = "Köp";
+  const cardAddToCartButton = document.createElement("button");
+  cardAddToCartButton.classList.add("btn", "btn-primary", "w-100", "shadow-sm")
+  cardAddToCartButton.textContent = "Köp";
 
-    cardBody.append(cardTitle, cardPrice, cardAddToCartButton);
-    cardDiv.append(cardImg, cardBody);
-    anchor.append(cardDiv)
-    colDiv.append(anchor);
+  cardBody.append(cardTitle, cardPrice, cardAddToCartButton);
+  cardDiv.append(cardImg, cardBody);
+  anchor.append(cardDiv)
+  colDiv.append(anchor);
 
-    return colDiv;
+  return colDiv;
 }
 
 document.getElementById("productModal").addEventListener("show.bs.modal", (event) => {
-    const productId = Number(event.relatedTarget.dataset.id);
-    const currentProduct = productData.find(product => product.id === productId);
+  const productId = Number(event.relatedTarget.dataset.id);
+  const currentProduct = productData.find(product => product.id === productId);
 
-    const img = document.getElementById("img");
-    img.src = currentProduct.image_url;
-    img.style.height = "200px";
-    document.getElementById("name").textContent = currentProduct.name;
+  const img = document.getElementById("img");
+  img.src = currentProduct.image_url;
+  img.style.height = "200px";
+
+  const stockBadge = document.getElementById("stock");
+  const stockClass = currentProduct.in_stock ? "text-bg-success" : "text-bg-danger";
+  const stockText = currentProduct.in_stock ? "I lager" : "Ej i lager";
+  stockBadge.classList.add("badge", stockClass);
+  stockBadge.textContent = stockText;
+
+  document.getElementById("name").textContent = currentProduct.name;
 });
