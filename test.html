@@ -37,17 +37,17 @@
       </a>
       <ul class="list-unstyled">
           <li>
-              <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+              <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 fw-semibold category-link">
                 <i class="bi bi-heart-fill me-2 text-danger"></i> Sparade Produkter
               </a>
           </li>
           <li>
-              <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+              <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 fw-semibold category-link">
                 <i class="bi bi-star-fill me-2 text-warning"></i> Aktuella Erbjudanden
               </a>
           </li>
           <li>
-              <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+              <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 fw-semibold category-link">
                   <i class="bi bi-cart3 me-2"></i> Alla produkter
               </a>
           </li>
@@ -146,9 +146,10 @@
             item.addEventListener("click", function(event) {
                 event.preventDefault(); // Prevent link from navigating
                 document.querySelectorAll(".category-link").forEach(link => {
-                    link.classList.remove("border", "border-primary", "bg-white", "rounded", "px-2");
+                    link.classList.remove("border", "border-2", "border-primary", "bg-white", "rounded", "px-2");
                 });
-                this.classList.add("border", "border-primary", "bg-white", "rounded", "px-2");
+                this.classList.add("border", "border-2", "border-primary", "bg-white", "rounded", "px-2");
+                this.style.borderColor = "#0d47a1";
             });
         });
         document.querySelectorAll(".category-link").forEach(item => {
