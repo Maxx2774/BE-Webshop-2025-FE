@@ -1,17 +1,22 @@
-
 export function getBaseUrl() {
-  if (!href.includes('localhost')) {
-    return "https://be-grupp-2.vercel.app/"
+  console.log(window.location.href)
+  if (window.location.href.includes('localhost')) {
+    return "https://webshopbackend.vercel.app/"
   }
-  return "http://localhost:3000/";
+  return "http://localhost:5500/";
 }
-export async function fetchProducts(endpoint = "api/products") {
-  //! DONT USE THIS IN PRODUCTION
+export async function fetchProducts(endpoint = "products") {
   const url = `${getBaseUrl()}${endpoint}`;
-  const response = await fetch(url);
-  if(response.ok){
+  
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    
     const data = await response.json();
-    return data;
+    
+    return Array.isArray(data.products) ? data.products : [];
+  } catch (error) {
+    console.error("Fetch error:", error);
+    return [];
   }
-  return [];    
 }
