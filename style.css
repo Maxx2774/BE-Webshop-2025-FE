@@ -10,6 +10,27 @@ body {
   min-height: 100vh;
 }
 
+.b-example-vr {
+  height: 100vh;
+}
+
+.bi {
+  vertical-align: -.125em;
+  fill: currentColor;
+}
+
+.bd-mode-toggle .dropdown-menu .active .bi {
+  display: block !important;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background-color: #0084d1;
+}
+
+.nav-pills .nav-link:hover {
+  background-color: #0084d1;
+}
+
 /* Header */
 .site-header {
   background: #eaeaea;
@@ -103,11 +124,6 @@ body {
 
 footer a:hover {
   text-decoration: underline !important;
-}
-
-.card {
-  border: 0;
-  padding-top: 10px;
 }
 
 .list-group-horizontal>.list-group-item+.list-group-item, .list-group-horizontal>.list-group-item:first-child:not(:last-child) { 
