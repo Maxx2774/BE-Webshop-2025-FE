@@ -1,44 +1,204 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hakim Livs</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
 
-    <!-- HEADER -->
-    <header class="site-header">
-      <nav>
-        <a href="index.html" class="logo">Hakim Livs</a>
-        <ul class="nav-links">
-          <li><a href="products.html">Products</a></li>
-          <li><a href="cart.html">Cart (0)</a></li>
-          <li><a href="login.html">Login</a></li>
-        </ul>
-      </nav>
-    </header>
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="src/scripts/home.js" type="module" defer></script>
 
-    <!-- MAIN CONTENT -->
-    <main class="main-content">
-      <h1>Welcome to Hakim Livs</h1>
-        <div id="products"></div>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="site-footer">
-      <div class="footer-content">
-        <p>&copy; 2024 Hakim Livs. All rights reserved.</p>
-        <div class="footer-links">
-          <a href="/about">About</a>
-          <a href="/contact">Contact</a>
-          <a href="/terms">Terms</a>
+    <title>Document</title>
+</head>
+<body style="background-color: #f9fafb;">
+    <!-- Nav -->
+    <nav class="navbar bg-white shadow-sm">
+        <div class="container d-flex justify-content-center gap-4">
+            <div class="me-auto">
+                <a class="navbar-brand" href="#">
+                    <img src="HAKIM_Livs_4.png"  alt="Bootstrap" height="50">
+                </a>
+            </div>
+            <div class="px-3 me-auto"  style="width: 40%;">
+                <input type="text" class="form-control w-100" id="exampleFormControlInput1" placeholder="Sök produkter...">
+            </div>
+            <div>
+              <a href="#" class="text-dark fs-4"><i class="bi bi-person me-5"></i></a>
+              <a href="#" class="text-dark fs-4"><i class="bi bi-cart"></i></a>
+            </div>
         </div>
+    </nav>
+
+    <!-- Main Content-->
+    <main class="container d-flex flex-nowrap gap-4 py-4">
+        <!-- Aside links -->
+      <div class="flex-shrink-0" style="width: 280px; background-color: transparent;">
+        <a href="/" class="d-flex align-items-center pb-3 mb-0 link-body-emphasis text-decoration-none">
+          <span class="fs-5 fw-semibold">Rekommenderat</span>
+      </a>
+      <ul class="list-unstyled">
+          <li>
+              <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 fw-semibold category-link">
+                <i class="bi bi-heart-fill me-2 text-danger"></i> Sparade Produkter
+              </a>
+          </li>
+          <li>
+              <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 fw-semibold category-link">
+                <i class="bi bi-star-fill me-2 text-warning"></i> Aktuella Erbjudanden
+              </a>
+          </li>
+          <li>
+              <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 fw-semibold category-link">
+                  <i class="bi bi-cart3 me-2"></i> Alla produkter
+              </a>
+          </li>
+      </ul>
+        <a href="/" class="d-flex align-items-center pb-3 mb-0 link-body-emphasis text-decoration-none">
+            <span class="fs-5 fw-semibold">Kategorier</span>
+        </a>
+        <ul class="list-unstyled">
+            <li>
+                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                    <i class="bi bi-cup-straw me-2"></i> Drycker
+                </a>
+            </li>
+            <li>
+                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                  <i class="fa fa-candy-cane me-2"></i> Godis & Snacks
+                </a>
+            </li>
+            <li>
+                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                  <i class="bi bi-box-seam me-2"></i> Mejeri
+                </a>
+            </li>
+            <li>
+                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                    <i class="bi bi-egg-fried me-2"></i> Frukost
+                </a>
+            </li>
+            <li>
+                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                    <i class="bi bi-box-seam me-2"></i> Frysta Varor
+                </a>
+            </li>
+            <li>
+                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                    <i class="bi bi-apple me-2"></i> Frukt & Grönsaker
+                </a>
+            </li>
+            <li>
+                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                    <i class="bi bi-emoji-smile me-2"></i> Barn & Baby
+                </a>
+            </li>
+            <li>
+                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 category-link">
+                    <i class="bi bi-heart-pulse me-2"></i> Träning & Hälsa
+                </a>
+            </li>
+        </ul>
+      </div>
+
+      <div>
+        <!-- Product cards -->
+        <div class="pb-4">
+          <p class="fs-4 fw-semibold mb-3">Populärt just nu</p>
+          <ul class="list-group list-group-horizontal" id="popular-product-list"></ul>
+        </div>
+
+        <div class="pt-4">
+          <p class="fs-4 fw-semibold mb-3">Senaste produkter</p>
+          <ul class="list-group list-group-horizontal" id="new-product-list"></ul>
+        </div>
+
+      </div>
+    </main>
+    
+    <footer class="text-light py-4" style="background-color: #024a70">
+      <div class="container px-4">
+        <div class="row">
+          <div class="col">
+            <h3 class="mb-4">Hakim Livs</h3>
+            <ul class="list-unstyled d-flex flex-column gap-2 border-start px-3">
+              <li><a href="#" class="text-decoration-none text-light">Adress</a></li>
+              <li><a href="#" class="text-decoration-none text-light">Telefon</a></li>
+              <li><a href="#" class="text-decoration-none text-light">Email</a></li>
+              <li><a href="#" class="text-decoration-none text-light">kontakta Oss</a></li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4 class="mb-4">FAQ</h4>
+            <ul class="list-unstyled d-flex flex-column gap-2 border-start border-white px-3">
+              <li><a href="#" class="text-decoration-none text-light">Om Hakim Livs</a></li>
+              <li><a href="#" class="text-decoration-none text-light">Vanliga frågor & Svar</a></li>
+              <li><a href="#" class="text-decoration-none text-light">Leverans & Frakt</a></li>
+              <li><a href="#" class="text-decoration-none text-light">Nyhetsbrev</a></li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4 class="mb-4">The Fine Print</h4>
+            <ul class="list-unstyled d-flex flex-column gap-2 border-start px-3">
+              <li><a href="#" class="text-decoration-none text-light mb-2">Cookie Policy</a></li>
+              <li><a href="#" class="text-decoration-none text-light mb-2">Integritets-​policy</a></li>
+              <li><a href="#" class="text-decoration-none text-light mb-2">Allmänna villkor</a></li>
+              <li><a href="#" class="text-decoration-none text-light mb-2">Cookie-inställningar</a></li>
+            </ul>
+          </div>
+          <div class="col">
+            <h4 class="mb-4">Social Media</h4>
+            <div class="d-flex gap-3">
+              <a href="#" class="text-primary fs-1"><i class="fab fa-facebook"></i></a>
+              <a href="#" class="text-info fs-1"><i class="fab fa-twitter"></i></a>
+              <a href="#" class="text-danger fs-1"><i class="fab fa-instagram"></i></a>
+          </div>
+          </div>
+        </div>
+        <hr>
+        <p>2025 &copy All rights reserved</p>
+
       </div>
     </footer>
 
-    <!-- PAGE-SPECIFIC JAVASCRIPT -->
-    <script type="module" src="./src/scripts/index.js"></script>
-  </body>
+    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="d-flex align-items-center gap-4">
+              <img src="" id="img"/>
+              <p class="h5 text-danger" id="name"></p>
+              <span id="stock"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- Footer -->
+      <script>
+        document.querySelectorAll(".category-link").forEach(item => {
+            item.addEventListener("click", function(event) {
+                event.preventDefault();
+                document.querySelectorAll(".category-link").forEach(link => {
+                    link.classList.remove("bg-white", "rounded", "px-2");
+                });
+                this.classList.add("bg-white", "rounded", "px-2");
+                this.style.borderColor = "#0d47a1";
+            });
+        });
+        
+        document.querySelectorAll(".category-link").forEach(item => {
+        item.addEventListener("mouseover", function() {
+            this.style.backgroundColor = "white";
+        });
+
+        item.addEventListener("mouseout", function() {
+            this.style.backgroundColor = "transparent";
+        });
+    });
+    </script>
+</body>
 </html>
