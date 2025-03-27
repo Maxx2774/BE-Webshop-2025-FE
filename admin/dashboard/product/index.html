@@ -91,5 +91,23 @@
           </div>
         </div>
       </main>
+
+      <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5">Ta bort produkt</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p class="fs-6">Är du säker på att du vill ta bort den här produkten?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Nej</button>
+              <button type="button" class="btn btn-sky" id="delete-product">Ja</button>
+            </div>
+          </div>
+        </div>
+      </div>
 </body>
 </html>

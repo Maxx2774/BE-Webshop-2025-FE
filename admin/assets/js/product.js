@@ -1,5 +1,18 @@
 import { InitDataTable } from '../js/datatables.js';
 
+const verify = async () => {
+    try {
+        const response = await axios.get("https://webshopbackend.vercel.app/auth/verify", { withCredentials: true });
+        console.log(response);     
+    } catch (error) {
+        console.log(error);
+    }
+
+    // console.log("Produkt ID:", productId);
+    // bootstrap.Modal.getInstance(document.getElementById("deleteModal")).hide();
+};
+verify();
+
 let dataTable;
 
 const format = (d) => {
@@ -50,9 +63,9 @@ var columns = [
         className: "text-end",
         orderable: false,
         fnCreatedCell: function (nTd, sData, oData) {
-            nTd.innerHTML =
-                '<a href="#" style="display:inline; color: #4a4e54;" class="nav-link me-3"><i class="fa fa-pen fa-sm"></i></a>' +
-                '<a href="#" style="display:inline; color: #4a4e54;" class="nav-link me-2"><i class="fa fa-trash fa-sm"></i></a>';
+            nTd.innerHTML =`
+                <a href="#" style="display:inline; color: #4a4e54;" class="nav-link me-3"><i class="fa fa-pen fa-sm"></i></a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" data-product-id="${oData.id}" style="display:inline; color: #4a4e54;" class="nav-link me-2"><i class="fa fa-trash fa-sm"></i></a>`;
         }
     }
 ];
@@ -69,3 +82,24 @@ dataTable.on('click', 'td.dt-control', function (e) {
         row.child(format(row.data())).show();
     }
 });
+
+//Ta bort
+document.getElementById("deleteModal").addEventListener("show.bs.modal", (event) => {
+    const productId = event.relatedTarget.dataset.productId;
+    const deleteButton = document.getElementById("delete-product");
+    
+    deleteButton.addEventListener("click", () => {
+        deleteProduct(productId);
+    });
+});
+
+const deleteProduct = async (productId) => {
+    try {
+        const response = await axios.delete("https://webshopbackend.vercel.app/admin/products/delete", {data: {product_id: productId}, withCredentials: true});
+        console.log(response);   
+    } catch (error) {
+        window.location.href = "/admin/dashboard/product/index.html";  
+        console.log(error);
+    }
+
+};
