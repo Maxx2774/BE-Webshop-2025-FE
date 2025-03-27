@@ -1,11 +1,17 @@
 const loginCredentials = async (credentials) => {
+    try {
         const response = await axios.post("https://webshopbackend.vercel.app/auth/signin", credentials);
         console.log(response);
-    
-        if (response) {
-            alert("Inloggning lyckades")
-        } 
+
+        if (response.data) {
+            alert("Inloggning lyckades");
+        } else {
+            alert("Inloggning misslyckad");
+        }
+    } catch (error) {
+        console.log(error);
     }
+};
 
 document.getElementById("btn-login").addEventListener("click", () => {
     const email = document.getElementById("email").value;

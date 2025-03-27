@@ -1,9 +1,11 @@
 export function getBaseUrl() {
-  console.log(window.location.href)
-  if (window.location.href.includes('localhost')) {
-    return "https://webshopbackend.vercel.app/"
-  }
-  return "http://localhost:5500/";
+  return "https://webshopbackend.vercel.app/"
+
+  // console.log(window.location.href)
+  // if (window.location.href.includes('localhost')) {
+  //   return "https://webshopbackend.vercel.app/"
+  // }
+  // return "http://localhost:5500/";
 }
 export async function fetchProducts(endpoint = "products") {
   const url = `${getBaseUrl()}${endpoint}`;
