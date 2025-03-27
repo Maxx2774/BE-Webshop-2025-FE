@@ -1,6 +1,6 @@
 const loginCredentials = async (credentials) => {
     try {
-        const response = await axios.post("https://webshopbackend.vercel.app/auth/signin", credentials);
+        const response = await axios.post("https://webshopbackend.vercel.app/auth/signin", credentials, { withCredentials: true });
         console.log(response);
 
         if (response.data) {
