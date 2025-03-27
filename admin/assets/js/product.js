@@ -123,3 +123,32 @@ document.getElementById("updateModal").addEventListener("show.bs.modal", (event)
 //         console.log(error);
 //     }
 // };
+
+//Lägg till produkt
+document.getElementById("add-product").addEventListener("click", () => {
+    const productTitle = document.getElementById("product-title").value;
+    const productPrice = document.getElementById("product-price").value;
+    const productDescription = document.getElementById("product-description").value;
+    const productCategory = document.getElementById("product-category").value;
+    const productImgUrl = document.getElementById("product-image").value;
+        
+    let product = {
+        name: productTitle,
+        price: productPrice,
+        description: productDescription,
+        category: productCategory,
+        image_url: productImgUrl
+    }
+
+    addProduct("https://webshopbackend.vercel.app/admin/products/add", product);  
+});
+
+const addProduct = async (url, product) => {
+    try {
+        let response = await axios.post(url, {data: product, withCredentials: true});
+        console.log(response);
+    } catch (error) {
+        console.log(error);
+    }
+    //const response = await axios.post(url, {data: {product_id: productId}, withCredentials: true});
+}
