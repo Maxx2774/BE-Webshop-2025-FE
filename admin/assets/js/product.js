@@ -64,7 +64,7 @@ var columns = [
         orderable: false,
         fnCreatedCell: function (nTd, sData, oData) {
             nTd.innerHTML =`
-                <a href="#" style="display:inline; color: #4a4e54;" class="nav-link me-3"><i class="fa fa-pen fa-sm"></i></a>
+                <a href="#" data-bs-toggle="modal" data-bs-target="#updateModal" data-product-id="${oData.id}" style="display:inline; color: #4a4e54;" class="nav-link me-3"><i class="fa fa-pen fa-sm"></i></a>
                 <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" data-product-id="${oData.id}" style="display:inline; color: #4a4e54;" class="nav-link me-2"><i class="fa fa-trash fa-sm"></i></a>`;
         }
     }
@@ -103,3 +103,23 @@ const deleteProduct = async (productId) => {
     }
 
 };
+
+//Uppdatera
+document.getElementById("updateModal").addEventListener("show.bs.modal", (event) => {
+    const productId = event.relatedTarget.dataset.productId;
+    const updateButton = document.getElementById("update-product");
+    
+    updateButton.addEventListener("click", () => {
+        updateProduct(productId);
+    });
+});
+
+// const updateProduct = async (productId) => {
+//     try {
+//         const response = await axios.patch("https://webshopbackend.vercel.app/admin/products/update", {data: {product_id: productId}, withCredentials: true});
+//         console.log(response);   
+//     } catch (error) {
+//         window.location.href = "/admin/dashboard/product/index.html";  
+//         console.log(error);
+//     }
+// };
