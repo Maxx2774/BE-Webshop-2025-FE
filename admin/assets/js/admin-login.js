@@ -5,6 +5,7 @@ const loginCredentials = async (credentials) => {
 
         if (response.data) {
             alert("Inloggning lyckades");
+            window.location.href = "/admin/dashboard/index.html";  
         } else {
             alert("Inloggning misslyckad");
         }
