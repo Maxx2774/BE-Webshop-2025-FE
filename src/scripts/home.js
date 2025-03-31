@@ -84,3 +84,25 @@ document.getElementById("productModal").addEventListener("show.bs.modal", (event
 
   document.getElementById("name").textContent = currentProduct.name;
 });
+
+// ----------------------------------------------------------------------
+document.querySelectorAll(".category-link").forEach(item => {
+  item.addEventListener("click", function(event) {
+      event.preventDefault();
+      document.querySelectorAll(".category-link").forEach(link => {
+          link.classList.remove("bg-white", "rounded", "px-2");
+      });
+      this.classList.add("bg-white", "rounded", "px-2");
+      this.style.borderColor = "#0d47a1";
+  });
+});
+
+document.querySelectorAll(".category-link").forEach(item => {
+item.addEventListener("mouseover", function() {
+  this.style.backgroundColor = "white";
+});
+
+item.addEventListener("mouseout", function() {
+  this.style.backgroundColor = "transparent";
+});
+});
