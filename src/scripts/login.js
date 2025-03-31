@@ -39,7 +39,23 @@ document.addEventListener("DOMContentLoaded", function () {
   const registerForm = document.getElementById('register-form');
   const showRegisterLink = document.getElementById('show-register');
   const showLoginLink = document.getElementById('show-login');
+  const loginButton = document.getElementById('login-button');
+  const logoutButton = document.getElementById('logout-button');
   const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+
+  //Check if user is logged in
+  function checkUserLoggedIn() {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user) {
+      logoutButton.classList.remove("d-none");
+      loginButton.classList.add("d-none");
+    } else {
+      logoutButton.classList.add("d-none");
+      loginButton.classList.remove("d-none");
+    }
+  };
+  checkUserLoggedIn();
   
   // Handle Register Form Submission
   registerForm.addEventListener('submit', function (e) {
@@ -150,6 +166,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  if (logoutButton) {
+    logoutButton.addEventListener('click', logoutUser);
+  }
+
   // Function to handle User Logout
   async function logoutUser() {
     const url = `${getBaseUrl()}auth/signout`; // Sign out endpoint
@@ -177,14 +197,6 @@ document.addEventListener("DOMContentLoaded", function () {
       alert('There was an error logging out. Please try again later.');
     }
   }
-
-  const loginButton = document.getElementById('login-button');
-  // Optional: Add a logout button to handle user logout
-  const logoutButton = document.getElementById('logout-button');
-  if (logoutButton) {
-    logoutButton.addEventListener('click', logoutUser);
-  }
-
 
   // Helper function to show login form
   function showLoginForm() {
