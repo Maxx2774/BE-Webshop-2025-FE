@@ -8,16 +8,10 @@ export function getBaseUrl() {
 }
 export async function fetchProducts(endpoint = "products") {
   const url = `${getBaseUrl()}${endpoint}`;
-  
-  try {
-    const response = await fetch(url);
-    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-    
+  const response = await fetch(url);
+  if(response.ok){
     const data = await response.json();
-    
-    return Array.isArray(data.products) ? data.products : [];
-  } catch (error) {
-    console.error("Fetch error:", error);
-    return [];
+    return data;
   }
+  return [];    
 }
