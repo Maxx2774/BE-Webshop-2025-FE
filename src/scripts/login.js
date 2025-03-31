@@ -137,8 +137,10 @@ document.addEventListener("DOMContentLoaded", function () {
         // Store the user data and token in localStorage
         localStorage.setItem('user', JSON.stringify(result.user));
         alert('Login successful');
-        loginModal.hide(); // Close the modal
-        window.location.reload(); // Optionally reload the page
+        loginModal.hide();  // Close the modal
+        logoutButton.classList.remove("d-none");
+        loginButton.classList.add("d-none");
+        // window.location.reload(); // Optionally reload the page
       } else {
         alert('Invalid login credentials');
       }
@@ -167,18 +169,22 @@ document.addEventListener("DOMContentLoaded", function () {
       // Remove user data from localStorage and alert the user
       localStorage.removeItem('user');
       alert('You have logged out');
-      window.location.reload(); // Optionally reload the page
+      logoutButton.classList.add("d-none");
+      loginButton.classList.remove("d-none");
+      // window.location.reload(); // Optionally reload the page
     } catch (error) {
       console.error('Logout error:', error);
       alert('There was an error logging out. Please try again later.');
     }
   }
 
+  const loginButton = document.getElementById('login-button');
   // Optional: Add a logout button to handle user logout
   const logoutButton = document.getElementById('logout-button');
   if (logoutButton) {
     logoutButton.addEventListener('click', logoutUser);
   }
+
 
   // Helper function to show login form
   function showLoginForm() {
