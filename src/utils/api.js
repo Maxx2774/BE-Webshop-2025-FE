@@ -1,6 +1,7 @@
 export function getBaseUrl() {
   return "https://webshopbackend.vercel.app/"
-  
+
+  // console.log(window.location.href)
   // if (window.location.href.includes('localhost')) {
   //   return "https://webshopbackend.vercel.app/"
   // }
