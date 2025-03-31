@@ -1,7 +1,9 @@
-import { verifyToken, GetAsync, DeleteAsync, PostAsync, baseUrl, unitWeight } from './services.js';
+import { verifyToken, GetAsync, DeleteAsync, PostAsync, baseUrl, unitWeight, loggedUser, logOutUser } from './services.js';
 import { InitDataTable } from '../js/datatables.js';
 
 await verifyToken();
+document.getElementById("logout").addEventListener("click", logOutUser);
+document.getElementById("logged-user-name").textContent = loggedUser.email;
 
 const datatableProduct = document.getElementById("product-list");
 if (datatableProduct) {
