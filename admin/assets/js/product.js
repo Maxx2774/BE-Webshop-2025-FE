@@ -76,9 +76,9 @@ if (datatableProduct) {
     });
 }
 
+//Ta bort
 const deleteProductModal = document.getElementById("deleteModal");
 if(deleteProductModal) {
-    //Ta bort
     document.getElementById("deleteModal").addEventListener("show.bs.modal", (event) => {
         const productId = event.relatedTarget.dataset.productId;
         const deleteButton = document.getElementById("delete-product");
@@ -90,11 +90,13 @@ if(deleteProductModal) {
     
     const deleteProduct = async (productId) => {
         try {
-            //const response = await DeleteAsync(`${baseUrl}/admin/products/delete`, { product_id: productId }, { withCredentials: true })
-            const response = await axios.delete(`${baseUrl}/admin/products/delete`, {data: {product_id: productId}, withCredentials: true});
-            console.log(response);   
+            const response = await DeleteAsync(`${baseUrl}/admin/products/delete`, { product_id: productId }, { withCredentials: true });
+
+            if (response.status === 204) {
+                window.location.href = "/admin/dashboard/product/index.html";  
+            }
+
         } catch (error) {
-            //window.location.href = "/admin/dashboard/product/index.html";  
             console.log(error);
         }
     
@@ -105,12 +107,21 @@ if(deleteProductModal) {
 const updateProductModal = document.getElementById("updateModal");
 if (updateProductModal) {
     updateProductModal.addEventListener("show.bs.modal", async (event) => {
+        const updateFields = document.querySelectorAll("#update input, #update textarea");
         const productId = event.relatedTarget.dataset.productId;
-        //const produkt = await GetAsync(`${baseUrl}/products/`, {data:{product_id: 120}}, { withCredentials: true });
-        const produkt = await axios.get(`${baseUrl}/products/${productId}`);
-        console.log(produkt)
+        console.log(updateFields);
+
+        const productToUpdate = await axios.get(`${baseUrl}/products/${productId}`);
+
+        updateFields.forEach(field => {
+            if (field.tagName.toLowerCase() === "textarea" || field.tagName.toLowerCase() === "input") {
+                field.value = productToUpdate.data[field.name] || ''; 
+            }
+        });
+
+        console.log(productToUpdate)
+
         const updateButton = document.getElementById("update-product");
-        
         updateButton.addEventListener("click", () => {
             updateProduct(productId);
         });
@@ -131,7 +142,20 @@ const location = window.location;
 if (location.pathname === "/admin/dashboard/product/create.html")
 {
     const productUnits = unitWeight;
+    const getCategories = await GetAsync(`${baseUrl}/categories`);
+    const categories = getCategories.data.sort((a, b) => a.name.localeCompare(b.name));
+
     const unitSelect = document.getElementById("product-unit");
+    const categoriesSelect = document.getElementById("product-category");
+
+    categories.forEach(category => {
+        console.log(category.id)
+        const option = document.createElement("option");
+        option.text = category.name;
+        option.value = category.id;
+        categoriesSelect.append(option);
+    });
+
     productUnits.forEach(unit => {
         const option = document.createElement("option");
         option.text = unit;
@@ -146,27 +170,36 @@ if (location.pathname === "/admin/dashboard/product/create.html")
         const productDescription = document.getElementById("product-description").value;
         const productCategory = document.getElementById("product-category").value;
         const productImgUrl = document.getElementById("product-image").value;
+        const productUnit = document.getElementById("product-unit").value;
+        const productQuantity = document.getElementById("product-quantity").value;
             
+        if (!productTitle || !productPrice || !productDescription || !productCategory || !productImgUrl || !productUnit || !productQuantity) {
+            document.getElementById("error").textContent = "Alla fält måste fyllas i!";
+            return;
+        }
+
         let product = {
             name: productTitle,
             price: productPrice,
             description: productDescription,
             category_id: productCategory,
             image_url: productImgUrl,
-            weight_unit: "kg"
+            weight_unit: productUnit,
+            stock_quantity: productQuantity
         }
     
-        addProduct("https://webshopbackend.vercel.app/admin/products/add", product);  
+        addProduct(product);  
     });
     
-    const addProduct = async (url, product) => {
+    const addProduct = async (product) => {
         try {
-            let response = await PostAsync (url, product, {withCredentials: true});
-            //let response = await axios.post(url, {data: product, withCredentials: true});
-            console.log(response);
+            let response = await PostAsync (`${baseUrl}/admin/products/add`, product, {withCredentials: true});
+
+            if (response.status === 200) {
+                window.location.href = "/admin/dashboard/product/index.html";  
+            }
         } catch (error) {
             console.log(error);
         }
-        //const response = await axios.post(url, {data: {product_id: productId}, withCredentials: true});
     }
 }

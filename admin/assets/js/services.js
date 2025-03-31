@@ -13,12 +13,12 @@ export const GetAsync = async (url, data = null, credentials = null) => {
 
 export const DeleteAsync = async (url, data, credentials = null) => {
     try {
-        const response = await axios.delete(url, data, credentials);
+        const response = await axios.delete(url, { data, ...credentials });
         return response;
     } catch (error) {
         return error;
     }
-}
+};
 
 export const PostAsync = async (url, data, credentials = null) => {
     try {

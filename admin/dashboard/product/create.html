@@ -90,17 +90,24 @@
                 </div>
 
                 <div class="mb-3">
+                  <label class="label-text">Antal</label>
+                  <input type="number" name="price" id="product-quantity" min="0" class="form-control text-secondary" required>
+              </div>
+
+                <div class="mb-3">
                     <label class="label-text">Beskrivning</label>
                     <textarea name="description" id="product-description" class="form-control text-secondary" rows="3" required></textarea>
                 </div>
 
                 <div class="mb-3">
                     <label class="label-text">Kategori</label>
-                    <input type="number" name="category" id="product-category" min="0" class="form-control text-secondary" required>
+                    <select name="unit" id="product-category" class="form-select">
+                      <option>Välj kategori</option>
+                    </select>                
                 </div>
 
                 <div class="mb-3">
-                  <label class="label-text">Kategori</label>
+                  <label class="label-text">Produktenhet</label>
                   <select name="unit" id="product-unit" class="form-select">
                     <option>Välj produktenhet</option>
                   </select>
@@ -110,6 +117,10 @@
                     <label class="label-text">Bild (Url)</label>
                     <input type="url" name="image" id="product-image" class="form-control text-secondary" required>
                 </div>
+
+                <div>
+                  <p id="error" class="text-danger text-center fw-semibold"></p>
+              </div>
 
             </div>
 
