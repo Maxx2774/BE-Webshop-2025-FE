@@ -6,7 +6,7 @@ export const InitDataTable = (tableId, apiUrl, tableColumns, dataSource) => {
         },
         ajax: {
             url: apiUrl,
-            dataSrc: dataSource
+            dataSrc: ''
         },
         deferRender: true,
         columnDefs: [
