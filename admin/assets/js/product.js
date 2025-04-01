@@ -1,7 +1,10 @@
-import { verifyToken, GetAsync, DeleteAsync, PostAsync, baseUrl, unitWeight } from './services.js';
+import { verifyToken, GetAsync, DeleteAsync, PostAsync, PatchAsync, baseUrl, unitWeight, loggedUser, logOutUser, adminCheck } from './services.js';
 import { InitDataTable } from '../js/datatables.js';
 
 await verifyToken();
+adminCheck();
+document.getElementById("logout").addEventListener("click", logOutUser);
+document.getElementById("logged-user-name").textContent = loggedUser.email;
 
 const datatableProduct = document.getElementById("product-list");
 if (datatableProduct) {
@@ -106,33 +109,42 @@ if(deleteProductModal) {
 //Uppdatera
 const updateProductModal = document.getElementById("updateModal");
 if (updateProductModal) {
+    let productId;
     updateProductModal.addEventListener("show.bs.modal", async (event) => {
         const updateFields = document.querySelectorAll("#update input, #update textarea");
-        const productId = event.relatedTarget.dataset.productId;
-        console.log(updateFields);
-
-        const productToUpdate = await axios.get(`${baseUrl}/products/${productId}`);
-
+        productId = event.relatedTarget.dataset.productId;
+    
+        const productToUpdate = await GetAsync(`${baseUrl}/products/${productId}`)
+    
         updateFields.forEach(field => {
             if (field.tagName.toLowerCase() === "textarea" || field.tagName.toLowerCase() === "input") {
                 field.value = productToUpdate.data[field.name] || ''; 
             }
         });
-
-        console.log(productToUpdate)
-
-        const updateButton = document.getElementById("update-product");
-        updateButton.addEventListener("click", () => {
-            updateProduct(productId);
-        });
     });
     
-    const updateProduct = async (productId) => {
+    document.getElementById("update-product").addEventListener("click", async () => {
+        const updateFields = document.querySelectorAll("#update input, #update textarea");
+    
+        let product = {};
+    
+        updateFields.forEach(field => {
+            if (field.name) {
+                product[field.name] = field.value;
+                console.log(`Set ${field.name} to ${field.value}`);
+            }
+        });
+    
+        product["product_id"] = productId;
+    
+        await updateProduct(product);
+    });
+
+    const updateProduct = async (product) => {
         try {
-            const response = await axios.patch("https://webshopbackend.vercel.app/admin/products/update", {productId}, {withCredentials: true});
-            console.log(response);   
-        } catch (error) {
+            await PatchAsync("https://webshopbackend.vercel.app/admin/products/update", product, {withCredentials: true});
             window.location.href = "/admin/dashboard/product/index.html";  
+        } catch (error) {
             console.log(error);
         }
     };
@@ -193,7 +205,7 @@ if (location.pathname === "/admin/dashboard/product/create.html")
     
     const addProduct = async (product) => {
         try {
-            let response = await PostAsync (`${baseUrl}/admin/products/add`, product, {withCredentials: true});
+            const response = await PostAsync(`${baseUrl}/admin/products/add`, product, {withCredentials: true});
 
             if (response.status === 200) {
                 window.location.href = "/admin/dashboard/product/index.html";  
