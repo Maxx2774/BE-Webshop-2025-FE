@@ -104,15 +104,6 @@ document.addEventListener("DOMContentLoaded", function () {
     registerUser(email, password);
   });
 
-  // Handle Login Form Submission
-  loginForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    
-    const email = document.getElementById('login-email').value;
-    const password = document.getElementById('login-password').value;
-
-    loginUser(email, password);
-  });
 
   // Show Register Form
   showRegisterLink.addEventListener('click', function () {
@@ -196,6 +187,16 @@ document.addEventListener("DOMContentLoaded", function () {
       alert('There was an error logging in. Please try again later.');
     }
   }
+
+  // Handle Login Form Submission
+  loginForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+
+    loginUser(email, password);
+  });
 
   // Helper function to show login form
   function showLoginForm() {
