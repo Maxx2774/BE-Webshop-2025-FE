@@ -1,6 +1,7 @@
-import { verifyToken, GetAsync, baseUrl, loggedUser, logOutUser } from './services.js';
+import { verifyToken, GetAsync, baseUrl, loggedUser, logOutUser, adminCheck } from './services.js';
 
 await verifyToken();
+adminCheck();
 document.getElementById("logout").addEventListener("click", logOutUser);
 document.getElementById("logged-user-name").textContent = loggedUser.email;
 

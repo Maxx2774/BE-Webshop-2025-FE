@@ -1,7 +1,8 @@
-import { verifyToken, GetAsync, DeleteAsync, PostAsync, PatchAsync, baseUrl, unitWeight, loggedUser, logOutUser } from './services.js';
+import { verifyToken, GetAsync, DeleteAsync, PostAsync, PatchAsync, baseUrl, unitWeight, loggedUser, logOutUser, adminCheck } from './services.js';
 import { InitDataTable } from '../js/datatables.js';
 
 await verifyToken();
+adminCheck();
 document.getElementById("logout").addEventListener("click", logOutUser);
 document.getElementById("logged-user-name").textContent = loggedUser.email;
 

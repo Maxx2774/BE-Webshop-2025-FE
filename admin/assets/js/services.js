@@ -55,8 +55,11 @@ export const verifyToken = async () => {
 export const logOutUser = async () => {
     try {
         await PostAsync(`https://webshopbackend.vercel.app/auth/signout`, null, {withCredentials: true});
+        loggedUser = {};
         window.location.href = "/admin/index.html";
     } catch (error) {
         console.error(error);
     }
 }
+
+export const adminCheck = () => !loggedUser.admin && (window.location.href = "/admin/403.html");
