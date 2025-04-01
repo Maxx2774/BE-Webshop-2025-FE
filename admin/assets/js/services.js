@@ -30,6 +30,15 @@ export const PostAsync = async (url, data = null, credentials = null) => {
     }
 }
 
+export const PatchAsync = async (url, data, credentials = null) => {
+    try {
+        const response = await axios.patch(url, data, credentials);
+        return response;
+    } catch (error) {
+        return error;
+    }
+};
+
 // Verifiera om användaren är inloggad
 export const verifyToken = async () => {
     const response = await GetAsync(`${baseUrl}/auth/verify`, { withCredentials: true });
@@ -45,7 +54,7 @@ export const verifyToken = async () => {
 //Logga ut
 export const logOutUser = async () => {
     try {
-        await PostAsync(`https://webshopbackend.vercel.app/auth/signout`);
+        await PostAsync(`https://webshopbackend.vercel.app/auth/signout`, null, {withCredentials: true});
         window.location.href = "/admin/index.html";
     } catch (error) {
         console.error(error);
