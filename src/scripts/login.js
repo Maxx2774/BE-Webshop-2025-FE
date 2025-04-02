@@ -244,10 +244,6 @@ async function logoutUser() {
 
 logoutButton.addEventListener("click", logoutUser);
 
-adminButton.addEventListener("click", () => {
-  window.location.href = "admin/index.html";
-});
-
 function showAdminFeatures() {
   if (adminButton) adminButton.classList.remove("d-none");
 }
