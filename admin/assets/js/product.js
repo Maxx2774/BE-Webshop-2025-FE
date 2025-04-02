@@ -207,7 +207,7 @@ if (location.pathname === "/admin/dashboard/product/create.html")
         try {
             const response = await PostAsync(`${baseUrl}/admin/products/add`, product, {withCredentials: true});
 
-            if (response.status === 200) {
+            if (response.status === 201) {
                 window.location.href = "/admin/dashboard/product/index.html";  
             }
         } catch (error) {
