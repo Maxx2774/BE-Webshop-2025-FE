@@ -11,13 +11,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const loadProducts = async (sectionId) => {
   const productListUl = document.getElementById(`${sectionId}-product-list`);
-  const products = await fetchProducts();
+  productListUl.innerHTML = "<p>Läser in produkter...</p>";
+  
+  let products = await fetchProducts();
+  productListUl.innerHTML = "";
 
+  if (sectionId === "new") {
+    products = products.slice().sort((a, b) => new Date(b.created_at) - new Date(a.created_at)).slice(0, 8);
+  } else {
+    products = products.slice(0, 8);
+  }
+
+  // Lägg till produktkort för varje produkt
   products.forEach(product => {
     const productList = createProductCard(product);
-    productListUl.append(productList)
+    productListUl.append(productList);
   });
-}
+};
 
 // Skapa produktkort
 const createProductCard = (product) => {
