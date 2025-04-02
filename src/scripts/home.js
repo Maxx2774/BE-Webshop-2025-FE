@@ -59,6 +59,12 @@ const createProductCard = (product) => {
   productButton.classList.add("btn", "btn-sky", "w-100", "shadow-sm")
   productButton.textContent = "Köp";
 
+  // Add event listener to the "Köp" button
+  productButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    addToCart(product); // Add product to cart when clicked
+  });
+
   divImg.append(productImg);
   divProductInfo.append(productTitle, productPrice);
   divProductButton.append(productButton);
@@ -67,6 +73,39 @@ const createProductCard = (product) => {
 
   return productLi;
 }
+
+// // Function to add the product to cart in localStorage
+// const addToCart = (product) => {
+//   // Get existing cart from localStorage or initialize an empty array
+//   let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+//   // Add the product to the cart
+//   cart.push(product);
+//   console.log(cart.quantity);
+  
+
+//   // Save the updated cart back to localStorage
+//   localStorage.setItem('cart', JSON.stringify(cart));
+
+//   // Optionally, show a confirmation message or update UI
+//   alert(`${product.name} has been added to your cart!`);
+// }
+
+// Uppdaterad addToCart funktion
+const addToCart = (product) => {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  let existingProduct = cart.find(item => item.id === product.id);
+
+  if (existingProduct) {
+      existingProduct.quantity += 1;
+  } else {
+      product.quantity = 1;
+      cart.push(product);
+  }
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+  renderCart(); // Uppdatera UI
+};
 
 document.getElementById("productModal").addEventListener("show.bs.modal", (event) => {
   const productId = Number(event.relatedTarget.dataset.id);
