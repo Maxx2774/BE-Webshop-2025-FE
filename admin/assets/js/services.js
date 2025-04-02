@@ -62,4 +62,10 @@ export const logOutUser = async () => {
     }
 }
 
-export const adminCheck = () => !loggedUser.admin && (window.location.href = "/admin/dashboard/access-denied.html");
+export const adminCheck = () => {
+    if (!loggedUser || Object.keys(loggedUser).length === 0) {
+      window.location.href = "/admin/index.html";
+    } else if (!loggedUser.admin) {
+      window.location.href = "/admin/dashboard/access-denied.html";
+    }
+  };
