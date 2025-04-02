@@ -12,7 +12,8 @@ export const InitDataTable = (tableId, apiUrl, tableColumns, dataSource) => {
         columnDefs: [
             { targets: '_all', type: 'string' }
         ],
-        columns: tableColumns
+        columns: tableColumns,
+        order: [1, 'asc']
     });
     
     return dataTable;
