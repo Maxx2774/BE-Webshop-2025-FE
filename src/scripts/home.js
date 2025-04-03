@@ -118,7 +118,7 @@ const addToCart = (product) => {
   renderCart(); // Uppdatera UI
 };
 
-document.getElementById("productModal").addEventListener("show.bs.modal", (event) => {
+document.getElementById("productModal").addEventListener("show.bs.modal", async (event) => {
   const productId = Number(event.relatedTarget.dataset.id);
   const products = await fetchProducts();
   const currentProduct = products.find(product => product.id === productId);
