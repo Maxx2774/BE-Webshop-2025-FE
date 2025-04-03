@@ -1,4 +1,4 @@
-export const InitDataTable = (tableId, apiUrl, tableColumns, dataSource) => {
+export const InitDataTable = (tableId, apiUrl, tableColumns, sortColumn) => {
     var dataTable = new DataTable(tableId, {
         pageLength: 10,
         language: {
@@ -16,7 +16,7 @@ export const InitDataTable = (tableId, apiUrl, tableColumns, dataSource) => {
             { targets: '_all', type: 'string' }
         ],
         columns: tableColumns,
-        order: [1, 'asc']
+        order: sortColumn
     });
     
     return dataTable;
