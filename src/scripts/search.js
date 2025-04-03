@@ -1,8 +1,9 @@
 import { getBaseUrl } from "../utils/api.js";
+import { createProductCard, currencySek } from "./services.js";
 
 const productSearch = async (searchQ) => {
     if (!searchQ.trim()) {
-        document.getElementById("product-result-list").innerHTML = ""; // Rensa resultat om fältet är tomt
+        document.getElementById("product-container").innerHTML = "";
         return;
     }
 
@@ -11,20 +12,29 @@ const productSearch = async (searchQ) => {
     try {
         const response = await axios.get(`${getBaseUrl().replace(/\/$/, "")}/products?search=${encodeURIComponent(searchQ)}`);
 
-        let resultsDiv = document.getElementById("product-result-list");
-        resultsDiv.innerHTML = "";
+        let productContainer = document.getElementById("product-container");
+        productContainer.innerHTML = "";
 
         let data = response.data;
         if (data.length === 0) {
-            resultsDiv.innerHTML = "<p>Inga resultat hittades.</p>";
+            productContainer.innerHTML = "<p>Inga resultat hittades.</p>";
         } else {
-            let ul = document.createElement("ul");
-            data.forEach(item => {
-                let li = document.createElement("li");
-                li.textContent = item.name;
-                ul.append(li);
+            const productResultDiv = document.createElement("div");
+            const productResultText = document.createElement("p");
+            productResultText.classList.add("fs-4", "fw-semibold", "mb-3");
+            productResultText.innerHTML = `Resultat för produkt <span class="fw-bold">${searchQ}</span>`;
+
+            const productResultUl = document.createElement("ul");
+            productResultUl.classList.add("list-group", "list-group-horizontal");
+            productResultUl.setAttribute("id", "result-product-list");
+
+            data.forEach(product => {
+                const resultProducts = createProductCard(product);
+                productResultUl.append(resultProducts);
             });
-            resultsDiv.append(ul);
+
+            productResultDiv.append(productResultText, productResultUl);
+            productContainer.append(productResultDiv);
         }
     } catch (error) {
         console.error(error);

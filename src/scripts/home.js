@@ -1,4 +1,5 @@
-import { fetchProducts } from "../utils/api.js"
+import { fetchProducts } from "../utils/api.js";
+import { createProductCard, currencySek } from "./services.js";
 
 const homeProductListArr = [
   { selectId: "popular"},
@@ -8,8 +9,6 @@ const homeProductListArr = [
 document.addEventListener("DOMContentLoaded", () => {
   homeProductListArr.forEach(item => loadProducts(item.selectId));
 });
-
-const currencySek = new Intl.NumberFormat("sv-SE", { style: "currency", currency: "SEK" });
 
 const loadProducts = async (sectionId) => {
   const productListUl = document.getElementById(`${sectionId}-product-list`);
@@ -31,53 +30,6 @@ const loadProducts = async (sectionId) => {
   });
 };
 
-// Skapa produktkort
-const createProductCard = (product) => {
-
-  const productLi = document.createElement("li");
-  productLi.classList.add("list-group-item", "shadow-sm");
-
-  const productLink = document.createElement("a");
-  productLink.classList.add("text-decoration-none");
-  productLink.setAttribute("data-id", product.id)
-  productLink.setAttribute("data-bs-toggle", "modal")
-  productLink.setAttribute("data-bs-target", "#productModal")
-  productLink.href = "#"
-
-  const divImg = document.createElement("div");
-  divImg.classList.add("d-flex", "justify-content-center");
-
-  const productImg = document.createElement("img");
-  productImg.classList.add("img-fluid");
-  productImg.style.height = "200px";
-  productImg.src = product.image_url;
-
-  const divProductInfo = document.createElement("div");
-  divProductInfo.classList.add("d-flex", "flex-column", "align-items-center", "fw-semibold", "pt-3");
-
-  const productTitle = document.createElement("p");
-  productTitle.classList.add("text-dark");
-  productTitle.textContent = product.name;
-
-  const productPrice = document.createElement("p");
-  productPrice.classList.add("text-danger", "fs-4");
-  productPrice.textContent = currencySek.format(product.price);
-
-  const divProductButton = document.createElement("div");
-  divProductButton.classList.add("py-2");
-  
-  const productButton = document.createElement("button");
-  productButton.classList.add("btn", "btn-sky", "w-100", "shadow-sm")
-  productButton.textContent = "Köp";
-
-  divImg.append(productImg);
-  divProductInfo.append(productTitle, productPrice);
-  divProductButton.append(productButton);
-  productLink.append(divImg, divProductInfo);
-  productLi.append(productLink, divProductButton);
-
-  return productLi;
-}
 document.getElementById("productModal").addEventListener("show.bs.modal", async (event) => {
   const productModal = document.getElementById("modal-product-details");
   productModal.innerHTML = "";
