@@ -1,139 +1,143 @@
-const renderCart = () => {
-  const cartContainer = document.getElementById("cart-container");
-  cartContainer.innerHTML = "";
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
+const shippingCost = 49; // Fixed shipping cost
+const taxRate = 0.12;
 
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let totalPrice = 0;
-  let prucent = 0.12;
-  const deliveryCost = 50; // Fast leveranskostnad
+document.addEventListener("DOMContentLoaded", () => {
+    renderCart();
+});
 
-  // Skapa container för varukorg + sammanfattning
-  const cartWrapper = document.createElement("div");
-  cartWrapper.classList.add("d-flex", "justify-content-between", "gap-4");
+function updateCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+    updateSummary();
+}
 
-  // Skapa en div för varorna
-  const cartItemsDiv = document.createElement("div");
-  cartItemsDiv.classList.add("w-75"); // 75% bredd för produkterna
+function renderCart() {
+    const cartContainer = document.getElementById("cart-items");
+    const continueButtonContainer = document.getElementById("continue-button-container");
+    cartContainer.innerHTML = "";
+    continueButtonContainer.innerHTML = ""; // Clear the existing button if any
 
-  cart.forEach((product) => {
-    const card = document.createElement("div");
-    card.classList.add(
-      "card",
-      "mb-2",
-      "p-2",
-      "d-flex",
-      "flex-row",
-      "align-items-center",
-      "gap-2"
-    );
+    cart.forEach(product => {
+        const productCard = document.createElement("div");
+        productCard.classList.add("d-flex", "align-items-center", "border-bottom", "pb-2", "mb-2", "p-2", "flex-wrap");
 
-    const img = document.createElement("img");
-    img.src = product.image_url;
-    img.classList.add("img-fluid");
-    img.style.width = "80px";
+        // Product Image (Responsive)
+        const productImg = document.createElement("img");
+        productImg.src = product.image_url;
+        productImg.style.width = "50px";
+        productImg.classList.add("me-3", "img-fluid");
 
-    const textDiv = document.createElement("div");
-    textDiv.classList.add("flex-grow-1");
-    textDiv.innerHTML = `<p class='mb-1 fw-bold'>${product.name}</p>
-                             <p class='text-danger fw-semibold'>
-                               ${new Intl.NumberFormat("sv-SE", {
-                                 style: "currency",
-                                 currency: "SEK",
-                               }).format(product.price)}
-                             </p>`;
+        // Product Name (Fixed Width)
+        const productName = document.createElement("div");
+        productName.innerHTML = `<strong>${product.name}</strong>`;
+        productName.classList.add("text-truncate"); 
+        productName.style.width = "150px"; // Ensure consistent width
+        productName.style.whiteSpace = "nowrap";
+        productName.style.overflow = "hidden";
+        productName.style.textOverflow = "ellipsis";
 
-    const quantityDiv = document.createElement("div");
-    quantityDiv.classList.add("d-flex", "align-items-center", "gap-2");
+        // Quantity Controls (Editable Input)
+        const quantityContainer = document.createElement("div");
+        quantityContainer.classList.add("d-flex", "align-items-center", "justify-content-center", "flex-grow-1");
 
-    const minusBtn = document.createElement("button");
-    minusBtn.classList.add("btn", "btn-outline-danger", "btn-sm");
-    minusBtn.textContent = "-";
-    minusBtn.onclick = () => updateQuantity(product.id, -1);
+        const minusBtn = document.createElement("button");
+        minusBtn.textContent = "-";
+        minusBtn.classList.add("btn", "btn-outline-secondary", "me-1");
+        minusBtn.onclick = () => changeQuantity(product.id, -1);
 
-    const quantitySpan = document.createElement("span");
-    quantitySpan.textContent = product.quantity;
-    quantitySpan.classList.add("fw-bold");
+        const quantityInput = document.createElement("input");
+        quantityInput.type = "text";  // Change to text input to allow custom values
+        quantityInput.value = product.quantity;
+        quantityInput.classList.add("form-control", "text-center");
+        quantityInput.style.width = "50px";
+        
+        // Allow only numeric input
+        quantityInput.addEventListener('input', (event) => {
+            let newQuantity = event.target.value.replace(/\D/g, ''); // Remove non-digit characters
+            if (newQuantity === '') {
+                newQuantity = 0; // If empty, reset to 0
+            }
+            event.target.value = newQuantity;
+            product.quantity = parseInt(newQuantity);
+            updateCart();  // Update the cart and summary
+        });
 
-    const plusBtn = document.createElement("button");
-    plusBtn.classList.add("btn", "btn-outline-success", "btn-sm");
-    plusBtn.textContent = "+";
-    plusBtn.onclick = () => updateQuantity(product.id, 1);
+        const plusBtn = document.createElement("button");
+        plusBtn.textContent = "+";
+        plusBtn.classList.add("btn", "btn-outline-secondary", "ms-1");
+        plusBtn.onclick = () => changeQuantity(product.id, 1);
 
-    const deleteBtn = document.createElement("button");
-    deleteBtn.classList.add("btn", "btn-outline-danger", "btn-sm");
-    deleteBtn.textContent = "Ta bort";
-    deleteBtn.onclick = () => removeProductFromCart(product.id);
+        quantityContainer.append(minusBtn, quantityInput, plusBtn);
 
-    quantityDiv.append(minusBtn, quantitySpan, plusBtn, deleteBtn);
-    card.append(img, textDiv, quantityDiv);
-    cartItemsDiv.appendChild(card);
-    //let sum = product.price * product.quantity;
-    //let totmedmoms = sum + totalPrice;        
-    totalPrice += product.price * product.quantity;; // Uppdatera totalpris
-    
-  });
+        // Price (Fixed Width for Alignment)
+        const productPrice = document.createElement("div");
+        productPrice.innerHTML = `${product.price} kr`;
+        productPrice.classList.add("text-end");
+        productPrice.style.width = "80px"; // Ensures price column is aligned
 
-  // Skapa en div för totalsumman
-  const cartSummaryDiv = document.createElement("div");
-  cartSummaryDiv.classList.add(
-    "w-25",
-    "bg-light",
-    "p-3",
-    "rounded",
-    "shadow-sm"
-  );
-  cartSummaryDiv.style.height = "300px";
-  cartSummaryDiv.innerHTML = `
-        <h5 class="fw-bold">Orderöversikt</h5>
-        <p><strong>Antal produkter:</strong> <span id="total-products">${
-          cart.length
-        }</span></p>
-        <p><strong>Totalpris varor:</strong> <span id="total-price">${new Intl.NumberFormat(
-          "sv-SE",
-          { style: "currency", currency: "SEK" }
-        ).format(totalPrice)}</span></p>
-        <p><strong>Leveranskostnad:</strong> <span id="delivery-cost">${new Intl.NumberFormat(
-          "sv-SE",
-          { style: "currency", currency: "SEK" }
-        ).format(deliveryCost)}</span></p>
-        <hr>
-        <h5><strong>Totalt att betala:</strong> <span id="total-with-delivery">${new Intl.NumberFormat(
-          "sv-SE",
-          { style: "currency", currency: "SEK" }
-        ).format(totalPrice + deliveryCost)}</span></h5>
-    `;
+        // Remove Button (Fixed Position on Right)
+        const removeBtn = document.createElement("button");
+        removeBtn.classList.add("btn", "btn-sm", "px-2", "py-1", "ms-3");
+        const trashIcon = document.createElement("i");
+        trashIcon.classList.add("bi", "bi-trash3", "text-danger");
+        removeBtn.appendChild(trashIcon);
+        removeBtn.onclick = () => removeFromCart(product.id);
 
-  // Lägg till varor och totalsumma i cartWrapper
-  cartWrapper.appendChild(cartItemsDiv);
-  cartWrapper.appendChild(cartSummaryDiv);
+        // Flex Container for Name & Quantity (Ensures Alignment)
+        const nameAndQuantityWrapper = document.createElement("div");
+        nameAndQuantityWrapper.classList.add("d-flex", "align-items-center", "flex-grow-1", "flex-wrap");
+        nameAndQuantityWrapper.append(productName, quantityContainer);
 
-  // Lägg till allt i cartContainer
-  cartContainer.appendChild(cartWrapper);
-};
+        // Append elements to product card in order
+        productCard.append(productImg, nameAndQuantityWrapper, productPrice, removeBtn);
+        cartContainer.append(productCard);
+    });
 
-// Funktion för att uppdatera produktens kvantitet
-const updateQuantity = (productId, change) => {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let product = cart.find((item) => item.id === productId);
+    // Create Continue button if there are products in the cart
+    if (cart.length > 0) {
+        const continueBtnContainer = document.createElement("div");
+        continueBtnContainer.classList.add("d-flex", "justify-content-center", "mt-3");
 
-  if (product) {
-    product.quantity += change;
-    if (product.quantity <= 0) {
-      cart = cart.filter((item) => item.id !== productId);
+        const continueBtn = document.createElement("button");
+        continueBtn.textContent = "Till kassan";
+        continueBtn.classList.add("btn", "btn-success");
+        continueBtn.style.width = "100%";
+
+        continueBtnContainer.append(continueBtn);
+        continueButtonContainer.append(continueBtnContainer); // Add the button to the summary section
     }
-  }
 
-  localStorage.setItem("cart", JSON.stringify(cart));
-  renderCart(); // Uppdatera hela varukorgen
-};
+    updateSummary();
+}
 
-// Funktion för att ta bort en produkt från varukorgen
-const removeProductFromCart = (productId) => {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart = cart.filter((item) => item.id !== productId);
-  localStorage.setItem("cart", JSON.stringify(cart));
-  renderCart(); // Uppdatera efter borttagning
-};
+function changeQuantity(id, amount) {
+    let product = cart.find(item => item.id === id);
+    if (product) {
+        product.quantity += amount;
+        if (product.quantity <= 0) {
+            removeFromCart(id);
+        } else {
+            updateCart();
+        }
+    }
+}
 
-// Kör renderCart vid sidladdning
-document.addEventListener("DOMContentLoaded", renderCart);
+function removeFromCart(id) {
+    const index = cart.findIndex(item => item.id === id);
+    if (index !== -1) {
+        cart.splice(index, 1);
+    }
+    updateCart();
+}
+
+function updateSummary() {
+    const totalProductPrice = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const totalTax = totalProductPrice * taxRate;
+    const totalCost = totalProductPrice + shippingCost;
+    
+    document.getElementById("total-product-price").textContent = `${totalProductPrice} kr`;
+    document.getElementById("tax").textContent = `${totalTax.toFixed(2)} kr`;
+    document.getElementById("shipping-cost").textContent = `${shippingCost} kr`;
+    document.getElementById("total-cost").textContent = `${totalCost} kr`;
+}
