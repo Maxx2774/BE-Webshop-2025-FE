@@ -1,3 +1,18 @@
+const addToCart = (product) => {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let existingProduct = cart.find((item) => item.id === product.id);
+
+  if (existingProduct) {
+    existingProduct.quantity += 1;
+  } else {
+    product.quantity = 1;
+    cart.push(product);
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderCart();
+};
+
 // Justerar till svensk valuta
 export const currencySek = new Intl.NumberFormat("sv-SE", { style: "currency", currency: "SEK" });
 
@@ -39,6 +54,11 @@ export const createProductCard = (product) => {
     const productButton = document.createElement("button");
     productButton.classList.add("btn", "btn-sky", "w-100", "shadow-sm")
     productButton.textContent = "Köp";
+
+    productButton.addEventListener("click", (e) => {
+      e.preventDefault();
+      addToCart(product);
+    });
   
     divImg.append(productImg);
     divProductInfo.append(productTitle, productPrice);
