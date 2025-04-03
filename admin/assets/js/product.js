@@ -65,7 +65,7 @@ if (datatableProduct) {
         }
     ];
     
-    dataTable = InitDataTable('#product-list', `${baseUrl}/products`, columns);
+    dataTable = InitDataTable('#product-list', `${baseUrl}/products`, columns, [1, 'asc']);
     
     dataTable.on('click', 'td.dt-control', function (e) {
         var tr = e.target.closest('tr');
