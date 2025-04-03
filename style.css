@@ -135,17 +135,27 @@ footer a:hover {
   margin-block-end: 0.275rem;
 }
 
+@media (max-width: 575.98px) {
+  .list-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .list-group-item {
+    flex: 1 1 48%;
+  }
+}
+
 @media (min-width: 576px) {
   .list-group {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
   }
+
   .list-group-item {
     flex: 1 1 23%;
-  }
-  .list-group-item:nth-child(4n) {
-    margin-right: 0;
   }
 }
 
