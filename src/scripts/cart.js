@@ -1,6 +1,8 @@
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 const shippingCost = 49; // Fixed shipping cost
 const taxRate = 0.12;
+console.log(cart.length);
+
 
 document.addEventListener("DOMContentLoaded", () => {
     renderCart();

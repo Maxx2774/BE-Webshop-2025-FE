@@ -215,4 +215,26 @@ const addToCart = (product) => {
 
   localStorage.setItem("cart", JSON.stringify(cart));
   renderCart(); // Uppdatera UI
+  updateCartCount();
 };
+
+function updateCartCount() {
+  const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+  const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0); // Summera kvantitet
+
+  const cartCountElement = document.getElementById("cart-count");
+  if (cartCountElement) {
+    cartCountElement.textContent = itemCount;
+    cartCountElement.style.display = itemCount === 0 ? "none" : "inline-block";
+  }
+  updateCartCount();
+}
+
+// Automatisk uppdatering varje halvsekund (ifall något ändras manuellt eller från annan vy)
+setInterval(updateCartCount, 500);
+
+// Kör uppdatering vid sidladdning
+document.addEventListener("DOMContentLoaded", () => {
+  updateCartCount();
+  renderCart();
+});
