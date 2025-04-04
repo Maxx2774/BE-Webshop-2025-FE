@@ -227,7 +227,6 @@ function updateCartCount() {
     cartCountElement.textContent = itemCount;
     cartCountElement.style.display = itemCount === 0 ? "none" : "inline-block";
   }
-  updateCartCount();
 }
 
 // Automatisk uppdatering varje halvsekund (ifall något ändras manuellt eller från annan vy)
