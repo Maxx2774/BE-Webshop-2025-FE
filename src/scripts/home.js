@@ -136,3 +136,39 @@ document.querySelectorAll(".category-link").forEach((item) => {
     this.style.backgroundColor = "transparent";
   });
 });
+
+const addToCart = (product) => {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let existingProduct = cart.find((item) => item.id === product.id);
+
+  if (existingProduct) {
+    existingProduct.quantity += 1;
+  } else {
+    product.quantity = 1;
+    cart.push(product);
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  renderCart(); // Uppdatera UI
+  updateCartCount();
+};
+
+function updateCartCount() {
+  const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+  const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0); // Summera kvantitet
+
+  const cartCountElement = document.getElementById("cart-count");
+  if (cartCountElement) {
+    cartCountElement.textContent = itemCount;
+    cartCountElement.style.display = itemCount === 0 ? "none" : "inline-block";
+  }
+}
+
+// Automatisk uppdatering varje halvsekund (ifall något ändras manuellt eller från annan vy)
+setInterval(updateCartCount, 500);
+
+// Kör uppdatering vid sidladdning
+document.addEventListener("DOMContentLoaded", () => {
+  updateCartCount();
+  renderCart();
+});
