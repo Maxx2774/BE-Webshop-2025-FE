@@ -1,14 +1,10 @@
 import { fetchProducts } from "../utils/api.js";
+import { createProductCard, currencySek, updateCartCount, addToCart } from "./services.js";
 
 const homeProductListArr = [{ selectId: "popular" }, { selectId: "new" }];
 
 document.addEventListener("DOMContentLoaded", () => {
   homeProductListArr.forEach((item) => loadProducts(item.selectId));
-});
-
-const currencySek = new Intl.NumberFormat("sv-SE", {
-  style: "currency",
-  currency: "SEK",
 });
 
 const loadProducts = async (sectionId) => {
@@ -27,91 +23,25 @@ const loadProducts = async (sectionId) => {
     products = products.slice(0, 8);
   }
 
-  // Lägg till produktkort för varje produkt
   products.forEach((product) => {
     const productList = createProductCard(product);
     productListUl.append(productList);
   });
 };
 
-// Skapa produktkort
-const createProductCard = (product) => {
-  const productLi = document.createElement("li");
-  productLi.classList.add("list-group-item", "shadow-sm");
-
-  const productLink = document.createElement("a");
-  productLink.classList.add("text-decoration-none");
-  productLink.setAttribute("data-id", product.id);
-  productLink.setAttribute("data-bs-toggle", "modal");
-  productLink.setAttribute("data-bs-target", "#productModal");
-  productLink.href = "#";
-
-  const divImg = document.createElement("div");
-  divImg.classList.add("d-flex", "justify-content-center");
-
-  const productImg = document.createElement("img");
-  productImg.classList.add("img-fluid");
-  productImg.style.height = "200px";
-  productImg.src = product.image_url;
-
-  const divProductInfo = document.createElement("div");
-  divProductInfo.classList.add(
-    "d-flex",
-    "flex-column",
-    "align-items-center",
-    "fw-semibold",
-    "pt-3"
-  );
-
-  const productTitle = document.createElement("p");
-  productTitle.classList.add("text-dark");
-  productTitle.textContent = product.name;
-
-  const productPrice = document.createElement("p");
-  productPrice.classList.add("text-danger", "fs-4");
-  productPrice.textContent = currencySek.format(product.price);
-
-  const divProductButton = document.createElement("div");
-  divProductButton.classList.add("py-2");
-
-  const productButton = document.createElement("button");
-  productButton.classList.add("btn", "btn-sky", "w-100", "shadow-sm");
-  productButton.textContent = "Köp";
-
-  // Add event listener to the "Köp" button
-  productButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    addToCart(product); // Add product to cart when clicked
-  });
-
-  divImg.append(productImg);
-  divProductInfo.append(productTitle, productPrice);
-  divProductButton.append(productButton);
-  productLink.append(divImg, divProductInfo);
-  productLi.append(productLink, divProductButton);
-
-  return productLi;
-};
-document
-  .getElementById("productModal")
-  .addEventListener("show.bs.modal", async (event) => {
-    const productModal = document.getElementById("modal-product-details");
-    productModal.innerHTML = "";
-
-    const productId = Number(event.relatedTarget.dataset.id);
-    const products = await fetchProducts();
-    const currentProduct = products.find((product) => product.id === productId);
+document.getElementById("productModal").addEventListener("show.bs.modal", async (event) => {
+  const productModal = document.getElementById("modal-product-details");
+  productModal.innerHTML = "";
+  
+  const productId = Number(event.relatedTarget.dataset.id);
+  const products = await fetchProducts();
+  const currentProduct = products.find(product => product.id === productId);
 
     const modalProductRowDiv = document.createElement("div");
     modalProductRowDiv.classList.add("row");
 
     const modalImageDiv = document.createElement("div");
-    modalImageDiv.classList.add(
-      "col-md-6",
-      "mb-4",
-      "d-flex",
-      "align-items-center"
-    );
+    modalImageDiv.classList.add("col-md-6", "mb-4", "d-flex", "justify-content-center", "align-items-center");
 
     const modalProductImg = document.createElement("img");
     modalProductImg.src = currentProduct.image_url;
@@ -147,35 +77,21 @@ document
     productDescription.textContent = currentProduct.description;
 
     const productStockBadge = document.createElement("span");
-    const stockClass =
-      Number(currentProduct.stock_quantity) > 0
-        ? "text-bg-success"
-        : "text-bg-danger";
-    const stockText =
-      Number(currentProduct.stock_quantity) > 0 ? "I lager" : "Ej i lager";
-    productStockBadge.classList.add(
-      "badge",
-      "mb-4",
-      "p-2",
-      "px-4",
-      "fs-6",
-      stockClass
-    );
+    const stockClass = Number(currentProduct.stock_quantity) > 0 ? "text-bg-success" : "text-bg-danger";
+    const stockText =  Number(currentProduct.stock_quantity) > 0 ? "I lager" : "Ej i lager";
+    productStockBadge.classList.add("badge", "mb-4", "p-2", "px-4", "fs-6", stockClass);
     productStockBadge.style.opacity = "75%";
     productStockBadge.textContent = stockText;
 
     const productCartButton = document.createElement("button");
-    productCartButton.classList.add("btn", "btn-sky", "w-25", "shadow-sm");
+    productCartButton.classList.add("btn", "btn-sky", "shadow-sm", "col-12", "col-md-3");
     productCartButton.textContent = "Köp";
 
-    modalProductDetails.append(
-      productName,
-      productCategory,
-      priceDiv,
-      productStockBadge,
-      productDescription,
-      productCartButton
-    );
+    productCartButton.addEventListener("click", () => {
+      addToCart(currentProduct);
+    });
+
+    modalProductDetails.append(productName, productCategory, priceDiv, productStockBadge, productDescription, productCartButton);
     modalProductRowDiv.append(modalImageDiv, modalProductDetails);
     productModal.append(modalProductRowDiv);
   });
@@ -202,38 +118,10 @@ document.querySelectorAll(".category-link").forEach((item) => {
   });
 });
 
-const addToCart = (product) => {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let existingProduct = cart.find((item) => item.id === product.id);
-
-  if (existingProduct) {
-    existingProduct.quantity += 1;
-  } else {
-    product.quantity = 1;
-    cart.push(product);
-  }
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-  renderCart(); // Uppdatera UI
-  updateCartCount();
-};
-
-function updateCartCount() {
-  const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-  const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0); // Summera kvantitet
-
-  const cartCountElement = document.getElementById("cart-count");
-  if (cartCountElement) {
-    cartCountElement.textContent = itemCount;
-    cartCountElement.style.display = itemCount === 0 ? "none" : "inline-block";
-  }
-}
-
 // Automatisk uppdatering varje halvsekund (ifall något ändras manuellt eller från annan vy)
 setInterval(updateCartCount, 500);
 
 // Kör uppdatering vid sidladdning
 document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
-  renderCart();
 });
