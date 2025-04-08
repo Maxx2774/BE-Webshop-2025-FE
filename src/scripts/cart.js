@@ -20,81 +20,92 @@ function renderCart() {
     cartContainer.innerHTML = "";
     continueButtonContainer.innerHTML = ""; // Clear the existing button if any
 
-    cart.forEach(product => {
-        const productCard = document.createElement("div");
-        productCard.classList.add("d-flex", "align-items-center", "border-bottom", "pb-2", "mb-2", "p-2", "flex-wrap");
+    if (cart.length === 0) {
+        const p = document.createElement("p");
+        p.classList.add("text-center", "fs-5")
+        p.textContent = "Din kundkorg är tom";
+        cartContainer.append(p);
+        document.getElementById("cart-summary").style.display = "none";
 
-        // Product Image (Responsive)
-        const productImg = document.createElement("img");
-        productImg.src = product.image_url;
-        productImg.style.width = "50px";
-        productImg.classList.add("me-3", "img-fluid");
-
-        // Product Name (Fixed Width)
-        const productName = document.createElement("div");
-        productName.innerHTML = `<strong>${product.name}</strong>`;
-        productName.classList.add("text-truncate"); 
-        productName.style.width = "150px"; // Ensure consistent width
-        productName.style.whiteSpace = "nowrap";
-        productName.style.overflow = "hidden";
-        productName.style.textOverflow = "ellipsis";
-
-        // Quantity Controls (Editable Input)
-        const quantityContainer = document.createElement("div");
-        quantityContainer.classList.add("d-flex", "align-items-center", "justify-content-center", "flex-grow-1");
-
-        const minusBtn = document.createElement("button");
-        minusBtn.textContent = "-";
-        minusBtn.classList.add("btn", "btn-outline-secondary", "me-1");
-        minusBtn.onclick = () => changeQuantity(product.id, -1);
-
-        const quantityInput = document.createElement("input");
-        quantityInput.type = "text";  // Change to text input to allow custom values
-        quantityInput.value = product.quantity;
-        quantityInput.classList.add("form-control", "text-center");
-        quantityInput.style.width = "50px";
-        
-        // Allow only numeric input
-        quantityInput.addEventListener('input', (event) => {
-            let newQuantity = event.target.value.replace(/\D/g, ''); // Remove non-digit characters
-            if (newQuantity === '') {
-                newQuantity = 0; // If empty, reset to 0
-            }
-            event.target.value = newQuantity;
-            product.quantity = parseInt(newQuantity);
-            updateCart();  // Update the cart and summary
+    } else {
+        document.getElementById("cart-summary").style.display = "";
+        cart.forEach(product => {
+            const productCard = document.createElement("div");
+            productCard.classList.add("d-flex", "align-items-center", "border-bottom", "pb-2", "mb-2", "p-2", "flex-wrap");
+    
+            // Product Image (Responsive)
+            const productImg = document.createElement("img");
+            productImg.src = product.image_url;
+            productImg.style.width = "50px";
+            productImg.classList.add("me-3", "img-fluid");
+    
+            // Product Name (Fixed Width)
+            const productName = document.createElement("div");
+            productName.innerHTML = `<strong>${product.name}</strong>`;
+            productName.classList.add("text-truncate"); 
+            productName.style.width = "150px"; // Ensure consistent width
+            productName.style.whiteSpace = "nowrap";
+            productName.style.overflow = "hidden";
+            productName.style.textOverflow = "ellipsis";
+    
+            // Quantity Controls (Editable Input)
+            const quantityContainer = document.createElement("div");
+            quantityContainer.classList.add("d-flex", "align-items-center", "justify-content-center", "flex-grow-1");
+    
+            const minusBtn = document.createElement("button");
+            minusBtn.textContent = "-";
+            minusBtn.classList.add("btn", "btn-outline-secondary", "me-1");
+            minusBtn.onclick = () => changeQuantity(product.id, -1);
+    
+            const quantityInput = document.createElement("input");
+            quantityInput.type = "text";  // Change to text input to allow custom values
+            quantityInput.value = product.quantity;
+            quantityInput.classList.add("form-control", "text-center");
+            quantityInput.style.width = "50px";
+            
+            // Allow only numeric input
+            quantityInput.addEventListener('input', (event) => {
+                let newQuantity = event.target.value.replace(/\D/g, ''); // Remove non-digit characters
+                if (newQuantity === '') {
+                    newQuantity = 0; // If empty, reset to 0
+                }
+                event.target.value = newQuantity;
+                product.quantity = parseInt(newQuantity);
+                updateCart();  // Update the cart and summary
+            });
+    
+            const plusBtn = document.createElement("button");
+            plusBtn.textContent = "+";
+            plusBtn.classList.add("btn", "btn-outline-secondary", "ms-1");
+            plusBtn.onclick = () => changeQuantity(product.id, 1);
+    
+            quantityContainer.append(minusBtn, quantityInput, plusBtn);
+    
+            // Price (Fixed Width for Alignment)
+            const productPrice = document.createElement("div");
+            productPrice.innerHTML = `${product.price} kr`;
+            productPrice.classList.add("text-end");
+            productPrice.style.width = "80px"; // Ensures price column is aligned
+    
+            // Remove Button (Fixed Position on Right)
+            const removeBtn = document.createElement("button");
+            removeBtn.classList.add("btn", "btn-sm", "px-2", "py-1", "ms-3");
+            const trashIcon = document.createElement("i");
+            trashIcon.classList.add("bi", "bi-trash3", "text-danger");
+            removeBtn.appendChild(trashIcon);
+            removeBtn.onclick = () => removeFromCart(product.id);
+    
+            // Flex Container for Name & Quantity (Ensures Alignment)
+            const nameAndQuantityWrapper = document.createElement("div");
+            nameAndQuantityWrapper.classList.add("d-flex", "align-items-center", "flex-grow-1", "flex-wrap");
+            nameAndQuantityWrapper.append(productName, quantityContainer);
+    
+            // Append elements to product card in order
+            productCard.append(productImg, nameAndQuantityWrapper, productPrice, removeBtn);
+            cartContainer.append(productCard);
         });
+    }
 
-        const plusBtn = document.createElement("button");
-        plusBtn.textContent = "+";
-        plusBtn.classList.add("btn", "btn-outline-secondary", "ms-1");
-        plusBtn.onclick = () => changeQuantity(product.id, 1);
-
-        quantityContainer.append(minusBtn, quantityInput, plusBtn);
-
-        // Price (Fixed Width for Alignment)
-        const productPrice = document.createElement("div");
-        productPrice.innerHTML = `${product.price} kr`;
-        productPrice.classList.add("text-end");
-        productPrice.style.width = "80px"; // Ensures price column is aligned
-
-        // Remove Button (Fixed Position on Right)
-        const removeBtn = document.createElement("button");
-        removeBtn.classList.add("btn", "btn-sm", "px-2", "py-1", "ms-3");
-        const trashIcon = document.createElement("i");
-        trashIcon.classList.add("bi", "bi-trash3", "text-danger");
-        removeBtn.appendChild(trashIcon);
-        removeBtn.onclick = () => removeFromCart(product.id);
-
-        // Flex Container for Name & Quantity (Ensures Alignment)
-        const nameAndQuantityWrapper = document.createElement("div");
-        nameAndQuantityWrapper.classList.add("d-flex", "align-items-center", "flex-grow-1", "flex-wrap");
-        nameAndQuantityWrapper.append(productName, quantityContainer);
-
-        // Append elements to product card in order
-        productCard.append(productImg, nameAndQuantityWrapper, productPrice, removeBtn);
-        cartContainer.append(productCard);
-    });
 
     // Create Continue button if there are products in the cart
     if (cart.length > 0) {

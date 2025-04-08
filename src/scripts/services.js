@@ -1,4 +1,4 @@
-const addToCart = (product) => {
+export const addToCart = (product) => {
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   let existingProduct = cart.find((item) => item.id === product.id);
 
@@ -10,8 +10,20 @@ const addToCart = (product) => {
   }
 
   localStorage.setItem("cart", JSON.stringify(cart));
-  renderCart();
+  toastr.success(`${product.name} har lagts till i din kundkorg!`)
+  updateCartCount();
 };
+
+export function updateCartCount() {
+  const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+  const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0); // Summera kvantitet
+
+  const cartCountElement = document.getElementById("cart-count");
+  if (cartCountElement) {
+    cartCountElement.textContent = itemCount;
+    cartCountElement.style.display = itemCount === 0 ? "none" : "inline-block";
+  }
+}
 
 // Justerar till svensk valuta
 export const currencySek = new Intl.NumberFormat("sv-SE", { style: "currency", currency: "SEK" });

@@ -1,5 +1,5 @@
 import { fetchProducts } from "../utils/api.js";
-import { createProductCard, currencySek } from "./services.js";
+import { createProductCard, currencySek, updateCartCount, addToCart } from "./services.js";
 
 const homeProductListArr = [{ selectId: "popular" }, { selectId: "new" }];
 
@@ -41,12 +41,7 @@ document.getElementById("productModal").addEventListener("show.bs.modal", async 
     modalProductRowDiv.classList.add("row");
 
     const modalImageDiv = document.createElement("div");
-    modalImageDiv.classList.add(
-      "col-md-6",
-      "mb-4",
-      "d-flex",
-      "align-items-center"
-    );
+    modalImageDiv.classList.add("col-md-6", "mb-4", "d-flex", "justify-content-center", "align-items-center");
 
     const modalProductImg = document.createElement("img");
     modalProductImg.src = currentProduct.image_url;
@@ -82,35 +77,21 @@ document.getElementById("productModal").addEventListener("show.bs.modal", async 
     productDescription.textContent = currentProduct.description;
 
     const productStockBadge = document.createElement("span");
-    const stockClass =
-      Number(currentProduct.stock_quantity) > 0
-        ? "text-bg-success"
-        : "text-bg-danger";
-    const stockText =
-      Number(currentProduct.stock_quantity) > 0 ? "I lager" : "Ej i lager";
-    productStockBadge.classList.add(
-      "badge",
-      "mb-4",
-      "p-2",
-      "px-4",
-      "fs-6",
-      stockClass
-    );
+    const stockClass = Number(currentProduct.stock_quantity) > 0 ? "text-bg-success" : "text-bg-danger";
+    const stockText =  Number(currentProduct.stock_quantity) > 0 ? "I lager" : "Ej i lager";
+    productStockBadge.classList.add("badge", "mb-4", "p-2", "px-4", "fs-6", stockClass);
     productStockBadge.style.opacity = "75%";
     productStockBadge.textContent = stockText;
 
     const productCartButton = document.createElement("button");
-    productCartButton.classList.add("btn", "btn-sky", "w-25", "shadow-sm");
+    productCartButton.classList.add("btn", "btn-sky", "shadow-sm", "col-12", "col-md-3");
     productCartButton.textContent = "Köp";
 
-    modalProductDetails.append(
-      productName,
-      productCategory,
-      priceDiv,
-      productStockBadge,
-      productDescription,
-      productCartButton
-    );
+    productCartButton.addEventListener("click", () => {
+      addToCart(currentProduct);
+    });
+
+    modalProductDetails.append(productName, productCategory, priceDiv, productStockBadge, productDescription, productCartButton);
     modalProductRowDiv.append(modalImageDiv, modalProductDetails);
     productModal.append(modalProductRowDiv);
   });
@@ -137,38 +118,10 @@ document.querySelectorAll(".category-link").forEach((item) => {
   });
 });
 
-const addToCart = (product) => {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  let existingProduct = cart.find((item) => item.id === product.id);
-
-  if (existingProduct) {
-    existingProduct.quantity += 1;
-  } else {
-    product.quantity = 1;
-    cart.push(product);
-  }
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-  renderCart(); // Uppdatera UI
-  updateCartCount();
-};
-
-function updateCartCount() {
-  const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-  const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0); // Summera kvantitet
-
-  const cartCountElement = document.getElementById("cart-count");
-  if (cartCountElement) {
-    cartCountElement.textContent = itemCount;
-    cartCountElement.style.display = itemCount === 0 ? "none" : "inline-block";
-  }
-}
-
 // Automatisk uppdatering varje halvsekund (ifall något ändras manuellt eller från annan vy)
 setInterval(updateCartCount, 500);
 
 // Kör uppdatering vid sidladdning
 document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
-  renderCart();
 });

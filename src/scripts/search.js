@@ -16,7 +16,8 @@ const productSearch = async (searchQ) => {
         productContainer.innerHTML = "";
 
         let data = response.data;
-        if (data.length === 0) {
+        console.log(response.status)
+        if (data.length === 0 || data.status === 404) {
             productContainer.innerHTML = "<p>Inga resultat hittades.</p>";
         } else {
             const productResultDiv = document.createElement("div");

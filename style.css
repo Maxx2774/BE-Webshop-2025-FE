@@ -179,3 +179,10 @@ footer a:hover {
   --bs-btn-active-border-color: transparent;
   --bs-btn-active-color: #fff;
 }
+
+#toast-container > div {
+  opacity: 1;
+}
+#toast-container>.toast-success {
+  background-image: none !important;
+}
