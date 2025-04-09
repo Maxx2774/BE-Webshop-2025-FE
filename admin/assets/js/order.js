@@ -163,6 +163,7 @@ orderDetailsModal.addEventListener("show.bs.modal", async (event) => {
 
     const orderId = event.relatedTarget.dataset.orderId;
     const order = await GetAsync(`${baseUrl}/admin/orders/${orderId}`, {withCredentials: true});
+    console.log(order)
     
     document.getElementById("order-number").textContent = `Ordernummer: ${order.data.id}`;
     document.getElementById("order-date").textContent = new Date(order.data.created_at).toLocaleString("sv-SE", { weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" });

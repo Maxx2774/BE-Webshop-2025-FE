@@ -137,7 +137,7 @@
                         <p class="mb-0" id="shipping-street"></p>
                         <p class="mb-0" id="shipping-zip-city"></p>
                       </div>
-                      <div class="col">
+                      <!-- <div class="col">
                         <p class="fs-5 fw-semibold mb-1">Betalningsmetod</p>
                         <div id="payment-status"></div>
                         <div class="d-flex gap-3 mt-3">
@@ -146,32 +146,75 @@
                             Kortnummer
                           </div>
                         </div>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                 </div>
               </div>
               <!-- -->
 
-              <div class="card shadow-sm bg-light mt-4">
-                <div class="card-body">
-                  <p class="fs-5 fw-semibold mb-0">Produkter</p>
-                  <table class="table table-light table-striped mt-3">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th>Produkt</th>
-                        <th>Antal</th>
-                        <th>Styckpris</th>
-                        <th>Totalpris</th>
-                      </tr>
-                    </thead>
-                    <tbody id="products-list">
-                    </tbody>
-                  </table>
+              <!-- -->
+              <div class="d-flex">
+                <div class="container" style="padding: 0;">
+                  <div class="row">
+                    <div class="col-8">
+                      <div class="card shadow-sm bg-light mt-4">
+                        <div class="card-body">
+                          <p class="fs-5 fw-semibold mb-0">Produkter</p>
+                          <table class="table table-light table-striped mt-3">
+                            <thead>
+                              <tr>
+                                <th></th>
+                                <th>Produkt</th>
+                                <th>Antal</th>
+                                <th>Styckpris</th>
+                                <th>Totalpris</th>
+                              </tr>
+                            </thead>
+                            <tbody id="products-list">
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div class="card shadow-sm bg-light mt-4">
+                        <div class="card-body">
+
+                          <div class="border-bottom border-translucent border-dashed pb-3">
+                            <p class="fs-5 fw-semibold mb-1">Betalningsmetod</p>
+                            <div id="payment-status"></div>
+                            <div class="d-flex gap-3 mt-3">
+                              <img id="payment-type" src="" class="rounded-4" style="height: 50px;" />
+                              <div class="flex-1">
+                                Kortnummer
+                              </div>
+                            </div>
+                          </div>
+
+
+                          <p class="fs-5 fw-semibold mb-3 pt-3">S</p>
+                          <div>
+                            <div class="d-flex justify-content-between">
+                              <p class="fw-semibold"> :</p>
+                              <p>kr</p>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                              <p class="fw-semibold">Frakt:</p>
+                              <p>49 kr</p>
+                            </div>
+                          </div>
+                          <div class="d-flex justify-content-between border-top border-translucent border-dashed pt-3">
+                            <p class="fs-4 mb-0">Total:</p>
+                            <p class="fs-4 mb-0">kr</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-  
+              <!-- -->
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Stäng</button>
