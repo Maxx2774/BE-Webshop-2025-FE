@@ -7,7 +7,7 @@ export function getBaseUrl() {
   // }
   // return "http://localhost:5500/";
 }
-export async function fetchProducts(endpoint = "products") {
+export async function fetchData(endpoint) {
   const url = `${getBaseUrl()}${endpoint}`;
   const response = await fetch(url);
   if(response.ok){
