@@ -1,17 +1,19 @@
-import { fetchProducts } from "../utils/api.js";
+import { fetchData } from "../utils/api.js";
 import { createProductCard, currencySek, updateCartCount, addToCart } from "./services.js";
 
 const homeProductListArr = [{ selectId: "popular" }, { selectId: "new" }];
+const homeCategoryListArr = [{ selectId: "categories-mobile-list" }, { selectId: "categories-list" }];
 
 document.addEventListener("DOMContentLoaded", () => {
   homeProductListArr.forEach((item) => loadProducts(item.selectId));
+  homeCategoryListArr.forEach((item) => loadCategories(item.selectId));
 });
 
 const loadProducts = async (sectionId) => {
   const productListUl = document.getElementById(`${sectionId}-product-list`);
   productListUl.innerHTML = "<p>Läser in produkter...</p>";
 
-  let products = await fetchProducts();
+  let products = await fetchData("products");
   productListUl.innerHTML = "";
 
   if (sectionId === "new") {
@@ -34,7 +36,7 @@ document.getElementById("productModal").addEventListener("show.bs.modal", async 
   productModal.innerHTML = "";
   
   const productId = Number(event.relatedTarget.dataset.id);
-  const products = await fetchProducts();
+  let products = await fetchData("products");
   const currentProduct = products.find(product => product.id === productId);
 
     const modalProductRowDiv = document.createElement("div");
@@ -95,6 +97,31 @@ document.getElementById("productModal").addEventListener("show.bs.modal", async 
     modalProductRowDiv.append(modalImageDiv, modalProductDetails);
     productModal.append(modalProductRowDiv);
   });
+
+//Hämtas alla kategorier
+const loadCategories = async (sectionId) => {
+  const categoriesListUl = document.getElementById(sectionId);
+  let categories = await fetchData("categories");
+
+  categoriesListUl.innerHTML = "";
+
+  categories.forEach(category => {
+    const li = document.createElement("li");
+    const anchor = document.createElement("a");
+    anchor.classList.add("d-flex", "align-items-center", "text-decoration-none", "text-dark", "py-2", "category-link");
+    anchor.href = "#";
+    anchor.setAttribute("data-category-id", category.id)
+
+    const i = document.createElement("i");
+    
+    let icon = category.icon.split(' ');
+    i.classList.add(...icon, "me-2");
+
+    anchor.append(i, category.name);
+    li.append(anchor);
+    categoriesListUl.append(li);
+  });
+};
 
 // ----------------------------------------------------------------------
 document.querySelectorAll(".category-link").forEach((item) => {
