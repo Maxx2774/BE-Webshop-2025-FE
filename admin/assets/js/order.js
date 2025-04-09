@@ -1,56 +1,56 @@
-import { verifyToken, baseUrl, loggedUser, logOutUser, adminCheck, GetAsync } from './services.js';
+import { verifyToken, baseUrl, loggedUser, logOutUser, adminCheck, GetAsync, orderStatus, PatchAsync } from "./services.js";
 
-import { InitDataTable } from '../js/datatables.js';
+import { InitDataTable } from "../js/datatables.js";
 
 await verifyToken();
 adminCheck();
 document.getElementById("logout").addEventListener("click", logOutUser);
 document.getElementById("logged-user-name").textContent = loggedUser.email;
     
-const orderStatus = (value, type) => {
-    let badgeClass = '';
-    let badgeText = '';
+const statusBadge = (value, type) => {
+    let badgeClass = "";
+    let badgeText = "";
 
     if (type === "orderStatus") {
         switch (value) {
-            case 'processing':
-                badgeClass = 'text-bg-warning';
-                badgeText = 'Ordern behandlas';
+            case "processing":
+                badgeClass = "text-bg-warning";
+                badgeText = "Ordern behandlas";
                 break;
-            case 'out_for_delivery':
-                badgeClass = 'text-bg-primary';
-                badgeText = 'Ordern är ute för leverans';
+            case "out_for_delivery":
+                badgeClass = "text-bg-primary";
+                badgeText = "Ordern är ute för leverans";
                 break;
-            case 'delivered':
-                badgeClass = 'text-bg-success';
-                badgeText = 'Ordern är levererad';
+            case "delivered":
+                badgeClass = "text-bg-success";
+                badgeText = "Ordern är levererad";
                 break;
-            case 'canceled':
-                badgeClass = 'text-bg-danger';
-                badgeText = 'Ordern är avbruten';
+            case "canceled":
+                badgeClass = "text-bg-danger";
+                badgeText = "Ordern är avbruten";
                 break;
-            case 'returned':
-                badgeClass = 'text-bg-secondary';
-                badgeText = 'Ordern är returnerad';
+            case "returned":
+                badgeClass = "text-bg-secondary";
+                badgeText = "Ordern är returnerad";
                 break;
         }
     } else {
         switch (value) {
-            case 'pending':
-                badgeClass = 'text-bg-warning';
-                badgeText = 'Väntar på betalning';
+            case "pending":
+                badgeClass = "text-bg-warning";
+                badgeText = "Väntar på betalning";
                 break;
-            case 'paid':
-                badgeClass = 'text-bg-success';
-                badgeText = 'Betalad';
+            case "paid":
+                badgeClass = "text-bg-success";
+                badgeText = "Betalad";
                 break;
-            case 'failed':
-                badgeClass = 'text-bg-danger';
-                badgeText = 'Betalning misslyckades';
+            case "failed":
+                badgeClass = "text-bg-danger";
+                badgeText = "Betalning misslyckades";
                 break;
-            case 'refunded':
-                badgeClass = 'text-bg-secondary';
-                badgeText = 'Återbetalad';
+            case "refunded":
+                badgeClass = "text-bg-secondary";
+                badgeText = "Återbetalad";
                 break;
         }
     }
@@ -60,42 +60,42 @@ const orderStatus = (value, type) => {
 
 var columns = [
 { 
-    data: 'null', 
+    data: "null", 
     render: function(data, type, row) {
         let names = row.order_information.map(orderInfo => {
             return `${orderInfo.shipping_address.first_name} ${orderInfo.shipping_address.last_name}`;
         });
 
-        return names.join(', ');
+        return names.join(", ");
     },
     width: "260px"
 },
 {
-    data: 'status',
+    data: "status",
     render: function(data, type, row) {
-        let badgeClass = '';
-        let badgeText = '';
+        let badgeClass = "";
+        let badgeText = "";
         
         switch (data) {
-            case 'processing':
-                badgeClass = 'text-bg-warning';
-                badgeText = 'Ordern behandlas';
+            case "processing":
+                badgeClass = "text-bg-warning";
+                badgeText = "Behandlas";
                 break;
-            case 'out_for_delivery':
-                badgeClass = 'text-bg-primary';
-                badgeText = 'Ordern är ute för leverans';
+            case "out_for_delivery":
+                badgeClass = "text-bg-primary";
+                badgeText = "Ute för leverans";
                 break;
-            case 'delivered':
-                badgeClass = 'text-bg-success';
-                badgeText = 'Ordern är levererad';
+            case "delivered":
+                badgeClass = "text-bg-success";
+                badgeText = "Levererad";
                 break;
-            case 'canceled':
-                badgeClass = 'text-bg-danger';
-                badgeText = 'Ordern är avbruten';
+            case "canceled":
+                badgeClass = "text-bg-danger";
+                badgeText = "Avbruten";
                 break;
-            case 'returned':
-                badgeClass = 'text-bg-secondary';
-                badgeText = 'Ordern är returnerad';
+            case "returned":
+                badgeClass = "text-bg-secondary";
+                badgeText = "Returnerad";
                 break;
         }
     
@@ -104,27 +104,27 @@ var columns = [
     width: "150px"
 },
 {
-    data: 'payment_status',
+    data: "payment_status",
     render: function(data, type, row) {
-        let badgeClass = '';
-        let badgeText = '';
+        let badgeClass = "";
+        let badgeText = "";
         
         switch (data) {
-            case 'pending':
-                badgeClass = 'text-bg-warning';
-                badgeText = 'Väntar på betalning';
+            case "pending":
+                badgeClass = "text-bg-warning";
+                badgeText = "Väntar på betalning";
                 break;
-            case 'paid':
-                badgeClass = 'text-bg-success';
-                badgeText = 'Betalad';
+            case "paid":
+                badgeClass = "text-bg-success";
+                badgeText = "Betalad";
                 break;
-            case 'failed':
-                badgeClass = 'text-bg-danger';
-                badgeText = 'Betalning misslyckades';
+            case "failed":
+                badgeClass = "text-bg-danger";
+                badgeText = "Betalning misslyckades";
                 break;
-            case 'refunded':
-                badgeClass = 'text-bg-secondary';
-                badgeText = 'Återbetalad';
+            case "refunded":
+                badgeClass = "text-bg-secondary";
+                badgeText = "Återbetalad";
                 break;
         }
         
@@ -132,8 +132,8 @@ var columns = [
     },
     width: "150px"
 },
-{ data: 'total_price', render: function(data, type, row) { return `${data} kr`; }, width: "100px", className: 'text-end' },
-{ data: 'created_at', render: DataTable.render.date("YYYY-MM-DD HH:mm"), width: "150px", className: "text-end", },
+{ data: "total_price", render: function(data, type, row) { return `${data} kr`; }, width: "100px", className: "text-end" },
+{ data: "created_at", render: DataTable.render.date("YYYY-MM-DD HH:mm"), width: "150px", className: "text-end", },
 {
     data: null,
     width: "100px",
@@ -146,21 +146,55 @@ var columns = [
     }
 }];
     
-InitDataTable('#order-list', `${baseUrl}/admin/orders`, columns, [0, 'asc']);
+let dataTable = InitDataTable("#order-list", `${baseUrl}/admin/orders`, columns, [5, "desc"]);
 
-document.getElementById("orderDetailsModal").addEventListener("show.bs.modal", async (event) => {
+
+const orderDetailsModal = document.getElementById("orderDetailsModal");
+const modal = new bootstrap.Modal(orderDetailsModal);
+
+orderDetailsModal.addEventListener("hidden.bs.modal", function () {
+    dataTable.ajax.reload();
+});
+
+orderDetailsModal.addEventListener("show.bs.modal", async (event) => {
+    const successMessage = document.getElementById("success-message");
+    successMessage.textContent = "";
+    successMessage.style.display = "none";
+
     const orderId = event.relatedTarget.dataset.orderId;
     const order = await GetAsync(`${baseUrl}/admin/orders/${orderId}`, {withCredentials: true});
-
+    
     document.getElementById("order-number").textContent = `Ordernummer: ${order.data.id}`;
     document.getElementById("order-date").textContent = new Date(order.data.created_at).toLocaleString("sv-SE", { weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" });
-    document.getElementById("order-status").innerHTML = `<span class="fw-semibold">Status:</span> ${orderStatus(order.data.status, "orderStatus")}`;
+    
+    const orderStatusSelect = document.getElementById("order-status");
+    orderStatusSelect.innerHTML = "";
+
+    orderStatus.forEach(status => {
+        const option = document.createElement("option");
+        option.text = status.swe;
+        option.value = status.eng;
+        option.selected = order.data.status === status.eng ? true : false;
+        orderStatusSelect.append(option);
+    });
+    orderStatusSelect.addEventListener("change", async (event) => {
+        const selectValue = event.target.value;
+
+        try {
+            await PatchAsync(`${baseUrl}/admin/orders/${orderId}`, { status: selectValue }, {withCredentials: true});
+            successMessage.textContent = "Orderstatus uppdaterad!"
+            successMessage.style.display = "";
+
+        } catch (error) {
+            console.log(error);
+        }
+    });
 
     document.getElementById("shipping-full-name").textContent = `${order.data.order_information[0].shipping_address.first_name} ${order.data.order_information[0].shipping_address.last_name}`;
     document.getElementById("shipping-street").textContent = `${order.data.order_information[0].shipping_address.street}`;
     document.getElementById("shipping-zip-city").textContent = `${order.data.order_information[0].shipping_address.zip} ${order.data.order_information[0].shipping_address.city}`;
 
-    document.getElementById("payment-status").innerHTML = `<span class="fw-semibold">Status:</span> ${orderStatus(order.data.payment_status, "paymentStatus")}`;
+    document.getElementById("payment-status").innerHTML = `<span class="fw-semibold">Status:</span> ${statusBadge(order.data.payment_status, "paymentStatus")}`;
     document.getElementById("payment-type").src = `/admin/assets/images/payment/${order.data.payment_method}.svg`;
 
     const productIds = order.data.order_items.map(item => item.product_id);
@@ -170,7 +204,7 @@ document.getElementById("orderDetailsModal").addEventListener("show.bs.modal", a
     const products = await Promise.all(productPromises);
 
     const productList = document.getElementById("products-list");
-    productList.innerHTML = '';
+    productList.innerHTML = "";
 
     order.data.order_items.forEach((orderItem, index) => {
         const product = products[index].data;
@@ -209,5 +243,4 @@ document.getElementById("orderDetailsModal").addEventListener("show.bs.modal", a
         // Lägg till raden till tabellen
         productList.append(tr);
     });
-
 });

@@ -115,7 +115,12 @@
                       <p class="fs-5 fw-semibold mb-0" id="order-number"></p>
                       <small class="text-truncate" id="order-date"></small>
                     </div>
-                    <div id="order-status"></div>
+                    <div class="d-flex align-items-center gap-2">
+                      <span class="fw-semibold">Status:</span>
+                      <select class="form-select form-select-sm w-25" id="order-status">
+                      </select>
+                    </div>
+                    <p class="text-success fw-semibold pt-2 mb-0" style="display: none;" id="success-message"></p>
                 </div>
               </div>   
               
