@@ -142,7 +142,7 @@ if (updateProductModal) {
 
     const updateProduct = async (product) => {
         try {
-            await PatchAsync("https://webshopbackend.vercel.app/admin/products/update", product, {withCredentials: true});
+            await PatchAsync(`${baseUrl}/admin/products/update`, product, {withCredentials: true});
             window.location.href = "/admin/dashboard/product/index.html";  
         } catch (error) {
             console.log(error);
@@ -151,8 +151,7 @@ if (updateProductModal) {
 }
 
 const location = window.location;
-if (location.pathname === "/admin/dashboard/product/create.html")
-{
+if (location.pathname === "/admin/dashboard/product/create.html") {
     const productUnits = unitWeight;
     const getCategories = await GetAsync(`${baseUrl}/categories`);
     const categories = getCategories.data.sort((a, b) => a.name.localeCompare(b.name));
