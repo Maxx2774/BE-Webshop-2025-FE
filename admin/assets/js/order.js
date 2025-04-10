@@ -156,6 +156,13 @@ orderDetailsModal.addEventListener("hidden.bs.modal", function () {
     dataTable.ajax.reload();
 });
 
+const getMaskedCreditCard = (cardNumber) => {
+    let creditCardNumber = cardNumber;
+    let maskedCreditCard = "**** **** **** " + creditCardNumber.slice(-4);
+
+    return maskedCreditCard;
+}
+
 orderDetailsModal.addEventListener("show.bs.modal", async (event) => {
     const successMessage = document.getElementById("success-message");
     successMessage.textContent = "";
@@ -163,7 +170,6 @@ orderDetailsModal.addEventListener("show.bs.modal", async (event) => {
 
     const orderId = event.relatedTarget.dataset.orderId;
     const order = await GetAsync(`${baseUrl}/admin/orders/${orderId}`, {withCredentials: true});
-    console.log(order)
     
     document.getElementById("order-number").textContent = `Ordernummer: ${order.data.id}`;
     document.getElementById("order-date").textContent = new Date(order.data.created_at).toLocaleString("sv-SE", { weekday: "long", year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" });
@@ -195,20 +201,27 @@ orderDetailsModal.addEventListener("show.bs.modal", async (event) => {
     document.getElementById("shipping-street").textContent = `${order.data.order_information[0].shipping_address.street}`;
     document.getElementById("shipping-zip-city").textContent = `${order.data.order_information[0].shipping_address.zip} ${order.data.order_information[0].shipping_address.city}`;
 
+    document.getElementById("billing-full-name").textContent = `${order.data.order_information[0].billing_address.first_name} ${order.data.order_information[0].billing_address.last_name}`;
+    document.getElementById("billing-street").textContent = `${order.data.order_information[0].billing_address.street}`;
+    document.getElementById("billing-zip-city").textContent = `${order.data.order_information[0].billing_address.zip} ${order.data.order_information[0].billing_address.city}`;
+
     document.getElementById("payment-status").innerHTML = `<span class="fw-semibold">Status:</span> ${statusBadge(order.data.payment_status, "paymentStatus")}`;
     document.getElementById("payment-type").src = `/admin/assets/images/payment/${order.data.payment_method}.svg`;
+    document.getElementById("card-number").textContent = order.data.payment_method === "card" ? getMaskedCreditCard(order.data.credit_card) : null;
+
+    let totalPriceProduct = 0;
 
     const productIds = order.data.order_items.map(item => item.product_id);
-
     const productPromises = productIds.map(productId => GetAsync(`${baseUrl}/products/${productId}`));
-
     const products = await Promise.all(productPromises);
-
+    
     const productList = document.getElementById("products-list");
     productList.innerHTML = "";
 
     order.data.order_items.forEach((orderItem, index) => {
         const product = products[index].data;
+
+        totalPriceProduct += orderItem.price * orderItem.quantity;
 
         const tr = document.createElement("tr");
 
@@ -244,4 +257,7 @@ orderDetailsModal.addEventListener("show.bs.modal", async (event) => {
         // Lägg till raden till tabellen
         productList.append(tr);
     });
+
+        document.getElementById("order-total-product-price").textContent = `${totalPriceProduct} kr`;
+        document.getElementById("order-total-price").textContent = `${totalPriceProduct + 49} kr`;
 });
