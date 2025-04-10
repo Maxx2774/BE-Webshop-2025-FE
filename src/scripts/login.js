@@ -71,19 +71,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 
-  // Show Register Form
-  showRegisterLink.addEventListener('click', function () {
-    loginForm.style.display = 'none';
-    registerForm.style.display = 'block';
-    document.getElementById('loginModalLabel').textContent = 'Registrera ett konto';
-  });
+  // // Show Register Form
+  // showRegisterLink.addEventListener('click', function () {
+  //   loginForm.style.display = 'none';
+  //   registerForm.style.display = 'block';
+  //   document.getElementById('loginModalLabel').textContent = 'Registrera ett konto';
+  // });
 
-  // Show Login Form
-  showLoginLink.addEventListener('click', function () {
-    registerForm.style.display = 'none';
-    loginForm.style.display = 'block';
-    document.getElementById('loginModalLabel').textContent = 'Logga in';
-  });
+  // // Show Login Form
+  // showLoginLink.addEventListener('click', function () {
+  //   registerForm.style.display = 'none';
+  //   loginForm.style.display = 'block';
+  //   document.getElementById('loginModalLabel').textContent = 'Logga in';
+  // });
+  showLoginLink.addEventListener('click', showLoginForm);
+  showRegisterLink.addEventListener('click', showRegisterForm);
 
   // Handle User Registration
   async function registerUser(email, password) {
@@ -161,6 +163,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
 
+    // Validate email and password
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const minPasswordLength = 5;
+
+    if (!emailPattern.test(email)) {
+      alert('Please enter a valid email address.');
+      return;
+    }
+
+    if (password.length < minPasswordLength) {
+      alert('Password must be at least 5 characters long.');
+      return;
+    }
+
     loginUser(email, password);
   });
 
@@ -186,7 +202,6 @@ async function logoutUser() {
           credentials: 'include'  // Ensures the cookie is sent and cleared
       });
 
-      // Try to parse JSON, but handle cases where response is plain text
       let data;
       try {
           data = await response.json();
