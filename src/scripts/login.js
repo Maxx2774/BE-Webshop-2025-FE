@@ -109,8 +109,6 @@ document.addEventListener("DOMContentLoaded", function () {
         showLoginForm();
       } else {
         alert('Registration failed. Please try again.');
-        console.log(response.status)
-        console.log(result)
       }
     } catch (error) {
       console.error('Registration error:', error);

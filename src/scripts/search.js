@@ -1,4 +1,4 @@
-import { getBaseUrl } from "../utils/api.js";
+import { getBaseUrl, fetchData } from "../utils/api.js";
 import { createProductCard } from "./services.js";
 
 const productSearch = async (searchQ) => {
@@ -62,13 +62,21 @@ window.addEventListener("load", () => {
 });
 
 // Hämta produkter baserad på kategori
+
+const getCategorySlug = async (categoryId) => {
+    const categories = await fetchData("categories");
+    let category = categories.find(category => category.id === Number(categoryId));
+    return category.slug;
+}
+
 const productCategory = async (categoryId) => {
     if (!categoryId) {
         document.getElementById("product-container").innerHTML = "";
         return;
     }
 
-    history.pushState(null, "", `?category_id=${encodeURIComponent(categoryId)}`);
+    let categorySlug = await getCategorySlug(categoryId);
+    history.pushState(null, "", `?category=${categorySlug}`);
 
     try {
         const response = await axios.get(`${getBaseUrl().replace(/\/$/, "")}/products?category_id=${encodeURIComponent(categoryId)}`);
@@ -112,7 +120,8 @@ document.addEventListener('click', async (event) => {
         
         if (!categoryId) return;
 
-        history.pushState(null, "", `?category_id=${categoryId}`);
+        let categorySlug = await getCategorySlug(categoryId);
+        history.pushState(null, "", `?category=${categorySlug}`);
 
         await productCategory(categoryId);
     }
