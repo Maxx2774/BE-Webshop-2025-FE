@@ -55,7 +55,7 @@ function renderCart() {
             const minusBtn = document.createElement("button");
             minusBtn.textContent = "-";
             minusBtn.classList.add("btn", "btn-outline-secondary", "me-1");
-            minusBtn.onclick = () => changeQuantity(product.id, -1);
+            minusBtn.onclick = () => changeQuantity(product.id, -1); 
     
             const quantityInput = document.createElement("input");
             quantityInput.type = "text";  // Change to text input to allow custom values
