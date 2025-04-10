@@ -1,5 +1,26 @@
 export const baseUrl = "https://webshopbackend.vercel.app";
 export const unitWeight = ["st", "kg", "hg", "g", "liter"];
+export const orderStatus = [
+{
+    eng: "processing",
+    swe: "Behandlas"
+},
+{
+    eng: "out_for_delivery",
+    swe: "Ute för leverans"
+},
+{
+    eng: "delivered",
+    swe: "Levererad"
+},
+{
+    eng: "canceled",
+    swe: "Avbruten"
+},
+{
+    eng: "returned",
+    swe: "Returnerad"
+}];
 export let loggedUser = {};
 
 // HTTP metoder
