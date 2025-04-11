@@ -109,18 +109,27 @@ function renderCart() {
     if (cart.length > 0) {
         const continueBtnContainer = document.createElement("div");
         continueBtnContainer.classList.add("d-flex", "justify-content-center", "mt-3");
-
+        
         const continueBtn = document.createElement("button");
         continueBtn.textContent = "Till kassan";
         continueBtn.classList.add("btn", "btn-success");
+        continueBtn.id ="tillKassa";
         continueBtn.style.width = "100%";
+        continueBtn.addEventListener('click', function(){
+            
+            levForm.classList.remove("d-none");
+        });
 
         continueBtnContainer.append(continueBtn);
         continueButtonContainer.append(continueBtnContainer); // Add the button to the summary section
     }
 
+
     updateSummary();
 }
+const levForm = document.getElementById("order-form");
+
+
 
 function changeQuantity(id, amount) {
     let product = cart.find(item => item.id === id);
