@@ -55,7 +55,7 @@ Här är en översikt över projektets mappstruktur:
 
 - scripts/services.js – Innehåller funktioner för att skapa återanvändbara produktkort samt uppdatera kundkorgen.
 - scripts/search-slug.js – Hanterar både sökfunktion och skapande av URL-slugs för produkterna.
-- scripts/search-slug.js – Ansvarar för autentisering i webbshopen.
+- scripts/login.js – Ansvarar för autentisering i webbshopen.
 - scripts/cart.js – Sköter all funktionalitet kopplad till kundkorgen.
 - utils/api.js – Samlar funktioner för API-anrop. Dessa bör återanvändas genomgående i projektet.
 - src/css/style.css – Projektets huvudsakliga CSS.
