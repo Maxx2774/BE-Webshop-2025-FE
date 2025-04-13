@@ -12,10 +12,10 @@ Detta är ett frontend projekt för en enkel e-handelsplattform med både använ
 1. **Klona repot**  
    ```   git clone <repo-url>   ```
 
-2. **Klona repot**  
+2. **Navigera till projektmappen**  
    ```   cd <projektmapp>   ```
 
-2. **Klona repot**  
+2. **Starta applikationen**  
    Öppna ```index.html``` i din webbläsare.
 
 ## Kodbibliotek och Teknologier
