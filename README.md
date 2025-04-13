@@ -48,8 +48,8 @@ Här är en översikt över projektets mappstruktur:
 │ ├── utils                # API-hantering och scripts 
 │ ├── images               # Bilder/Logo
 │ ├── css                  # Stilfiler
-├── index.html              # Startsida 
-├── shopping-cart.html      # Varukorgssida
+├── index.html             # Startsida 
+├── shopping-cart.html     # Varukorgssida
 ```
 ## Viktiga filer
 
@@ -64,5 +64,5 @@ Här är en översikt över projektets mappstruktur:
 - admin/assets/js/services.js – Innehåller fetch-funktioner som med fördel kan återanvändas i hela adminpanelen.
 
 ## Förbättringspunkter
-- Vissa funktioner kan göras om för att återanvändas
-- Struktuera om vissa filer för clean code
+- Vissa funktioner bör brytas ut till separata, återanvändbara moduler för att minska kodupprepning.
+- Filstruktur kan förbättras för ökad läsbarhet och bättre separation av ansvar (clean code-principer).
