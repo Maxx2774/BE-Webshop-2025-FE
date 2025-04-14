@@ -1,16 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    <link rel="stylesheet" href="src/css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"
+    />
+    <link rel="stylesheet" href="src/css/style.css" />
 
-    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+      integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"
+      defer
+    ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="src/scripts/login.js" type="module" defer></script>
@@ -18,86 +38,176 @@
     <script src="src/scripts/search-slug.js" type="module" defer></script>
 
     <title>Document</title>
-</head>
-<body style="background-color: #f9fafb;">
+  </head>
+  <body style="background-color: #f9fafb">
     <!-- Nav -->
     <nav class="navbar navbar-expand-lg bg-white shadow-sm">
       <div class="container">
         <a class="navbar-brand" href="index.html">
-          <img src="/src/images/HAKIM_Livs_4.png" alt="Bootstrap" height="50">
+          <img src="/src/images/HAKIM_Livs_4.png" alt="Bootstrap" height="50" />
         </a>
-    
-        <span class="navbar-toggler border-0" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+
+        <span
+          class="navbar-toggler border-0"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <i class="fa-solid fa-bars fa-xl me-1"></i>
         </span>
-    
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <div class="col-12 col-lg-9 mx-auto px-3 pt-3 mt-lg-0">
             <form id="search-product-form">
               <div class="input-group mb-3">
                 <span class="input-group-text">
-                  <i class="fa-solid fa-magnifying-glass text-body-secondary"></i>
+                  <i
+                    class="fa-solid fa-magnifying-glass text-body-secondary"
+                  ></i>
                 </span>
-                <input type="text" class="form-control" id="search-product-q" placeholder="Sök produkter...">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="search-product-q"
+                  placeholder="Sök produkter..."
+                />
                 <button class="btn btn-sky px-4 fw-semibold">Sök</button>
               </div>
             </form>
           </div>
-    
-          <div class="d-flex gap-5 justify-content-center justify-content-lg-start align-items-center">
+
+          <div
+            class="d-flex gap-5 justify-content-center justify-content-lg-start align-items-center"
+          >
             <div id="login-button">
-              <a href="#" class="text-dark text-decoration-none" data-bs-toggle="modal" data-bs-target="#loginModal">
-                <i class="fa-solid fa-user fs-3 ms-2" style="color: #010768;"></i>
-                <p class="mb-0" style="font-size: 0.60rem; font-weight: bold; color: #010768;">Logga in</p>
+              <a
+                href="#"
+                class="text-dark text-decoration-none"
+                data-bs-toggle="modal"
+                data-bs-target="#loginModal"
+              >
+                <i
+                  class="fa-solid fa-user fs-3 ms-2"
+                  style="color: #010768"
+                ></i>
+                <p
+                  class="mb-0"
+                  style="font-size: 0.6rem; font-weight: bold; color: #010768"
+                >
+                  Logga in
+                </p>
               </a>
             </div>
             <div id="logout-button">
               <a href="#" class="text-dark text-decoration-none">
-                <i class="fa-solid fa-user fs-3 ms-2" style="color: #010768;"></i>
-                <p class="mb-0" style="font-size: 0.60rem; font-weight: bold; color: #010768;">Logga ut</p>
-                </a>
-              </div>
-              <div>
-                <a href="./shopping-cart.html" class="text-dark text-decoration-none d-flex flex-column justify-content-center align-items-center">
-                  <i class="fa-solid fa-cart-shopping fs-3 ms-2 position-relative" style="color: #010768;">
-                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count" style="font-size: .750rem"></span></i>
-                  <p class="mb-0" style="font-size: 0.60rem; font-weight: bold; color: #010768;">Till kassan</p>
-                </a>
-              </div>
-              <div id="admin-button" class="d-none d-flex flex-column justify-content-center align-items-center">
-                <a href="admin/dashboard/index.html" class="text-dark text-decoration-none d-flex flex-column justify-content-center align-items-center">
-                  <i class="fa-solid fa-user-gear fs-3" style="color: #010768;"></i>
-                <p class="text-start mb-0" style="font-size: 0.60rem; font-weight: bold; color: #010768; position: relative; left: -5px;">Admin</p>
+                <i
+                  class="fa-solid fa-user fs-3 ms-2"
+                  style="color: #010768"
+                ></i>
+                <p
+                  class="mb-0"
+                  style="font-size: 0.6rem; font-weight: bold; color: #010768"
+                >
+                  Logga ut
+                </p>
+              </a>
+            </div>
+            <div>
+              <a
+                href="./shopping-cart.html"
+                class="text-dark text-decoration-none d-flex flex-column justify-content-center align-items-center"
+              >
+                <i
+                  class="fa-solid fa-cart-shopping fs-3 ms-2 position-relative"
+                  style="color: #010768"
+                >
+                  <span
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                    id="cart-count"
+                    style="font-size: 0.75rem"
+                  ></span
+                ></i>
+                <p
+                  class="mb-0"
+                  style="font-size: 0.6rem; font-weight: bold; color: #010768"
+                >
+                  Till kassan
+                </p>
+              </a>
+            </div>
+            <div
+              id="admin-button"
+              class="d-none d-flex flex-column justify-content-center align-items-center"
+            >
+              <a
+                href="admin/dashboard/index.html"
+                class="text-dark text-decoration-none d-flex flex-column justify-content-center align-items-center"
+              >
+                <i
+                  class="fa-solid fa-user-gear fs-3"
+                  style="color: #010768"
+                ></i>
+                <p
+                  class="text-start mb-0"
+                  style="
+                    font-size: 0.6rem;
+                    font-weight: bold;
+                    color: #010768;
+                    position: relative;
+                    left: -5px;
+                  "
+                >
+                  Admin
+                </p>
               </a>
             </div>
           </div>
-    
-          <div class="d-lg-none pt-3 ms-4"> <!-- Döljer på stora skärmar -->
-            <a href="/" class="d-flex align-items-center pb-2  link-body-emphasis text-decoration-none">
+
+          <div class="d-lg-none pt-3 ms-4">
+            <!-- Döljer på stora skärmar -->
+            <a
+              href="/"
+              class="d-flex align-items-center pb-2 link-body-emphasis text-decoration-none"
+            >
               <span class="fs-5 fw-semibold">Rekommenderat</span>
             </a>
             <ul class="list-unstyled">
               <li>
-                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 fw-semibold category-link">
-                  <i class="bi bi-heart-fill me-2 text-danger"></i> Sparade Produkter
+                <a
+                  href="#"
+                  class="d-flex align-items-center text-decoration-none text-dark py-2 fw-semibold category-link"
+                >
+                  <i class="bi bi-heart-fill me-2 text-danger"></i> Sparade
+                  Produkter
                 </a>
               </li>
               <li>
-                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 fw-semibold category-link">
-                  <i class="bi bi-star-fill me-2 text-warning"></i> Aktuella Erbjudanden
+                <a
+                  href="#"
+                  class="d-flex align-items-center text-decoration-none text-dark py-2 fw-semibold category-link"
+                >
+                  <i class="bi bi-star-fill me-2 text-warning"></i> Aktuella
+                  Erbjudanden
                 </a>
               </li>
               <li>
-                <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 fw-semibold category-link">
+                <a
+                  href="#"
+                  class="d-flex align-items-center text-decoration-none text-dark py-2 fw-semibold category-link"
+                >
                   <i class="bi bi-cart3 me-2"></i> Alla produkter
                 </a>
               </li>
             </ul>
-            <a href="/" class="d-flex align-items-center pb-2 pt-3 link-body-emphasis text-decoration-none">
+            <a
+              href="/"
+              class="d-flex align-items-center pb-2 pt-3 link-body-emphasis text-decoration-none"
+            >
               <span class="fs-5 fw-semibold">Kategorier</span>
             </a>
-            <ul class="list-unstyled" id="categories-mobile-list">
-            </ul>
+            <ul class="list-unstyled" id="categories-mobile-list"></ul>
           </div>
         </div>
       </div>
@@ -105,48 +215,71 @@
 
     <!-- Main Content-->
     <main class="container d-flex flex-nowrap gap-4 py-4">
-        <!-- Aside links -->
-        <div class="flex-shrink-0 d-none d-lg-block" style="width: 280px; background-color: transparent;">
-          <a href="/" class="d-flex align-items-center pb-3 mb-0 link-body-emphasis text-decoration-none">
-              <span class="fs-5 fw-semibold">Rekommenderat</span>
-          </a>
-          <ul class="list-unstyled">
-              <li>
-                  <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 fw-semibold category-link">
-                      <i class="bi bi-heart-fill me-2 text-danger"></i> Sparade Produkter
-                  </a>
-              </li>
-              <li>
-                  <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 fw-semibold category-link">
-                      <i class="bi bi-star-fill me-2 text-warning"></i> Aktuella Erbjudanden
-                  </a>
-              </li>
-              <li>
-                  <a href="#" class="d-flex align-items-center text-decoration-none text-dark py-2 fw-semibold category-link">
-                      <i class="bi bi-cart3 me-2"></i> Alla produkter
-                  </a>
-              </li>
-          </ul>
-          <a href="/" class="d-flex align-items-center pb-3 mb-0 link-body-emphasis text-decoration-none">
-              <span class="fs-5 fw-semibold">Kategorier</span>
-          </a>
-          <ul class="list-unstyled" id="categories-list">
-          </ul>
+      <!-- Aside links -->
+      <div
+        class="flex-shrink-0 d-none d-lg-block"
+        style="width: 280px; background-color: transparent"
+      >
+        <a
+          href="/"
+          class="d-flex align-items-center pb-3 mb-0 link-body-emphasis text-decoration-none"
+        >
+          <span class="fs-5 fw-semibold">Rekommenderat</span>
+        </a>
+        <ul class="list-unstyled">
+          <li>
+            <a
+              href="#"
+              class="d-flex align-items-center text-decoration-none text-dark py-2 fw-semibold category-link"
+            >
+              <i class="bi bi-heart-fill me-2 text-danger"></i> Sparade
+              Produkter
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="d-flex align-items-center text-decoration-none text-dark py-2 fw-semibold category-link"
+            >
+              <i class="bi bi-star-fill me-2 text-warning"></i> Aktuella
+              Erbjudanden
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              class="d-flex align-items-center text-decoration-none text-dark py-2 fw-semibold category-link"
+            >
+              <i class="bi bi-cart3 me-2"></i> Alla produkter
+            </a>
+          </li>
+        </ul>
+        <a
+          href="/"
+          class="d-flex align-items-center pb-3 mb-0 link-body-emphasis text-decoration-none"
+        >
+          <span class="fs-5 fw-semibold">Kategorier</span>
+        </a>
+        <ul class="list-unstyled" id="categories-list"></ul>
       </div>
-      
 
       <div id="product-container">
         <!-- Product cards -->
         <div class="pb-4">
           <p class="fs-4 fw-semibold mb-3">Populärt just nu</p>
-          <ul class="list-group list-group-horizontal" id="popular-product-list"></ul>
+          <ul
+            class="list-group list-group-horizontal"
+            id="popular-product-list"
+          ></ul>
         </div>
 
         <div class="pt-4">
           <p class="fs-4 fw-semibold mb-3">Senaste produkter</p>
-          <ul class="list-group list-group-horizontal" id="new-product-list"></ul>
+          <ul
+            class="list-group list-group-horizontal"
+            id="new-product-list"
+          ></ul>
         </div>
-
       </div>
     </main>
 
@@ -156,113 +289,238 @@
         <div class="row">
           <div class="col">
             <h3 class="mb-4">Hakim Livs</h3>
-            <ul class="list-unstyled d-flex flex-column gap-2 border-start px-3">
-              <li><a href="#" class="text-decoration-none text-light">Adress</a></li>
-              <li><a href="#" class="text-decoration-none text-light">Telefon</a></li>
-              <li><a href="#" class="text-decoration-none text-light">Email</a></li>
-              <li><a href="#" class="text-decoration-none text-light">kontakta Oss</a></li>
+            <ul
+              class="list-unstyled d-flex flex-column gap-2 border-start px-3"
+            >
+              <li>
+                <a href="#" class="text-decoration-none text-light">Adress</a>
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-light">Telefon</a>
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-light">Email</a>
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-light"
+                  >Kontakta Oss</a
+                >
+              </li>
             </ul>
           </div>
           <div class="col">
             <h4 class="mb-4">FAQ</h4>
-            <ul class="list-unstyled d-flex flex-column gap-2 border-start border-white px-3">
-              <li><a href="#" class="text-decoration-none text-light">Om Hakim Livs</a></li>
-              <li><a href="#" class="text-decoration-none text-light">Vanliga frågor & Svar</a></li>
-              <li><a href="#" class="text-decoration-none text-light">Leverans & Frakt</a></li>
-              <li><a href="#" class="text-decoration-none text-light">Nyhetsbrev</a></li>
+            <ul
+              class="list-unstyled d-flex flex-column gap-2 border-start border-white px-3"
+            >
+              <li>
+                <a href="#" class="text-decoration-none text-light"
+                  >Om Hakim Livs</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-light"
+                  >Vanliga frågor & Svar</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-light"
+                  >Leverans & Frakt</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-light"
+                  >Nyhetsbrev</a
+                >
+              </li>
             </ul>
           </div>
           <div class="col">
             <h4 class="mb-4">The Fine Print</h4>
-            <ul class="list-unstyled d-flex flex-column gap-2 border-start px-3">
-              <li><a href="#" class="text-decoration-none text-light mb-2">Cookie Policy</a></li>
-              <li><a href="#" class="text-decoration-none text-light mb-2">Integritets-​policy</a></li>
-              <li><a href="#" class="text-decoration-none text-light mb-2">Allmänna villkor</a></li>
-              <li><a href="#" class="text-decoration-none text-light mb-2">Cookie-inställningar</a></li>
+            <ul
+              class="list-unstyled d-flex flex-column gap-2 border-start px-3"
+            >
+              <li>
+                <a href="#" class="text-decoration-none text-light mb-2"
+                  >Cookie Policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-light mb-2"
+                  >Integritets-​policy</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-light mb-2"
+                  >Allmänna villkor</a
+                >
+              </li>
+              <li>
+                <a href="#" class="text-decoration-none text-light mb-2"
+                  >Cookie-inställningar</a
+                >
+              </li>
             </ul>
           </div>
           <div class="col">
             <h4 class="mb-4">Social Media</h4>
             <div class="d-flex gap-3">
-              <a href="#" class="text-primary fs-1"><i class="fab fa-facebook"></i></a>
-              <a href="#" class="text-info fs-1"><i class="fab fa-twitter"></i></a>
-              <a href="#" class="text-danger fs-1"><i class="fab fa-instagram"></i></a>
-          </div>
+              <a href="#" class="text-primary fs-1"
+                ><i class="fab fa-facebook"></i
+              ></a>
+              <a href="#" class="text-info fs-1"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="#" class="text-danger fs-1"
+                ><i class="fab fa-instagram"></i
+              ></a>
+            </div>
           </div>
         </div>
-        <hr>
+        <hr />
         <p>2025 &copy All rights reserved</p>
-
       </div>
     </footer>
 
     <!-- Modal för produkter -->
-    <div class="modal fade" id="productModal" tabindex="-1" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div
+      class="modal fade"
+      id="productModal"
+      tabindex="-1"
+      aria-labelledby="productModalLabel"
+      aria-hidden="true"
+    >
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
-          <div class="modal-header" style="border-bottom: 0;">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="modal-header" style="border-bottom: 0">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
           </div>
-          <div class="modal-body" id="modal-product-details">
-          </div>
+          <div class="modal-body" id="modal-product-details"></div>
         </div>
       </div>
     </div>
 
     <!-- Modal för Login och Register -->
-      <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header" style="background-color: #024a70; color: white;">
-              <h5 class="modal-title" id="loginModalLabel">Logga in</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <div
+      class="modal fade"
+      id="loginModal"
+      tabindex="-1"
+      aria-labelledby="loginModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div
+            class="modal-header"
+            style="background-color: #024a70; color: white"
+          >
+            <h5 class="modal-title" id="loginModalLabel">Logga in</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- Login -->
+            <div id="login-form">
+              <form>
+                <div class="mb-3">
+                  <label for="login-email" class="form-label">E-post</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="login-email"
+                    placeholder="E-postadress"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="login-password" class="form-label"
+                    >Lösenord</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="login-password"
+                    placeholder="Lösenord"
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">Logga in</button>
+                <p class="mt-3">
+                  Har du inget konto?
+                  <a href="javascript:void(0);" id="show-register"
+                    >Registrera dig här</a
+                  >
+                </p>
+              </form>
             </div>
-            <div class="modal-body">
 
-              <!-- Login -->
-              <div id="login-form">
-                <form>
-                  <div class="mb-3">
-                    <label for="login-email" class="form-label">E-post</label>
-                    <input type="email" class="form-control" id="login-email" placeholder="E-postadress">
-                  </div>
-                  <div class="mb-3">
-                    <label for="login-password" class="form-label">Lösenord</label>
-                    <input type="password" class="form-control" id="login-password" placeholder="Lösenord">
-                  </div>
-                  <button type="submit" class="btn btn-primary">Logga in</button>
-                  <p class="mt-3">Har du inget konto? <a href="javascript:void(0);" id="show-register">Registrera dig här</a></p>
-                </form>
-              </div>
-
-              <!-- Register -->
-              <div id="register-form" style="display: none;">
-                <form>
-                  <div class="mb-3">
-                    <label for="register-email" class="form-label">E-post</label>
-                    <input type="email" class="form-control" id="register-email" placeholder="E-postadress">
-                    <div class="error-message" id="register-email-error"></div>
-                  </div>
-                  <div class="mb-3">
-                    <label for="register-password" class="form-label">Lösenord</label>
-                    <input type="password" class="form-control" id="register-password" placeholder="Lösenord">
-                    <div class="error-message" id="register-password-error"></div>
-                  </div>
-                  <div class="mb-3">
-                    <label for="register-confirm-password" class="form-label">Bekräfta Lösenord</label>
-                    <input type="password" class="form-control" id="register-confirm-password" placeholder="Bekräfta Lösenord">
-                    <div class="error-message" id="register-confirm-password-error"></div>
-                  </div>
-                  <button type="submit" class="btn btn-primary">Registrera</button>
-                  <p class="mt-3">Har du redan ett konto? <a href="javascript:void(0);" id="show-login">Logga in här</a></p>
-                </form>
-              </div>
+            <!-- Register -->
+            <div id="register-form" style="display: none">
+              <form>
+                <div class="mb-3">
+                  <label for="register-email" class="form-label">E-post</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="register-email"
+                    placeholder="E-postadress"
+                  />
+                  <div class="error-message" id="register-email-error"></div>
+                </div>
+                <div class="mb-3">
+                  <label for="register-password" class="form-label"
+                    >Lösenord</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="register-password"
+                    placeholder="Lösenord"
+                  />
+                  <div class="error-message" id="register-password-error"></div>
+                </div>
+                <div class="mb-3">
+                  <label for="register-confirm-password" class="form-label"
+                    >Bekräfta Lösenord</label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="register-confirm-password"
+                    placeholder="Bekräfta Lösenord"
+                  />
+                  <div
+                    class="error-message"
+                    id="register-confirm-password-error"
+                  ></div>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Registrera
+                </button>
+                <p class="mt-3">
+                  Har du redan ett konto?
+                  <a href="javascript:void(0);" id="show-login">Logga in här</a>
+                </p>
+              </form>
             </div>
-            <div class="modal-footer" style="background-color: #024a70; color: white;">
-              <button type="button" class="btn btn-light" data-bs-dismiss="modal">Stäng</button>
-            </div>
+          </div>
+          <div
+            class="modal-footer"
+            style="background-color: #024a70; color: white"
+          >
+            <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+              Stäng
+            </button>
           </div>
         </div>
       </div>
-</body>
+    </div>
+  </body>
 </html>
