@@ -143,16 +143,15 @@ function renderCart() {
     continueBtn.id = "tillKassa";
     continueBtn.style.width = "100%";
     continueBtn.addEventListener("click", function () {
-      levForm.classList.remove("d-none");
+      window.location.href = "/src/checkout/checkout.html";
     });
 
     continueBtnContainer.append(continueBtn);
-    continueButtonContainer.append(continueBtnContainer); // Add the button to the summary section
+    continueButtonContainer.append(continueBtnContainer);
   }
 
   updateSummary();
 }
-const levForm = document.getElementById("order-form");
 
 function changeQuantity(id, amount) {
   let product = cart.find((item) => item.id === id);
@@ -181,6 +180,12 @@ function updateSummary() {
   );
   const totalTax = totalProductPrice * taxRate;
   const totalCost = totalProductPrice + shippingCost;
+
+  // Store cart totals in localStorage for checkout page to access
+  localStorage.setItem("cartTotalProductPrice", totalProductPrice);
+  localStorage.setItem("cartTotalTax", totalTax.toFixed(2));
+  localStorage.setItem("cartShippingCost", shippingCost);
+  localStorage.setItem("cartTotalCost", totalCost);
 
   document.getElementById(
     "total-product-price"

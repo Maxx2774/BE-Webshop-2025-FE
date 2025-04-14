@@ -25,6 +25,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="/src/scripts/cart.js" type="module" defer></script>
+    <script src="/src/scripts/checkout.js" type="module" defer></script>
 
     <title>Kassan | Hakim Livs</title>
   </head>
@@ -61,6 +62,102 @@
           <div class="p-4 border rounded bg-white">
             <div class="text-center mb-4 border-bottom pb-2">
               <h3>Slutför din beställning</h3>
+            </div>
+
+            <div class="mb-4">
+              <h4 class="mb-3">Dina uppgifter</h4>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="firstName" class="form-label">Förnamn</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="firstName"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="lastName" class="form-label">Efternamn</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="lastName"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="email" class="form-label">E-post</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="namn@exempel.com"
+                    required
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label for="phone" class="form-label">Telefonnummer</label>
+                  <input
+                    type="tel"
+                    class="form-control"
+                    id="phone"
+                    placeholder="07X-XXX-XXXX"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-4" id="card-number-container">
+              <label for="cardNumber" class="form-label">Kortnummer</label>
+              <input
+                type="text"
+                class="form-control"
+                id="cardNumber"
+                placeholder="XXXX XXXX XXXX XXXX"
+              />
+            </div>
+
+            <div class="mb-4">
+              <h4 class="mb-3">Leveransadress</h4>
+              <div class="row g-3">
+                <div class="col-12">
+                  <label for="address" class="form-label">Adress</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="address"
+                    placeholder="Gatan 123"
+                    required
+                  />
+                </div>
+                <div class="col-12">
+                  <label for="address2" class="form-label"
+                    >Lägenhet, trappa, etc. (valfritt)</label
+                  >
+                  <input type="text" class="form-control" id="address2" />
+                </div>
+                <div class="col-md-5">
+                  <label for="city" class="form-label">Stad</label>
+                  <input type="text" class="form-control" id="city" required />
+                </div>
+                <div class="col-md-4">
+                  <label for="zipCode" class="form-label">Postnummer</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="zipCode"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <label for="notes" class="form-label"
+                >Meddelande (valfritt)</label
+              >
+              <textarea class="form-control" id="notes" rows="3"></textarea>
             </div>
 
             <!-- Payment Options -->
