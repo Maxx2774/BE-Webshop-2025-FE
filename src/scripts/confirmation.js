@@ -32,7 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
       <p><strong>Betalningsmetod:</strong> ${getPaymentMethodName(
         orderData.orderData.order_info.payment_method
       )}</p>
-      <p><strong>Total kostnad:</strong> ${orderData.totalCost}</p>
+      <p><strong>Total kostnad:</strong> ${
+        orderData.orderData.total_cost
+      } SEK</p>
     `;
 
   orderDetails.appendChild(customerInfo);
