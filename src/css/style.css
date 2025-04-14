@@ -15,7 +15,7 @@ body {
 }
 
 .bi {
-  vertical-align: -.125em;
+  vertical-align: -0.125em;
   fill: currentColor;
 }
 
@@ -23,7 +23,8 @@ body {
   display: block !important;
 }
 
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
   background-color: #0084d1;
 }
 
@@ -72,7 +73,6 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem;
-  
 }
 
 .product-card {
@@ -127,7 +127,8 @@ footer a:hover {
   text-decoration: underline !important;
 }
 
-.list-group-horizontal>.list-group-item+.list-group-item, .list-group-horizontal>.list-group-item:first-child:not(:last-child) { 
+.list-group-horizontal > .list-group-item + .list-group-item,
+.list-group-horizontal > .list-group-item:first-child:not(:last-child) {
   border: 0px solid #dee2e6;
   border-radius: 0.375rem;
 }
@@ -183,6 +184,15 @@ footer a:hover {
 #toast-container > div {
   opacity: 1;
 }
-#toast-container>.toast-success {
+#toast-container > .toast-success {
   background-image: none !important;
+}
+
+#categories-list li:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+#categories-list li:active {
+  background-color: #e0e0e0;
 }
