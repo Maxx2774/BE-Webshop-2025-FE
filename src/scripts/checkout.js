@@ -1,28 +1,23 @@
 import { getBaseUrl } from "../utils/api.js";
 import { currencySek } from "./services.js";
 
-// Hämta varukorgen från localStorage??
+// Hämtar varukorgen från localStorage??
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 document.addEventListener("DOMContentLoaded", () => {
   const paymentRadios = document.querySelectorAll(
     'input[name="paymentMethod"]'
   );
-  const cardNumberContainer = document.getElementById("card-number-container");
 
   setupFormValidation();
 
   paymentRadios.forEach((radio) => {
     radio.addEventListener("change", function () {
-      cardNumberContainer.style.display =
-        this.id === "creditCard" ? "block" : "none";
+      updatePaymentFieldsVisibility();
     });
   });
 
-  cardNumberContainer.style.display = document.getElementById("creditCard")
-    .checked
-    ? "block"
-    : "none";
+  updatePaymentFieldsVisibility();
 
   displayOrderSummary();
 
@@ -30,7 +25,26 @@ document.addEventListener("DOMContentLoaded", () => {
   if (placeOrderButton) {
     placeOrderButton.addEventListener("click", handleOrderSubmission);
   }
+
+  const swishRadio = document.getElementById("swish");
+  if (swishRadio) {
+    swishRadio.checked = true;
+    updatePaymentFieldsVisibility();
+  }
 });
+
+function updatePaymentFieldsVisibility() {
+  const selectedPayment = document.querySelector(
+    'input[name="paymentMethod"]:checked'
+  ).id;
+  const cardNumberContainer = document.getElementById("card-number-container");
+
+  cardNumberContainer.style.display = "none";
+
+  if (selectedPayment === "creditCard") {
+    cardNumberContainer.style.display = "block";
+  }
+}
 
 function setupFormValidation() {
   const emailInput = document.getElementById("email");
@@ -59,34 +73,36 @@ function setupFormValidation() {
   });
 
   const cardInput = document.getElementById("cardNumber");
-  cardInput.addEventListener("input", function (e) {
-    this.value = this.value.replace(/\D/g, "");
+  if (cardInput) {
+    cardInput.addEventListener("input", function (e) {
+      this.value = this.value.replace(/\D/g, "");
 
-    if (this.value.length > 16) {
-      this.value = this.value.slice(0, 16);
-    }
+      if (this.value.length > 16) {
+        this.value = this.value.slice(0, 16);
+      }
 
-    if (this.value.length > 0 && this.value.length < 16) {
-      this.classList.add("is-invalid");
-      if (
-        !this.nextElementSibling ||
-        !this.nextElementSibling.classList.contains("invalid-feedback")
-      ) {
-        const feedback = document.createElement("div");
-        feedback.classList.add("invalid-feedback");
-        feedback.textContent = "Kortnumret måste innehålla 16 siffror.";
-        this.parentNode.insertBefore(feedback, this.nextSibling);
+      if (this.value.length > 0 && this.value.length < 16) {
+        this.classList.add("is-invalid");
+        if (
+          !this.nextElementSibling ||
+          !this.nextElementSibling.classList.contains("invalid-feedback")
+        ) {
+          const feedback = document.createElement("div");
+          feedback.classList.add("invalid-feedback");
+          feedback.textContent = "Kortnumret måste innehålla 16 siffror.";
+          this.parentNode.insertBefore(feedback, this.nextSibling);
+        }
+      } else {
+        this.classList.remove("is-invalid");
+        if (
+          this.nextElementSibling &&
+          this.nextElementSibling.classList.contains("invalid-feedback")
+        ) {
+          this.nextElementSibling.remove();
+        }
       }
-    } else {
-      this.classList.remove("is-invalid");
-      if (
-        this.nextElementSibling &&
-        this.nextElementSibling.classList.contains("invalid-feedback")
-      ) {
-        this.nextElementSibling.remove();
-      }
-    }
-  });
+    });
+  }
 
   const phoneInput = document.getElementById("phone");
   phoneInput.addEventListener("input", function () {
