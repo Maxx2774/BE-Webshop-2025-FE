@@ -1,8 +1,16 @@
 import { fetchData } from "../utils/api.js";
-import { createProductCard, currencySek, updateCartCount, addToCart } from "./services.js";
+import {
+  createProductCard,
+  currencySek,
+  updateCartCount,
+  addToCart,
+} from "./services.js";
 
 const homeProductListArr = [{ selectId: "popular" }, { selectId: "new" }];
-const homeCategoryListArr = [{ selectId: "categories-mobile-list" }, { selectId: "categories-list" }];
+const homeCategoryListArr = [
+  { selectId: "categories-mobile-list" },
+  { selectId: "categories-list" },
+];
 
 document.addEventListener("DOMContentLoaded", () => {
   homeProductListArr.forEach((item) => loadProducts(item.selectId));
@@ -31,19 +39,29 @@ const loadProducts = async (sectionId) => {
   });
 };
 
-document.getElementById("productModal").addEventListener("show.bs.modal", async (event) => {
-  const productModal = document.getElementById("modal-product-details");
-  productModal.innerHTML = "";
-  
-  const productId = Number(event.relatedTarget.dataset.id);
-  let products = await fetchData("products");
-  const currentProduct = products.find(product => product.id === productId);
+document
+  .getElementById("productModal")
+  .addEventListener("show.bs.modal", async (event) => {
+    const productModal = document.getElementById("modal-product-details");
+    productModal.innerHTML = "";
+
+    const productId = Number(event.relatedTarget.dataset.id);
+    let products = await fetchData("products");
+    const currentProduct = products.find((product) => product.id === productId);
+
+    const isOutOfStock = currentProduct.stock_quantity <= 0;
 
     const modalProductRowDiv = document.createElement("div");
     modalProductRowDiv.classList.add("row");
 
     const modalImageDiv = document.createElement("div");
-    modalImageDiv.classList.add("col-md-6", "mb-4", "d-flex", "justify-content-center", "align-items-center");
+    modalImageDiv.classList.add(
+      "col-md-6",
+      "mb-4",
+      "d-flex",
+      "justify-content-center",
+      "align-items-center"
+    );
 
     const modalProductImg = document.createElement("img");
     modalProductImg.src = currentProduct.image_url;
@@ -79,21 +97,45 @@ document.getElementById("productModal").addEventListener("show.bs.modal", async 
     productDescription.textContent = currentProduct.description;
 
     const productStockBadge = document.createElement("span");
-    const stockClass = Number(currentProduct.stock_quantity) > 0 ? "text-bg-success" : "text-bg-danger";
-    const stockText =  Number(currentProduct.stock_quantity) > 0 ? "I lager" : "Ej i lager";
-    productStockBadge.classList.add("badge", "mb-4", "p-2", "px-4", "fs-6", stockClass);
+    const stockClass =
+      Number(currentProduct.stock_quantity) > 0
+        ? "text-bg-success"
+        : "text-bg-danger";
+    const stockText =
+      Number(currentProduct.stock_quantity) > 0 ? "I lager" : "Ej i lager";
+    productStockBadge.classList.add(
+      "badge",
+      "mb-4",
+      "p-2",
+      "px-4",
+      "fs-6",
+      stockClass
+    );
     productStockBadge.style.opacity = "75%";
     productStockBadge.textContent = stockText;
 
     const productCartButton = document.createElement("button");
-    productCartButton.classList.add("btn", "btn-sky", "shadow-sm", "col-12", "col-md-3");
-    productCartButton.textContent = "Köp";
 
-    productCartButton.addEventListener("click", () => {
-      addToCart(currentProduct);
-    });
+    if (isOutOfStock) {
+      productCartButton.classList.add("btn", "btn-secondary", "w-100");
+      productCartButton.textContent = "Tillfälligt slut";
+      productCartButton.disabled = true;
+    } else {
+      productCartButton.classList.add("btn", "btn-sky", "w-100");
+      productCartButton.textContent = "Köp";
+      productCartButton.addEventListener("click", () => {
+        addToCart(currentProduct);
+      });
+    }
 
-    modalProductDetails.append(productName, productCategory, priceDiv, productStockBadge, productDescription, productCartButton);
+    modalProductDetails.append(
+      productName,
+      productCategory,
+      priceDiv,
+      productStockBadge,
+      productDescription,
+      productCartButton
+    );
     modalProductRowDiv.append(modalImageDiv, modalProductDetails);
     productModal.append(modalProductRowDiv);
   });
@@ -105,16 +147,23 @@ const loadCategories = async (sectionId) => {
 
   categoriesListUl.innerHTML = "";
 
-  categories.forEach(category => {
+  categories.forEach((category) => {
     const li = document.createElement("li");
     const anchor = document.createElement("a");
-    anchor.classList.add("d-flex", "align-items-center", "text-decoration-none", "text-dark", "py-2", "category-link");
+    anchor.classList.add(
+      "d-flex",
+      "align-items-center",
+      "text-decoration-none",
+      "text-dark",
+      "py-2",
+      "category-link"
+    );
     anchor.href = "#";
-    anchor.setAttribute("data-category-id", category.id)
+    anchor.setAttribute("data-category-id", category.id);
 
     const i = document.createElement("i");
-    
-    let icon = category.icon.split(' ');
+
+    let icon = category.icon.split(" ");
     i.classList.add(...icon, "me-2");
 
     anchor.append(i, category.name);
