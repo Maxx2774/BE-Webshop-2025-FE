@@ -472,7 +472,7 @@ async function handleOrderSubmission() {
           ? "card"
           : paymentMethod === "swish"
           ? "swish"
-          : "invoice",
+          : "klarna",
       phone_number: phone,
       shipping_address: addressInfo,
       billing_address: addressInfo,

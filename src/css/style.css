@@ -196,3 +196,15 @@ footer a:hover {
 #categories-list li:active {
   background-color: #e0e0e0;
 }
+
+.swishlogo {
+  margin-left: 20px;
+  height: 70px;
+  margin-top: -20px;
+}
+
+.klarnalogo {
+  height: 30px;
+  margin-top: 4px;
+  margin-left: 20px;
+}

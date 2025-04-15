@@ -44,8 +44,8 @@ function getPaymentMethodName(method) {
       return "Kreditkort";
     case "swish":
       return "Swish";
-    case "invoice":
-      return "Faktura";
+    case "klarna":
+      return "Klarna";
     default:
       return method;
   }
