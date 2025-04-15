@@ -105,6 +105,24 @@ body {
   border: 1px solid #ddd;
 }
 
+.security-message {
+  background: linear-gradient(to right, #f8f9fa, #e9ecef);
+  border: 1px solid #dee2e6;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.security-message i {
+  color: #0d6efd;
+}
+
+.security-message .fw-semibold {
+  color: #212529;
+}
+
+.security-message small {
+  color: #6c757d;
+}
+
 /* Footer */
 .site-footer {
   background: #eaeaea;
