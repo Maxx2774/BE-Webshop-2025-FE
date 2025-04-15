@@ -1,5 +1,3 @@
-import { currencySek } from "./services.js";
-
 document.addEventListener("DOMContentLoaded", () => {
   const orderData = JSON.parse(sessionStorage.getItem("orderConfirmation"));
 
@@ -30,9 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
       <p><strong>Betalningsmetod:</strong> ${getPaymentMethodName(
         orderData.orderData.order_info.payment_method
       )}</p>
-      <p><strong>Total kostnad:</strong> ${currencySek.format(
+      <p><strong>Total kostnad:</strong> ${
         orderData.orderData.total_cost
-      )}</p>
+      } SEK</p>
     `;
 
   orderDetails.appendChild(customerInfo);
