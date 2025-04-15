@@ -25,12 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (placeOrderButton) {
     placeOrderButton.addEventListener("click", handleOrderSubmission);
   }
-
-  const swishRadio = document.getElementById("swish");
-  if (swishRadio) {
-    swishRadio.checked = true;
-    updatePaymentFieldsVisibility();
-  }
 });
 
 function updatePaymentFieldsVisibility() {
