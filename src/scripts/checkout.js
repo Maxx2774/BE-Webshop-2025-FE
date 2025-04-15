@@ -1,6 +1,8 @@
-// Get cart from localStorage
+import { getBaseUrl } from "../utils/api.js";
+import { currencySek } from "./services.js";
+
+// Hämta varukorgen från localStorage??
 const cart = JSON.parse(localStorage.getItem("cart")) || [];
-const baseUrl = "https://webshopbackend.vercel.app";
 
 document.addEventListener("DOMContentLoaded", () => {
   const paymentRadios = document.querySelectorAll(
@@ -194,7 +196,7 @@ function setupFormValidation() {
 }
 
 function formatPrice(price) {
-  return `${price} kr`;
+  return currencySek.format(price);
 }
 
 function displayOrderSummary() {
@@ -479,9 +481,8 @@ async function handleOrderSubmission() {
     orderButton.textContent = "Bearbetar...";
     orderButton.disabled = true;
 
-    // FETCHA VIA API från vår backend
-
-    const response = await fetch(`${baseUrl}/orders`, {
+    const url = `${getBaseUrl()}orders`;
+    const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,3 +1,5 @@
+import { currencySek } from "./services.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const orderData = JSON.parse(sessionStorage.getItem("orderConfirmation"));
 
@@ -6,12 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  if (orderData.orderMessage) {
-    document.getElementById("order-message").textContent =
-      orderData.orderMessage;
-  }
-
   const orderDetails = document.getElementById("order-details");
+  if (!orderDetails) return;
 
   const customerInfo = document.createElement("div");
   customerInfo.innerHTML = `
@@ -32,9 +30,9 @@ document.addEventListener("DOMContentLoaded", () => {
       <p><strong>Betalningsmetod:</strong> ${getPaymentMethodName(
         orderData.orderData.order_info.payment_method
       )}</p>
-      <p><strong>Total kostnad:</strong> ${
+      <p><strong>Total kostnad:</strong> ${currencySek.format(
         orderData.orderData.total_cost
-      } SEK</p>
+      )}</p>
     `;
 
   orderDetails.appendChild(customerInfo);
