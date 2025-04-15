@@ -74,13 +74,20 @@ function renderCart() {
       quantityInput.value = product.quantity;
       quantityInput.classList.add("form-control", "text-center");
       quantityInput.style.width = "50px";
+      quantityInput.maxLength = 2; // Limit to 2 digits (max 99)
+      quantityInput.setAttribute("data-max", "50"); // Custom attribute to store max value
 
       // Allow only numeric input
       quantityInput.addEventListener("input", (event) => {
         let newQuantity = event.target.value.replace(/\D/g, ""); // Remove non-digit characters
+
         if (newQuantity === "") {
           newQuantity = 0; // If empty, reset to 0
+        } else {
+          // Apply maximum limit of 50
+          newQuantity = Math.min(parseInt(newQuantity), 50);
         }
+
         event.target.value = newQuantity;
         product.quantity = parseInt(newQuantity);
         updateCart(); // Update the cart and summary
@@ -156,6 +163,10 @@ function renderCart() {
 function changeQuantity(id, amount) {
   let product = cart.find((item) => item.id === id);
   if (product) {
+    if (amount > 0 && product.quantity >= 50) {
+      return;
+    }
+
     product.quantity += amount;
     if (product.quantity <= 0) {
       removeFromCart(id);
