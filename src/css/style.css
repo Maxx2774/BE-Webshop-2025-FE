@@ -228,19 +228,7 @@ footer a:hover {
 
 /* OPENING HOURS */
 .opening-hours-container {
-  background: linear-gradient(
-    45deg,
-    rgba(0, 144, 214, 0.2) 0%,
-    rgba(2, 74, 112, 0.4) 100%
-  );
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
-}
-
-.opening-hours-container:hover {
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
 }
 
 .opening-hours-content {
@@ -321,3 +309,5 @@ footer a:hover {
     margin-top: 5px;
   }
 }
+
+/* PRODUCT SECTION IN HOME */
