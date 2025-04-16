@@ -215,6 +215,40 @@
       </div>
     </nav>
 
+    <section class="hero-section">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h1 class="display-4 fw-bold mb-1">
+              <i class="fa-solid fa-seedling text-success me-2"></i>
+              Färskare. Enklare.
+            </h1>
+            <h2 class="display-6 fw-semibold mb-4">Hakim Livs-upplevelsen</h2>
+            <div class="d-flex gap-3">
+              <a
+                href="#popular-products"
+                class="btn btn-sky px-3 px-md-4 py-1 py-md-2 shadow-sm fw-semibold"
+              >
+                Utforska produkter
+                <i class="bi bi-arrow-right ms-2"></i>
+              </a>
+              <a
+                href="#footer"
+                class="btn btn-outline-dark px-3 px-md-4 py-1 py-md-2 fw-semibold"
+                >Öppettidder</a
+              >
+            </div>
+          </div>
+          <div class="col-lg-6 mt-5 mt-lg-0 text-center">
+            <img
+              src="src/images/groceries.png"
+              class="hero-image d-none d-lg-block img-fluid mx-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Main Content-->
     <main class="container d-flex flex-nowrap gap-4 py-4">
       <!-- Aside links -->
@@ -268,7 +302,7 @@
       <div id="product-container">
         <div class="product-section">
           <div class="d-flex justify-content-between align-items-center mb-4">
-            <div>
+            <div id="popular-products">
               <span class="badge bg-warning text-dark section-badge"
                 >Populärt</span
               >
@@ -299,7 +333,11 @@
     </main>
 
     <!-- Footer -->
-    <footer class="text-light py-4" style="background-color: #024a70">
+    <footer
+      class="text-light py-4"
+      style="background-color: #024a70"
+      id="footer"
+    >
       <div class="container px-4">
         <div class="row">
           <div class="col">

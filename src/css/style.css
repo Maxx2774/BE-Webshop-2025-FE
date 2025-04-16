@@ -288,7 +288,7 @@ footer a:hover {
   }
 }
 
-/* COPYRIGHT */
+/* COPYRIGHT MSG */
 
 .copyright-section {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -314,4 +314,23 @@ footer a:hover {
   .copyright-text {
     margin-top: 5px;
   }
+}
+
+/* HERO SECTION */
+
+.hero-section {
+  padding: 3rem 0;
+  position: relative;
+  overflow: hidden;
+  background-color: #f9fafb;
+}
+
+.hero-section h1 {
+  color: #024a70;
+  font-weight: 900;
+}
+
+.hero-image {
+  max-height: 440px;
+  object-fit: cover;
 }
