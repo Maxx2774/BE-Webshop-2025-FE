@@ -34,7 +34,7 @@ export const currencySek = new Intl.NumberFormat("sv-SE", {
 // Skapa produktkort
 export const createProductCard = (product) => {
   const productLi = document.createElement("li");
-  productLi.style.minWidth = "250px";
+  productLi.style.minWidth = "200px";
   productLi.classList.add("list-group-item");
 
   const isOutOfStock = product.stock_quantity <= 0;
