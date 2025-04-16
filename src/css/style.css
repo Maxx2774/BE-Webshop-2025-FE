@@ -338,3 +338,9 @@ footer a:hover {
   max-height: 440px;
   object-fit: cover;
 }
+
+/* ANNOUNCEMENT BAR */
+.announcement-bar {
+  color: white;
+  background-color: #ff6b35;
+}
