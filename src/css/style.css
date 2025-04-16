@@ -311,3 +311,14 @@ footer a:hover {
 }
 
 /* PRODUCT SECTION IN HOME */
+
+.product_section {
+  padding-bottom: 100rem;
+}
+
+.section-badge {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  margin-bottom: 0.75rem;
+}
