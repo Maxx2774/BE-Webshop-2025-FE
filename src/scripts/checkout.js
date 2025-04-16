@@ -519,7 +519,7 @@ async function handleOrderSubmission() {
     window.location.href = "/src/checkout/confirmation.html";
   } catch (error) {
     console.error("Error creating order:", error);
-    alert("Det uppstod ett fel vid beställningen. Försök igen senare.");
+    alert("Vi kunde inte slutföra din beställning. Vissa produkter kan ha begränsad tillgång i lager just nu. Hör gärna av dig till oss så hjälper vi dig vidare!");
 
     orderButton.textContent = originalText;
     orderButton.disabled = false;
