@@ -3,6 +3,10 @@ export const addToCart = (product) => {
   let existingProduct = cart.find((item) => item.id === product.id);
 
   if (existingProduct) {
+    if (existingProduct.quantity >= 50) {
+      toastr.error(`Max antal för ${product.name} är 50 st.`);
+      return;
+    }
     existingProduct.quantity += 1;
   } else {
     product.quantity = 1;
