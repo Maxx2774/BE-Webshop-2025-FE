@@ -344,3 +344,21 @@ footer a:hover {
   color: white;
   background-color: #ff6b35;
 }
+
+@media (max-width: 576px) {
+  .announcement-text {
+    font-size: 0.75rem;
+  }
+  .announcement-bar .fas {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .announcement-text {
+    font-size: 0.65rem;
+  }
+  .announcement-bar .fas {
+    font-size: 0.7rem;
+  }
+}
