@@ -69,23 +69,29 @@ body {
 }
 
 /* Products */
-#products {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
+
+.product_section {
+  padding-bottom: 100rem;
 }
 
-.product-card {
-  border: 1px solid #ddd;
-  padding: 1rem;
-  text-align: center;
-}
-
-.product-card button {
-  background: lightgray;
-  border: none;
+.section-badge {
+  font-size: 0.9rem;
   padding: 0.5rem 1rem;
-  cursor: pointer;
+  border-radius: 50px;
+  margin-bottom: 0.75rem;
+}
+
+/* Buy product btn custom styling. Added a nice hovering effect aswell. */
+.list-group-item .btn-sky,
+#modal-product-details .btn-sky {
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.list-group-item .btn-sky:hover,
+#modal-product-details .btn-sky:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Login */
@@ -308,17 +314,4 @@ footer a:hover {
   .copyright-text {
     margin-top: 5px;
   }
-}
-
-/* PRODUCT SECTION IN HOME */
-
-.product_section {
-  padding-bottom: 100rem;
-}
-
-.section-badge {
-  font-size: 0.9rem;
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
-  margin-bottom: 0.75rem;
 }
