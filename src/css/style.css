@@ -225,3 +225,99 @@ footer a:hover {
   margin-top: 4px;
   margin-left: 20px;
 }
+
+/* OPENING HOURS */
+.opening-hours-container {
+  background: linear-gradient(
+    45deg,
+    rgba(0, 144, 214, 0.2) 0%,
+    rgba(2, 74, 112, 0.4) 100%
+  );
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.opening-hours-container:hover {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+}
+
+.opening-hours-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.opening-hours-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.75rem 2rem;
+  flex: 1;
+  min-width: 220px;
+  transition: transform 0.2s ease;
+}
+
+.opening-hours-divider {
+  width: 1px;
+  height: 50px;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin: 0 10px;
+  align-self: center;
+}
+
+.day-label {
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+.time-label {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: white;
+}
+
+@media (max-width: 767px) {
+  .opening-hours-day {
+    margin-bottom: 0.5rem;
+    width: 100%;
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .opening-hours-day:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+}
+
+/* COPYRIGHT */
+
+.copyright-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.copyright-logo {
+  height: 30px;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
+}
+
+.copyright-text {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.3px;
+}
+
+@media (max-width: 576px) {
+  .copyright-section {
+    text-align: center;
+  }
+
+  .copyright-text {
+    margin-top: 5px;
+  }
+}
