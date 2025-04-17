@@ -64,20 +64,6 @@ body {
   box-shadow: none;
 }
 
-.search-button {
-  transition: all 0.2s ease;
-  background-color: #f00480;
-  border: none;
-}
-
-.search-button:hover {
-  background-color: #c9006b;
-}
-
-.search-button:active {
-  background-color: #7e0043 !important;
-}
-
 /* Main Content */
 .main-content {
   padding: 2rem;
