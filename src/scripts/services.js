@@ -50,7 +50,6 @@ export const createProductCard = (product) => {
   const isOutOfStock = product.stock_quantity <= 0;
   if (isOutOfStock) {
     productLi.classList.add("out-of-stock");
-    productLi.style.opacity = "0.6";
   }
 
   const productLink = document.createElement("a");

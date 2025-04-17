@@ -54,6 +54,14 @@ body {
 
 /* Products */
 
+.list-group-item {
+  border: none !important;
+}
+
+.out-of-stock {
+  opacity: 0.6 !important;
+}
+
 .section-badge {
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
