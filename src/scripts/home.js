@@ -19,7 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const loadProducts = async (sectionId) => {
   const productListUl = document.getElementById(`${sectionId}-product-list`);
-  productListUl.innerHTML = "<p>Läser in produkter...</p>";
+  productListUl.innerHTML = `<div class=" w-100 py-4">
+  <div class="spinner-border text-primary" role="status">
+  </div>
+</div>`;
 
   let products = await fetchData("products");
   productListUl.innerHTML = "";
@@ -143,6 +146,13 @@ document
 //Hämtas alla kategorier
 const loadCategories = async (sectionId) => {
   const categoriesListUl = document.getElementById(sectionId);
+  categoriesListUl.innerHTML = `<li class="py-2">
+    <div class="d-flex align-items-center">
+      <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+      <span class="text-muted">Laddar kategorier</span>
+    </div>
+  </li>`;
+
   let categories = await fetchData("categories");
 
   categoriesListUl.innerHTML = "";
