@@ -362,3 +362,10 @@ footer a:hover {
     font-size: 0.7rem;
   }
 }
+
+@media (max-width: 991.98px) {
+  .navbar.sticky-top {
+    position: static;
+    top: auto;
+  }
+}
