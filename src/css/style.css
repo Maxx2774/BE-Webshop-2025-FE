@@ -45,6 +45,39 @@ body {
   }
 }
 
+/* SEARCH BAR  */
+
+.search-icon {
+  color: #010768;
+  font-size: 1.2rem;
+}
+.search-container {
+  transition: all 0.3s ease;
+}
+
+.search-container:hover,
+.search-container:focus-within {
+  box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.search-input:focus {
+  box-shadow: none;
+}
+
+.search-button {
+  transition: all 0.2s ease;
+  background-color: #f00480;
+  border: none;
+}
+
+.search-button:hover {
+  background-color: #c9006b;
+}
+
+.search-button:active {
+  background-color: #7e0043 !important;
+}
+
 /* Main Content */
 .main-content {
   padding: 2rem;

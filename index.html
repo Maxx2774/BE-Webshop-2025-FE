@@ -76,19 +76,21 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <div class="col-12 col-lg-9 mx-auto px-3 pt-3 mt-lg-0">
             <form id="search-product-form">
-              <div class="input-group mb-3">
-                <span class="input-group-text">
-                  <i
-                    class="fa-solid fa-magnifying-glass text-body-secondary"
-                  ></i>
+              <div
+                class="input-group mb-3 search-container shadow-sm rounded-3 overflow-hidden"
+              >
+                <span class="input-group-text border-0 bg-white">
+                  <i class="fa-solid fa-magnifying-glass search-icon"></i>
                 </span>
                 <input
                   type="text"
-                  class="form-control"
+                  class="form-control border-0 py-2 search-input"
                   id="search-product-q"
                   placeholder="Sök produkter..."
                 />
-                <button class="btn btn-sky px-4 fw-semibold">Sök</button>
+                <button class="btn btn-primary px-4 fw-semibold search-button">
+                  Sök
+                </button>
               </div>
             </form>
           </div>
