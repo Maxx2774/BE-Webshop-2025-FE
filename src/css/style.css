@@ -367,3 +367,10 @@ footer a:hover {
 .list-group-item {
   animation: fadeIn 0.5s ease forwards;
 }
+
+/* FLYING CART mobile only */
+.flying-cart {
+  width: 60px;
+  height: 60px;
+  z-index: 54;
+}

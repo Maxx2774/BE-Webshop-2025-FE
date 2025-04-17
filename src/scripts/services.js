@@ -27,6 +27,12 @@ export function updateCartCount() {
     cartCountElement.textContent = itemCount;
     cartCountElement.style.display = itemCount === 0 ? "none" : "inline-block";
   }
+
+  const floatingCartCount = document.getElementById("floating-cart-count");
+  if (floatingCartCount) {
+    floatingCartCount.textContent = itemCount;
+    floatingCartCount.style.display = itemCount === 0 ? "none" : "inline-block";
+  }
 }
 
 // Justerar till svensk valuta
@@ -38,7 +44,7 @@ export const currencySek = new Intl.NumberFormat("sv-SE", {
 // Skapa produktkort
 export const createProductCard = (product) => {
   const productLi = document.createElement("li");
-  productLi.style.minWidth = "200px";
+  productLi.style.minWidth = "210px";
   productLi.classList.add("list-group-item");
 
   const isOutOfStock = product.stock_quantity <= 0;
