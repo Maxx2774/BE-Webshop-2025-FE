@@ -330,14 +330,20 @@ footer a:hover {
 }
 
 .hero-section h1 {
-  color: #024a70;
   font-weight: 900;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: -1px;
+  color: #1a1a2e;
+}
+
+.hero-section h2 {
+  color: #555;
 }
 
 .hero-image {
   max-height: 440px;
   object-fit: cover;
-  filter: drop-shadow(0 7px 5px rgba(0, 0, 0, 0.4));
+  filter: drop-shadow(0 7px 10px rgba(0, 0, 0, 0.4));
 }
 
 /* ANNOUNCEMENT BAR */
