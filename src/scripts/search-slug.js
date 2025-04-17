@@ -101,7 +101,14 @@ const productCategory = async (categoryId) => {
 document.addEventListener("click", async (event) => {
   if (event.target.matches(".category-link")) {
     event.preventDefault();
+
+    document.querySelectorAll(".category-link").forEach((link) => {
+      link.classList.remove("active-category");
+    });
+    event.target.classList.add("active-category");
+
     const categoryId = event.target.dataset.categoryId;
+
     if (categoryId) {
       let categorySlug = await getCategorySlug(categoryId);
       history.pushState(null, "", `?category=${categorySlug.slug}`);

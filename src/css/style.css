@@ -176,14 +176,33 @@ footer a:hover {
   background-image: none !important;
 }
 
+/** CATEGORY LIST */
+
+.active-category {
+  background-color: rgba(0, 132, 209, 0.08);
+  color: #0084d1 !important;
+  font-weight: 600;
+  border-left: 3px solid #0084d1;
+  padding-left: 0.75rem;
+  border-radius: 0 4px 4px 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
+}
+
+.active-category:hover {
+  background-color: rgba(65, 126, 161, 0.12);
+}
+
+.active-category i {
+  color: #0084d1;
+}
+
 #categories-list li:hover {
   background-color: #f0f0f0;
   cursor: pointer;
 }
 
-#categories-list li:active {
-  background-color: #e0e0e0;
-}
+/* PAYMENTLOGOS */
 
 .swishlogo {
   height: 70px;
