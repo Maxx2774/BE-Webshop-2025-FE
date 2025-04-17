@@ -322,13 +322,6 @@ footer a:hover {
 
 /* HERO SECTION */
 
-.hero-section {
-  padding: 3rem 0;
-  position: relative;
-  overflow: hidden;
-  background-color: #f9fafb;
-}
-
 .hero-section h1 {
   font-weight: 900;
   font-family: "Poppins", sans-serif;
