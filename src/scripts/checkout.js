@@ -43,6 +43,7 @@ function updatePaymentFieldsVisibility() {
 function setupFormValidation() {
   const emailInput = document.getElementById("email");
   emailInput.addEventListener("input", function () {
+    this.value = this.value.replace(/[^a-zA-Z0-9@._\-]/g, "");
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(this.value) && this.value.length > 0) {
       this.classList.add("is-invalid");
@@ -169,13 +170,13 @@ function setupFormValidation() {
       if (this.value.length > 50) {
         this.value = this.value.slice(0, 50);
       }
+      this.value = this.value.replace(/[^a-zA-ZåäöÅÄÖ\s-]/g, "");
     });
   });
 
   const addressInputs = [
     document.getElementById("address"),
     document.getElementById("address2"),
-    document.getElementById("city"),
   ];
 
   addressInputs.forEach((input) => {
@@ -183,7 +184,17 @@ function setupFormValidation() {
       if (this.value.length > 100) {
         this.value = this.value.slice(0, 100);
       }
+      this.value = this.value.replace(/[^a-zA-ZåäöÅÄÖ0-9\s,.-]/g, "");
     });
+  });
+
+  const cityInput = document.getElementById("city");
+  cityInput.addEventListener("input", function () {
+    if (this.value.length > 100) {
+      this.value = this.value.slice(0, 100);
+    }
+
+    this.value = this.value.replace(/[^a-zA-ZåäöÅÄÖ\s-]/g, "");
   });
 
   const notesInput = document.getElementById("notes");
@@ -519,7 +530,9 @@ async function handleOrderSubmission() {
     window.location.href = "/src/checkout/confirmation.html";
   } catch (error) {
     console.error("Error creating order:", error);
-    alert("Vi kunde inte slutföra din beställning. Vissa produkter kan ha begränsad tillgång i lager just nu. Hör gärna av dig till oss så hjälper vi dig vidare!");
+    alert(
+      "Vi kunde inte slutföra din beställning. Vissa produkter kan ha begränsad tillgång i lager just nu. Hör gärna av dig till oss så hjälper vi dig vidare!"
+    );
 
     orderButton.textContent = originalText;
     orderButton.disabled = false;
