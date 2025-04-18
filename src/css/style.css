@@ -81,6 +81,20 @@ body {
   opacity: 0.6 !important;
 }
 
+.out-of-stock-badge {
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+.out-of-stock-badge .badge {
+  font-size: 0.7rem;
+  padding: 0.35rem 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
 .section-badge {
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
@@ -190,7 +204,7 @@ body {
 }
 
 #toast-container > div:hover {
-  border:0;
+  border: 0;
 }
 
 #toast-container > .toast-success {

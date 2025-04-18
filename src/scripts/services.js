@@ -1,8 +1,8 @@
 export const addToCart = (product) => {
   toastr.options = {
-    "timeOut": "1500",
-  }
-  
+    timeOut: "1500",
+  };
+
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   let existingProduct = cart.find((item) => item.id === product.id);
 
@@ -65,6 +65,14 @@ export const createProductCard = (product) => {
 
   const divImg = document.createElement("div");
   divImg.classList.add("d-flex", "justify-content-center");
+
+  if (isOutOfStock) {
+    const outOfStockBadge = document.createElement("div");
+    outOfStockBadge.classList.add("out-of-stock-badge", "position-absolute");
+    outOfStockBadge.innerHTML =
+      '<span class="badge bg-danger">Slut i lager</span>';
+    divImg.appendChild(outOfStockBadge);
+  }
 
   const productImg = document.createElement("img");
   productImg.classList.add("img-fluid");
