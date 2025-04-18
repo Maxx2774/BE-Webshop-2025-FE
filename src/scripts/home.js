@@ -46,7 +46,13 @@ document
   .getElementById("productModal")
   .addEventListener("show.bs.modal", async (event) => {
     const productModal = document.getElementById("modal-product-details");
-    productModal.innerHTML = "";
+    productModal.innerHTML = `
+    <div class="d-flex justify-content-center align-items-center" style="height:200px;">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Laddar...</span>
+      </div>
+    </div>
+  `;
 
     const productId = Number(event.relatedTarget.dataset.id);
     let products = await fetchData("products");
@@ -140,6 +146,7 @@ document
       productCartButton
     );
     modalProductRowDiv.append(modalImageDiv, modalProductDetails);
+    productModal.innerHTML = "";
     productModal.append(modalProductRowDiv);
   });
 
