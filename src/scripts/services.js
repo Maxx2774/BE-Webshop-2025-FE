@@ -1,4 +1,8 @@
 export const addToCart = (product) => {
+  toastr.options = {
+    "timeOut": "1500",
+  }
+  
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   let existingProduct = cart.find((item) => item.id === product.id);
 
