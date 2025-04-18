@@ -156,12 +156,12 @@ orderDetailsModal.addEventListener("hidden.bs.modal", function () {
     dataTable.ajax.reload();
 });
 
-const getMaskedCreditCard = (cardNumber) => {
-    let creditCardNumber = cardNumber;
-    let maskedCreditCard = "**** **** **** " + creditCardNumber.slice(-4);
+// const getMaskedCreditCard = (cardNumber) => {
+//     let creditCardNumber = cardNumber;
+//     let maskedCreditCard = "**** **** **** " + creditCardNumber.slice(-4);
 
-    return maskedCreditCard;
-}
+//     return maskedCreditCard;
+// }
 
 orderDetailsModal.addEventListener("show.bs.modal", async (event) => {
     const successMessage = document.getElementById("success-message");
@@ -207,7 +207,7 @@ orderDetailsModal.addEventListener("show.bs.modal", async (event) => {
 
     document.getElementById("payment-status").innerHTML = `<span class="fw-semibold">Status:</span> ${statusBadge(order.data.payment_status, "paymentStatus")}`;
     document.getElementById("payment-type").src = `/admin/assets/images/payment/${order.data.payment_method}.svg`;
-    document.getElementById("card-number").textContent = order.data.payment_method === "card" ? getMaskedCreditCard(order?.data?.credit_card) : null;
+    document.getElementById("card-number").textContent = order.data.payment_method === "card" && order.data.card_last4 ? "**** **** **** " + order.data.card_last4 : "Fel i fetch?"; 
 
     let totalPriceProduct = 0;
 
