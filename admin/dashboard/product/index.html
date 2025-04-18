@@ -113,8 +113,11 @@
               </div>
 
               <div class="form-floating mb-3">
-                <input type="number" name="price" id="price" min="0" class="form-control text-secondary" required>
+                <input type="text" pattern="^(?:[1-4]?\d{1,4}|50000)$" name="price" id="price" min="0" max="50000" class="form-control text-secondary" required>
                 <label>Pris</label>
+                <div>
+                  <p id="error-price" class="text-danger text-center pt-1"></p>
+                </div>
               </div>
 
               <div class="form-floating mb-3">
@@ -123,13 +126,20 @@
               </div>
 
               <div class="form-floating mb-3">
-                <input type="number" name="stock_quantity" id="stock-quantity" min="0" class="form-control text-secondary" required>
+                <input type="text" pattern="^(?:[1-4]?\d{1,4}|1000)$" name="stock_quantity" id="stock-quantity" min="1" max="1000" class="form-control text-secondary" required>
                 <label>Antal</label>
+                <div>
+                  <p id="error-stock" class="text-danger text-center pt-1"></p>
+                </div>
               </div>
 
               <div class="form-floating mb-3">
                 <input type="url" name="image_url" id="image-url" class="form-control text-secondary" required>
                 <label>Bild (Url)</label>
+              </div>
+
+              <div>
+                <p id="error" class="text-danger text-center fw-semibold"></p>
               </div>
   
             </div>

@@ -146,25 +146,35 @@
             <div class="mb-3">
               <label class="label-text">Pris</label>
               <input
-                type="number"
+                type="text"
+                pattern="^(?:[1-4]?\d{1,4}|20000)$"
                 name="price"
                 id="product-price"
                 min="0"
+                max="20000"
                 class="form-control text-secondary"
                 required
               />
+              <div>
+                <p id="error-price" class="text-danger text-center pt-1"></p>
+              </div>
             </div>
 
             <div class="mb-3">
               <label class="label-text">Antal</label>
               <input
-                type="number"
+                type="text"
+                pattern="^(?:[1-4]?\d{1,4}|1000)$"
                 name="price"
                 id="product-quantity"
-                min="0"
+                min="1"
+                max="1000"
                 class="form-control text-secondary"
                 required
               />
+              <div>
+                <p id="error-stock" class="text-danger text-center pt-1"></p>
+              </div>
             </div>
 
             <div class="mb-3">
