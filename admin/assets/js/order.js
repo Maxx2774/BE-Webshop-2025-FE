@@ -207,7 +207,7 @@ orderDetailsModal.addEventListener("show.bs.modal", async (event) => {
 
     document.getElementById("payment-status").innerHTML = `<span class="fw-semibold">Status:</span> ${statusBadge(order.data.payment_status, "paymentStatus")}`;
     document.getElementById("payment-type").src = `/admin/assets/images/payment/${order.data.payment_method}.svg`;
-    document.getElementById("card-number").textContent = order.data.payment_method === "card" && order.data.card_last4 ? "**** **** **** " + order.data.card_last4 : "Fel i fetch?"; 
+    document.getElementById("card-number").textContent = order.data.payment_method === "card" && order.data.order_information[0].card_last4 ? "**** **** **** " + order.data.order_information[0].card_last4 : ""; 
 
     let totalPriceProduct = 0;
 
