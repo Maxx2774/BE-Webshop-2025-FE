@@ -8,7 +8,7 @@ document.getElementById("logout").addEventListener("click", logOutUser);
 document.getElementById("logged-user-name").textContent = loggedUser.email;
 
     var columns = [
-        { data: 'id', width: "70px" },
+        { data: 'id', classname: "text-start", width: "70px" },
         { data: 'name', width: "200px" },
         { data: 'slug', width: "150px" },
     ];

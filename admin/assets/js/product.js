@@ -37,7 +37,7 @@ if (datatableProduct) {
             orderable: false,
             defaultContent: ''
         },
-        { data: 'id', width: "70px" },
+        { data: 'id',  className: "text-start", width: "70px" },
         { data: 'name', width: "200px" },
         { data: 'categories.name', width: "150px" },
         { data: 'price', width: "100px" },
@@ -106,9 +106,42 @@ if(deleteProductModal) {
     };
 }
 
+const validateInput = (event, type) => {
+    let inputValue = event.target.value;
+    let errorMessage = document.getElementById(type === "price" ? "error-price" : "error-stock");
+    let errorMessages = [];
+
+    if (type === "price") {
+        if (inputValue.includes(",") || inputValue.includes(".")) {
+            errorMessages.push("Priset får endast innehålla heltal!");
+        }
+
+        if (!inputValue.includes(",") && !inputValue.includes(".")) {
+            if (isNaN(inputValue) || inputValue < 0 || inputValue > 20000) {
+                errorMessages.push("Priset får endast vara mellan 0 och 20000!");
+            }
+        }
+    }
+
+    if (type === "quantity") {
+        if (inputValue.includes(",") || inputValue.includes(".")) {
+            errorMessages.push("Antalet får endast innehålla heltal!");
+        }
+
+        if (inputValue < 0 || inputValue > 1000) {
+            errorMessages.push("Antalet får inte vara mindre än 0 eller större än 1000!");
+        }
+    }
+
+    errorMessage.textContent = errorMessages.length > 0 ? errorMessages.join(" ") : "";
+};
+
 //Uppdatera
 const updateProductModal = document.getElementById("updateModal");
 if (updateProductModal) {
+    document.getElementById("price").addEventListener("input", event => validateInput(event, "price"));
+    document.getElementById("stock-quantity").addEventListener("input", event => validateInput(event, "quantity"));
+
     let productId;
     updateProductModal.addEventListener("show.bs.modal", async (event) => {
         const updateFields = document.querySelectorAll("#update input, #update textarea");
@@ -134,6 +167,14 @@ if (updateProductModal) {
                 console.log(`Set ${field.name} to ${field.value}`);
             }
         });
+
+        const priceError = document.getElementById("error-price").textContent;
+        const quantityError = document.getElementById("error-stock").textContent;
+
+        if (priceError || quantityError) {
+            document.getElementById("error").textContent = "Vänligen korrigera alla fel innan du skickar in formuläret!";
+            return;
+        }
     
         product["product_id"] = productId;
     
@@ -152,6 +193,9 @@ if (updateProductModal) {
 
 const location = window.location;
 if (location.pathname === "/admin/dashboard/product/create.html") {
+    document.getElementById("product-price").addEventListener("input", event => validateInput(event, "price"));
+    document.getElementById("product-quantity").addEventListener("input", event => validateInput(event, "quantity"));
+
     const productUnits = unitWeight;
     const getCategories = await GetAsync(`${baseUrl}/categories`);
     const categories = getCategories.data.sort((a, b) => a.name.localeCompare(b.name));
@@ -186,6 +230,14 @@ if (location.pathname === "/admin/dashboard/product/create.html") {
             
         if (!productTitle || !productPrice || !productDescription || !productCategory || !productImgUrl || !productUnit || !productQuantity) {
             document.getElementById("error").textContent = "Alla fält måste fyllas i!";
+            return;
+        }
+
+        const priceError = document.getElementById("error-price").textContent;
+        const quantityError = document.getElementById("error-stock").textContent;
+
+        if (priceError || quantityError) {
+            document.getElementById("error").textContent = "Vänligen korrigera alla fel innan du skickar in formuläret!";
             return;
         }
 
