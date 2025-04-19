@@ -489,3 +489,81 @@ body {
     font-size: 16px;
   }
 }
+
+/* AUTH MODAL IMPROVEMENTS */
+#loginModal .modal-content {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+#loginModal .modal-dialog {
+  transition: transform 0.3s ease-out;
+}
+
+#loginModal.show .modal-dialog {
+  transform: scale(1) translateY(0);
+}
+
+#loginModal .btn-close {
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+#loginModal .btn-close:hover {
+  opacity: 1;
+}
+
+#loginModal .btn-primary {
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 0.6rem 0;
+  background-color: #010768;
+  border-color: #010768;
+}
+
+#loginModal .btn-primary:hover {
+  background-color: #000946;
+}
+
+#loginModal .bg-light {
+  background-color: #f8f9fa !important;
+  border-left: 3px solid #0d6efd;
+  padding: 0.8rem 1rem;
+  border-radius: 6px !important;
+}
+
+#login-form,
+#register-form {
+  transition: all 0.3s ease;
+}
+
+#login-form.fade-out,
+#register-form.fade-out {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+#login-form.fade-in,
+#register-form.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.input-icon {
+  top: 50%;
+  transform: translateY(-50%);
+  left: 15px;
+  z-index: 5;
+  color: #6c757d;
+}
+
+#loginModal .form-floating .form-control:focus {
+  border-color: #010768;
+  box-shadow: 0 0 0 0.25rem rgba(1, 7, 104, 0.15);
+}
+
+#loginModal .form-control:hover {
+  border-color: #ced4da;
+  box-shadow: 0 0 0 0.25rem rgba(1, 7, 104, 0.05);
+}

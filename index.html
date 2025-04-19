@@ -429,7 +429,7 @@
       </div>
     </div>
 
-    <!-- Modal för Login och Register -->
+    <!-- Modal för Login -->
     <div
       class="modal fade"
       id="loginModal"
@@ -437,13 +437,9 @@
       aria-labelledby="loginModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div
-            class="modal-header"
-            style="background-color: #024a70; color: white"
-          >
-            <h5 class="modal-title" id="loginModalLabel">Logga in</h5>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+          <div class="modal-header border-0 pb-0">
             <button
               type="button"
               class="btn-close"
@@ -451,116 +447,153 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
-            <!-- Säkerhetsmeddelande -->
-            <div
-              id="security-message"
-              class="security-message mb-4 p-3 rounded"
-            >
-              <div class="d-flex align-items-center">
-                <div class="me-3">
-                  <i class="fas fa-shield-alt" style="font-size: 1.5rem"></i>
-                </div>
-                <div>
-                  <div class="fw-semibold mb-1">Säker inloggning</div>
-                  <small
-                    >Din information är skyddad med avancerad kryptering och
-                    säkra lagringsmetoder.</small
-                  >
-                </div>
-              </div>
+          <div class="modal-body px-4 pt-0">
+            <div class="text-center mb-4">
+              <img
+                src="/src/images/Fav.png"
+                alt="Hakim Livs"
+                height="60"
+                class="mb-3"
+              />
+              <h4 class="modal-title fw-bold" id="loginModalLabel">Logga in</h4>
             </div>
 
-            <!-- Login -->
+            <div class="d-flex align-items-center bg-light p-2 rounded-3 mb-4">
+              <i class="fas fa-shield-alt text-primary me-2"></i>
+              <small class="text-secondary"
+                >Säker inloggning med krypterad anslutning</small
+              >
+            </div>
+
+            <!-- Login Form with Icons -->
             <div id="login-form">
               <form>
-                <div class="mb-3">
-                  <label for="login-email" class="form-label">E-post</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="login-email"
-                    placeholder="E-postadress"
-                  />
+                <div class="position-relative mb-3">
+                  <div class="form-floating">
+                    <input
+                      type="email"
+                      class="form-control ps-5"
+                      id="login-email"
+                      placeholder="E-postadress"
+                    />
+                    <label for="login-email" class="ms-4">E-postadress</label>
+                  </div>
+                  <i
+                    class="fas fa-envelope position-absolute text-muted input-icon"
+                  ></i>
                 </div>
-                <div class="mb-3">
-                  <label for="login-password" class="form-label"
-                    >Lösenord</label
-                  >
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="login-password"
-                    placeholder="Lösenord"
-                  />
+
+                <div class="position-relative mb-3">
+                  <div class="form-floating">
+                    <input
+                      type="password"
+                      class="form-control ps-5"
+                      id="login-password"
+                      placeholder="Lösenord"
+                    />
+                    <label for="login-password" class="ms-4">Lösenord</label>
+                  </div>
+                  <i
+                    class="fas fa-lock position-absolute text-muted input-icon"
+                  ></i>
                 </div>
-                <button type="submit" class="btn btn-primary">Logga in</button>
-                <p class="mt-3">
-                  Har du inget konto?
-                  <a href="javascript:void(0);" id="show-register"
-                    >Registrera dig här</a
-                  >
-                </p>
+
+                <button type="submit" class="btn btn-primary w-100 py-2 mb-3">
+                  Logga in
+                </button>
+
+                <div class="text-center">
+                  <p class="mb-0">
+                    Har du inget konto?
+                    <a
+                      href="javascript:void(0);"
+                      id="show-register"
+                      class="text-decoration-none"
+                      >Registrera dig</a
+                    >
+                  </p>
+                </div>
               </form>
             </div>
 
-            <!-- Register -->
+            <!-- Register Form with Icons -->
             <div id="register-form" style="display: none">
               <form>
-                <div class="mb-3">
-                  <label for="register-email" class="form-label">E-post</label>
-                  <input
-                    type="email"
-                    class="form-control"
-                    id="register-email"
-                    placeholder="E-postadress"
-                  />
-                  <div class="error-message" id="register-email-error"></div>
+                <div class="position-relative mb-3">
+                  <div class="form-floating">
+                    <input
+                      type="email"
+                      class="form-control ps-5"
+                      id="register-email"
+                      placeholder="E-postadress"
+                    />
+                    <label for="register-email" class="ms-4"
+                      >E-postadress</label
+                    >
+                  </div>
+                  <i
+                    class="fas fa-envelope position-absolute text-muted input-icon"
+                  ></i>
+                  <div class="invalid-feedback" id="register-email-error"></div>
                 </div>
-                <div class="mb-3">
-                  <label for="register-password" class="form-label"
-                    >Lösenord</label
-                  >
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="register-password"
-                    placeholder="Lösenord"
-                  />
-                  <div class="error-message" id="register-password-error"></div>
-                </div>
-                <div class="mb-3">
-                  <label for="register-confirm-password" class="form-label"
-                    >Bekräfta Lösenord</label
-                  >
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="register-confirm-password"
-                    placeholder="Bekräfta Lösenord"
-                  />
+
+                <div class="position-relative mb-3">
+                  <div class="form-floating">
+                    <input
+                      type="password"
+                      class="form-control ps-5"
+                      id="register-password"
+                      placeholder="Lösenord"
+                    />
+                    <label for="register-password" class="ms-4">Lösenord</label>
+                  </div>
+                  <i
+                    class="fas fa-lock position-absolute text-muted input-icon"
+                  ></i>
                   <div
-                    class="error-message"
+                    class="invalid-feedback"
+                    id="register-password-error"
+                  ></div>
+                </div>
+
+                <div class="position-relative mb-3">
+                  <div class="form-floating">
+                    <input
+                      type="password"
+                      class="form-control ps-5"
+                      id="register-confirm-password"
+                      placeholder="Bekräfta Lösenord"
+                    />
+                    <label for="register-confirm-password" class="ms-4"
+                      >Bekräfta Lösenord</label
+                    >
+                  </div>
+                  <i
+                    class="fas fa-check-circle position-absolute text-muted input-icon"
+                  ></i>
+                  <div
+                    class="invalid-feedback"
                     id="register-confirm-password-error"
                   ></div>
                 </div>
-                <button type="submit" class="btn btn-primary">
+
+                <button type="submit" class="btn btn-primary w-100 py-2 mb-3">
                   Registrera
                 </button>
-                <p class="mt-3">
-                  Har du redan ett konto?
-                  <a href="javascript:void(0);" id="show-login">Logga in här</a>
-                </p>
+
+                <div class="text-center">
+                  <p class="mb-0">
+                    Har du redan ett konto?
+                    <a
+                      href="javascript:void(0);"
+                      id="show-login"
+                      class="text-decoration-none"
+                      >Logga in</a
+                    >
+                  </p>
+                </div>
               </form>
             </div>
-          </div>
-          <div
-            class="modal-footer"
-            style="background-color: #024a70; color: white"
-          >
-            <button type="button" class="btn btn-light" data-bs-dismiss="modal">
-              Stäng
-            </button>
           </div>
         </div>
       </div>
