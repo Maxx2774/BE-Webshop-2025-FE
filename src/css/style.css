@@ -10,6 +10,7 @@ html {
 
 body {
   margin: 0;
+  padding: 0;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -566,4 +567,20 @@ body {
 #loginModal .form-control:hover {
   border-color: #ced4da;
   box-shadow: 0 0 0 0.25rem rgba(1, 7, 104, 0.05);
+}
+
+/* OUR TEAM */
+
+.ourTeam {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  background-color: #ff6b35;
+  text-align: center;
+  margin: auto;
+  height: 25px;
+  font-weight: 600;
+  color: #1d1d1d;
+  text-transform: uppercase;
 }
