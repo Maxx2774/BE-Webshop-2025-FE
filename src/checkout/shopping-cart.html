@@ -28,7 +28,7 @@
 
     <title>Varukorg | Hakim Livs</title>
   </head>
-  <body style="background-color: #f9fafb">
+  <body class="d-flex flex-column" style="background-color: #f9fafb">
     <!-- Announcement. -->
     <div class="py-2 announcement-bar">
       <div class="container text-center">
@@ -91,7 +91,14 @@
         <div class="col-lg-7 col-md-8 col-12 mb-4">
           <div class="p-3 border rounded bg-white">
             <div class="text-center mb-3 border-bottom pb-2">
-              <h4>Varukorg</h4>
+              <h4 class="d-flex align-items-center justify-content-center">
+                Varukorg
+                <span
+                  id="cart-count-badge"
+                  class="badge bg-success rounded-pill ms-2"
+                  >0</span
+                >
+              </h4>
             </div>
             <div id="cart-items"></div>
           </div>
@@ -132,7 +139,7 @@
       </div>
     </div>
 
-    <footer class="text-light py-4 mt-5" style="background-color: #002aa8">
+    <footer class="text-light py-4 mt-auto" style="background-color: #002aa8">
       <div class="container px-4">
         <div class="row justify-content-center mb-4">
           <div class="col-md-8 text-center">
