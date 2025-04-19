@@ -390,3 +390,90 @@ body {
   height: 60px;
   z-index: 54;
 }
+
+/* PROGRESS BAR STARTING FROM CART */
+
+.checkout-steps {
+  margin-top: 15px;
+  position: relative;
+  z-index: 1;
+}
+
+.step {
+  text-align: center;
+  width: 33.333%;
+}
+
+.checkout-steps::before {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #e9ecef;
+  z-index: -1;
+}
+
+.step-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px;
+  color: #adb5bd;
+  border: 2px solid #dee2e6;
+  z-index: 2;
+  transition: all 0.3s ease;
+  font-size: 18px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.step.completed .step-icon {
+  background-color: #208502;
+  border-color: #208502;
+  color: white;
+  box-shadow: 0 2px 10px rgba(32, 133, 2, 0.3);
+}
+
+.step.active .step-icon {
+  background-color: white;
+  border-color: #208502;
+  color: #208502;
+  box-shadow: 0 0 0 4px rgba(32, 133, 2, 0.15);
+  transform: scale(1.1);
+}
+
+.step-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #6c757d;
+  margin-top: 5px;
+  transition: all 0.3s ease;
+}
+
+.step.completed .step-label {
+  color: #208502;
+  font-weight: 600;
+}
+
+.step.active .step-label {
+  color: #208502;
+  font-weight: 700;
+  transform: scale(1.05);
+}
+
+@media (max-width: 576px) {
+  .step-label {
+    font-size: 12px;
+  }
+
+  .step-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+}
