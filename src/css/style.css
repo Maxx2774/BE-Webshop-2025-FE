@@ -344,13 +344,6 @@ body {
   max-height: 440px;
   object-fit: cover;
   filter: drop-shadow(0 7px 10px rgba(0, 0, 0, 0.4));
-  transition: all 0.3s ease;
-}
-
-.hero-image:hover {
-  transform: translateY(-5px);
-  filter: drop-shadow(0 25px 25px rgba(0, 0, 0, 0.2))
-    drop-shadow(0 15px 12px rgba(0, 0, 0, 0.1));
 }
 
 @media (max-width: 450px) {
