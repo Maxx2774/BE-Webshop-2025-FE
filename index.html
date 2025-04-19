@@ -99,83 +99,54 @@
             <div id="login-button">
               <a
                 href="#"
-                class="text-dark text-decoration-none"
+                class="text-decoration-none d-flex flex-column align-items-center nav-hover-effect"
                 data-bs-toggle="modal"
                 data-bs-target="#loginModal"
               >
-                <i
-                  class="fa-solid fa-user fs-3 ms-2"
-                  style="color: #010768"
-                ></i>
-                <p
-                  class="mb-0"
-                  style="font-size: 0.6rem; font-weight: bold; color: #010768"
-                >
-                  Logga in
-                </p>
+                <div class="nav-icon-container">
+                  <i class="bi bi-box-arrow-in-right fs-3 text-dark"></i>
+                </div>
+                <p class="authText">Logga in</p>
               </a>
             </div>
             <div id="logout-button">
-              <a href="#" class="text-dark text-decoration-none">
-                <i
-                  class="fa-solid fa-user fs-3 ms-2"
-                  style="color: #010768"
-                ></i>
-                <p
-                  class="mb-0"
-                  style="font-size: 0.6rem; font-weight: bold; color: #010768"
-                >
-                  Logga ut
-                </p>
+              <a
+                href="#"
+                class="text-decoration-none d-flex flex-column align-items-center nav-hover-effect"
+              >
+                <div class="nav-icon-container">
+                  <i class="bi bi-box-arrow-right fs-3 text-dark"></i>
+                </div>
+                <p class="authText">Logga ut</p>
               </a>
             </div>
             <div>
               <a
                 href="src/checkout/shopping-cart.html"
-                class="text-dark text-decoration-none d-flex flex-column justify-content-center align-items-center"
+                class="text-decoration-none d-flex flex-column align-items-center nav-hover-effect"
               >
-                <i
-                  class="fa-solid fa-cart-shopping fs-3 ms-2 position-relative"
-                  style="color: #010768"
-                >
+                <div class="position-relative nav-icon-container">
+                  <i class="bi bi-bag fs-3 text-dark"></i>
                   <span
-                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                    class="position-absolute start-100 translate-middle badge rounded-pill bg-danger cart-badge"
                     id="cart-count"
-                    style="font-size: 0.75rem"
-                  ></span
-                ></i>
-                <p
-                  class="mb-0"
-                  style="font-size: 0.6rem; font-weight: bold; color: #010768"
-                >
-                  Till kassan
-                </p>
+                  ></span>
+                </div>
+                <p class="authText">Varukorgen</p>
               </a>
             </div>
             <div
               id="admin-button"
-              class="d-none d-flex flex-column justify-content-center align-items-center"
+              class="d-flex flex-column justify-content-center align-items-center"
             >
               <a
                 href="admin/dashboard/index.html"
-                class="text-dark text-decoration-none d-flex flex-column justify-content-center align-items-center"
+                class="text-decoration-none d-flex flex-column align-items-center nav-hover-effect"
               >
-                <i
-                  class="fa-solid fa-user-gear fs-3"
-                  style="color: #010768"
-                ></i>
-                <p
-                  class="text-start mb-0"
-                  style="
-                    font-size: 0.6rem;
-                    font-weight: bold;
-                    color: #010768;
-                    position: relative;
-                    left: -5px;
-                  "
-                >
-                  Admin
-                </p>
+                <div class="nav-icon-container">
+                  <i class="bi bi-speedometer2 fs-3 text-dark"></i>
+                </div>
+                <p class="authText">Admin</p>
               </a>
             </div>
           </div>
