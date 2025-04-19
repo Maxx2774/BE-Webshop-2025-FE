@@ -45,6 +45,18 @@ body {
   }
 }
 
+/* For phones like iPhone 12 Pro, iPhone 12 SE. Otherwise, the button next to logo breaks */
+@media (max-width: 420px) {
+  .navbar-brand img {
+    height: 40px;
+  }
+
+  .navbar .btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
 /* SEARCH BAR  */
 
 .search-icon {
@@ -475,5 +487,16 @@ body {
     width: 40px;
     height: 40px;
     font-size: 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .navbar-brand img {
+    height: 40px;
+  }
+
+  .navbar .btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
   }
 }
