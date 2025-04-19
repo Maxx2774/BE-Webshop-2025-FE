@@ -1,3 +1,32 @@
+window.addEventListener("DOMContentLoaded", () => {
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.6 },
+    colors: ["#208502", "#002aa8", "#4CAF50", "#FFC107"],
+  });
+
+  setTimeout(() => {
+    confetti({
+      particleCount: 50,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 },
+      colors: ["#208502", "#002aa8", "#4CAF50", "#FFC107"],
+    });
+  }, 250);
+
+  setTimeout(() => {
+    confetti({
+      particleCount: 50,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 },
+      colors: ["#208502", "#002aa8", "#4CAF50", "#FFC107"],
+    });
+  }, 400);
+});
+
 document.addEventListener("DOMContentLoaded", () => {
   const orderData = JSON.parse(sessionStorage.getItem("orderConfirmation"));
 
