@@ -37,6 +37,12 @@ export function updateCartCount() {
     floatingCartCount.textContent = itemCount;
     floatingCartCount.style.display = itemCount === 0 ? "none" : "inline-block";
   }
+
+  const cartCountBadge = document.getElementById("cart-count-badge");
+  if (cartCountBadge) {
+    cartCountBadge.textContent = itemCount;
+    cartCountBadge.style.display = itemCount === 0 ? "none" : "inline-block";
+  }
 }
 
 // Justerar till svensk valuta
