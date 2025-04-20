@@ -655,29 +655,9 @@ body {
   }
 }
 
-.nav-hover-effect .nav-icon-container {
-  transition: transform 0.3s ease;
-}
-
-.nav-hover-effect:hover .nav-icon-container {
-  transform: translateY(-2px);
-}
-
-.nav-hover-effect i {
-  transition: color 0.3s ease;
-}
-
-.nav-hover-effect:hover i {
-  color: #010768;
-}
-
-.nav-hover-effect .authText {
-  transition: color 0.3s ease, font-weight 0.3s ease;
-}
-
 .nav-hover-effect:hover .authText {
   color: #010768;
-  font-weight: 600;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 
 /* Detta är promptad via AI för att få ikonerna mer fylld. Ingen ork att designa om dem - hitta ingen alt */
