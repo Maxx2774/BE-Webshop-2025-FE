@@ -84,6 +84,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   checkUserLoggedIn();
 
+  document
+    .getElementById("loginModal")
+    .addEventListener("hidden.bs.modal", hideNotifications);
+
   // Handle Register Form Submission
   registerForm.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -237,7 +241,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     setTimeout(() => {
       loginUser(email, password);
-    }, 1500); // Hur länge spinnern visas
+    }, 1200); // Hur länge spinnern visas
   });
 
   // Helper function to show login form
