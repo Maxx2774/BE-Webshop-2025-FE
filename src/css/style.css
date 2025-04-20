@@ -576,7 +576,7 @@ body {
   justify-content: center;
   align-items: center;
   font-size: 13px;
-  background-color: #909090;
+  background-color: #e4e4e4;
   text-align: center;
   margin: auto;
   height: 25px;
@@ -630,7 +630,7 @@ body {
   font-weight: 600;
 }
 
-/* Detta är promptad via AI för att få ikonerna mer fylld. Ingen ork att designa om dem - hitta ingern alt */
+/* Detta är promptad via AI för att få ikonerna mer fylld. Ingen ork att designa om dem - hitta ingen alt */
 .position-relative i.bi {
   -webkit-text-stroke: 0.5px currentColor;
   text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.1);
