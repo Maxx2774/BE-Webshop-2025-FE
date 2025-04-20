@@ -498,8 +498,8 @@ async function handleOrderSubmission() {
 
   try {
     const orderButton = document.getElementById("place-order");
-    const originalText = orderButton.textContent;
-    orderButton.textContent = "Bearbetar...";
+    const originalHTML = orderButton.innerHTML;
+    orderButton.innerHTML = `<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span> Bekräftar...`;
     orderButton.disabled = true;
 
     const url = `${getBaseUrl()}orders`;
