@@ -679,4 +679,20 @@ body {
   text-shadow: 1px 0px 1px rgba(0, 0, 0, 0.1);
 }
 
+/* AUTH MODAL VALIDATION MSGS  */
+.alert-success {
+  border-color: #28a745 !important;
+  background-color: rgba(40, 167, 69, 0.1);
+}
+
+.alert-danger {
+  border-color: #dc3545 !important;
+  background-color: rgba(220, 53, 69, 0.1);
+}
+
+.alert {
+  transition: opacity 0.3s ease;
+  border-radius: 8px;
+}
+
 /* ----- TBC. */
