@@ -745,12 +745,12 @@ body {
 }
 
 #place-order {
-  background-color: #208502;
+  background-color: #196d00;
   font-family: "Montserrat", sans-serif;
   border: none;
   font-size: 0.95rem;
   border-radius: 10px;
-  font-weight: 600;
+  font-weight: 700;
   padding: 14px;
   letter-spacing: 1px;
   box-shadow: 0 4px 12px rgba(46, 139, 87, 0.2);
@@ -761,6 +761,7 @@ body {
 #place-order:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 16px rgba(46, 139, 87, 0.25);
+  background-color: #104600;
 }
 
 /* ----- TBC. */
