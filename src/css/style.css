@@ -738,10 +738,6 @@ body {
   box-shadow: 5px 5px 10px #f0f0f0, -5px -5px 10px #ffffff;
 }
 
-.checkout-section .card:hover {
-  transform: translateY(-3px);
-}
-
 #place-order {
   background-color: #196d00;
   font-family: "Montserrat", sans-serif;
