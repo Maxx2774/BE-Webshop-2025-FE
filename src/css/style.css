@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
 :root {
   font-family: Arial, sans-serif;
   color: #333;
@@ -693,6 +695,65 @@ body {
 .alert {
   transition: opacity 0.3s ease;
   border-radius: 8px;
+}
+
+/* CHECKOUT MODERNIZATION */
+
+.checkout-section .form-control,
+.checkout-section .form-select {
+  border-radius: 10px;
+  border: 1px solid #eaeaea;
+  padding: 12px 15px;
+  box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s;
+}
+
+.checkout-section .form-control:focus,
+.checkout-section .form-select:focus {
+  box-shadow: inset 2px 2px 8px rgba(0, 0, 0, 0.08);
+  border-color: #208502;
+}
+
+.checkout-icon-bg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background-color: rgba(32, 133, 2, 0.1);
+  color: #208502;
+}
+
+.checkout-section .card {
+  border-radius: 12px;
+  border: 1px solid #eaeaea;
+  transition: all 0.3s;
+  background: linear-gradient(145deg, #ffffff, #f5f5f5);
+  box-shadow: 5px 5px 10px #f0f0f0, -5px -5px 10px #ffffff;
+}
+
+.checkout-section .card:hover {
+  transform: translateY(-3px);
+}
+
+#place-order {
+  background-color: #208502;
+  font-family: "Montserrat", sans-serif;
+  border: none;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: 14px;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 12px rgba(46, 139, 87, 0.2);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+
+#place-order:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(46, 139, 87, 0.25);
 }
 
 /* ----- TBC. */
