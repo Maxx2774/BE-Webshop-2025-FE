@@ -585,6 +585,13 @@ body {
   text-transform: uppercase;
 }
 
+@media (max-width: 550px) {
+  .ourTeam {
+    font-size: 10px;
+    height: 20px;
+  }
+}
+
 /* NAV ICONS - LOGIN, LOGOUT, ADMIN, CART + HOVERING EFFECT */
 
 .cart-badge {
