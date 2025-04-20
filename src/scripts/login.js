@@ -221,7 +221,6 @@ async function logoutUser() {
       logoutButton.classList.add("d-none");
       loginButton.classList.remove("d-none");
       hideAdminFeatures();
-      alert("Logged out successfully!");
     } else {
       console.error("⚠️ Logout failed:", data.message);
     }
