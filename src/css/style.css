@@ -117,6 +117,13 @@ body {
   margin-bottom: 0.75rem;
 }
 
+.btn-added {
+  background-color: #29b100 !important;
+
+  color: white !important;
+  transition: all 0.3s ease;
+}
+
 /* Buy product btn custom styling. Added a nice hovering effect aswell. */
 .list-group-item .btn-sky,
 #modal-product-details .btn-sky {

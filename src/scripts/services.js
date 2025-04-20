@@ -1,16 +1,35 @@
 export const addToCart = (product) => {
-  toastr.options = {
-    timeOut: "1500",
-  };
+  const button = event.target;
+  if (button.disabled) return;
 
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   let existingProduct = cart.find((item) => item.id === product.id);
 
+  if (existingProduct && existingProduct.quantity >= 50) {
+    toastr.options = { timeOut: "1500" };
+    toastr.error(`Max antal för ${product.name} är 50 st.`);
+    return;
+  }
+
+  button.disabled = true;
+
+  const originalText = button.textContent;
+  const originalClass = button.className;
+
+  button.textContent = "Tillagd";
+  button.className = "btn btn-added w-100";
+
+  setTimeout(() => {
+    button.textContent = originalText;
+    button.className = originalClass;
+    button.disabled = false;
+  }, 1500);
+
+  toastr.options = {
+    timeOut: "1500",
+  };
+
   if (existingProduct) {
-    if (existingProduct.quantity >= 50) {
-      toastr.error(`Max antal för ${product.name} är 50 st.`);
-      return;
-    }
     existingProduct.quantity += 1;
   } else {
     product.quantity = 1;
