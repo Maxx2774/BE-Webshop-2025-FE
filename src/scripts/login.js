@@ -11,6 +11,39 @@ const loginModal = new bootstrap.Modal(document.getElementById("loginModal"));
 const emailRegex = /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/;
 const passwordRegex = /^.{6,}$/;
 
+function showLoginError(message) {
+  const notification = document.getElementById("login-notification");
+  notification.className = "alert alert-danger mb-3";
+  notification.textContent = message;
+  notification.classList.remove("d-none");
+}
+
+function showLoginSuccess(message) {
+  const notification = document.getElementById("login-notification");
+  notification.className = "alert alert-success mb-3";
+  notification.textContent = message;
+  notification.classList.remove("d-none");
+}
+
+function showRegisterError(message) {
+  const notification = document.getElementById("register-notification");
+  notification.className = "alert alert-danger mb-3";
+  notification.textContent = message;
+  notification.classList.remove("d-none");
+}
+
+function showRegisterSuccess(message) {
+  const notification = document.getElementById("register-notification");
+  notification.className = "alert alert-success mb-3";
+  notification.textContent = message;
+  notification.classList.remove("d-none");
+}
+
+function hideNotifications() {
+  document.getElementById("login-notification").classList.add("d-none");
+  document.getElementById("register-notification").classList.add("d-none");
+}
+
 // Säkerhetsmeddelande. Visa meddelande när användaren klickar på "Logga in" eller "Registrera".
 document.addEventListener("DOMContentLoaded", function () {
   showLoginLink.addEventListener("click", function () {
@@ -62,17 +95,17 @@ document.addEventListener("DOMContentLoaded", function () {
     ).value;
 
     if (!emailRegex.test(email)) {
-      alert("Invalid email format. Please enter a valid email.");
+      showRegisterError("Ange en giltig e-postadress.");
       return;
     }
 
     if (!passwordRegex.test(password)) {
-      alert("Password must be at least 6 characters long.");
+      showRegisterError("Lösenordet måste vara minst 6 tecken långt.");
       return;
     }
 
     if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+      showRegisterError("Lösenorden matchar inte!");
       return;
     }
 
@@ -115,14 +148,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const result = await response.json();
       if (response.status === 201) {
-        alert("Registration successful. You can now log in.");
-        showLoginForm();
+        showRegisterSuccess("Registrering lyckades! Du kan nu logga in.");
+        setTimeout(showLoginForm, 1000);
       } else {
-        alert("Registration failed. Please try again.");
+        showRegisterError("Registrering misslyckades. Försök igen.");
       }
     } catch (error) {
       console.error("Registration error:", error);
-      alert("There was an error registering. Please try again later.");
+      showRegisterError(
+        "Ett fel uppstod vid registrering. Försök igen senare."
+      );
     }
   }
 
@@ -130,6 +165,8 @@ document.addEventListener("DOMContentLoaded", function () {
   async function loginUser(email, password) {
     const url = `${getBaseUrl()}auth/signin`;
     const data = { email, password };
+    const loginSpinner = document.getElementById("login-spinner");
+    const loginButton = document.getElementById("login-submit-btn");
 
     try {
       const response = await fetch(url, {
@@ -141,6 +178,9 @@ document.addEventListener("DOMContentLoaded", function () {
         credentials: "include", // Include cookies in the request
       });
 
+      loginSpinner.classList.add("d-none");
+      loginButton.disabled = false;
+
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
@@ -149,16 +189,20 @@ document.addEventListener("DOMContentLoaded", function () {
       if (response.status === 200) {
         localStorage.setItem("user", JSON.stringify(result.user));
         checkAdminStatus(result.user);
-        alert("Login successful");
-        loginModal.hide();
-        logoutButton.classList.remove("d-none");
-        loginButton.classList.add("d-none");
+        showLoginSuccess("Inloggning lyckades!");
+        setTimeout(() => {
+          loginModal.hide();
+          document.getElementById("login-button").classList.add("d-none");
+          document.getElementById("logout-button").classList.remove("d-none");
+        }, 1000);
       } else {
-        alert("Invalid login credentials");
+        showLoginError("Hmm... stämmer allt?");
       }
     } catch (error) {
       console.error("Login error:", error);
-      alert("There was an error logging in. Please try again later.");
+      showLoginError("Hmm... stämmer allt?");
+      loginSpinner.classList.add("d-none");
+      loginButton.disabled = false;
     }
   }
 
@@ -174,16 +218,26 @@ document.addEventListener("DOMContentLoaded", function () {
     const minPasswordLength = 5;
 
     if (!emailPattern.test(email)) {
-      alert("Please enter a valid email address.");
+      showLoginError("Ange en giltig e-postadress.");
+
       return;
     }
 
     if (password.length < minPasswordLength) {
-      alert("Password must be at least 5 characters long.");
+      showLoginError("Lösenordet måste vara minst 5 tecken långt.");
       return;
     }
 
-    loginUser(email, password);
+    const loginSpinner = document.getElementById("login-spinner");
+    const loginButton = document.getElementById("login-submit-btn");
+
+    hideNotifications();
+    loginSpinner.classList.remove("d-none");
+    loginButton.disabled = true;
+
+    setTimeout(() => {
+      loginUser(email, password);
+    }, 1500); // Hur länge spinnern visas
   });
 
   // Helper function to show login form
@@ -191,6 +245,7 @@ document.addEventListener("DOMContentLoaded", function () {
     loginForm.style.display = "block";
     registerForm.style.display = "none";
     document.getElementById("loginModalLabel").textContent = "Logga in";
+    hideNotifications();
   }
 
   // Helper function to show register form
@@ -199,6 +254,7 @@ document.addEventListener("DOMContentLoaded", function () {
     registerForm.style.display = "block";
     document.getElementById("loginModalLabel").textContent =
       "Registrera ett konto";
+    hideNotifications();
   }
 });
 

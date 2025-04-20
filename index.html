@@ -456,6 +456,12 @@
               >
             </div>
 
+            <div
+              id="login-notification"
+              class="alert d-none mb-3"
+              role="alert"
+            ></div>
+
             <!-- Login Form  -->
             <div id="login-form">
               <form>
@@ -489,7 +495,18 @@
                   ></i>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100 py-2 mb-3">
+                <div id="login-spinner" class="d-none text-center mb-3">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Laddar...</span>
+                  </div>
+                  <p class="mt-2 text-primary">Verifierar dina uppgifter...</p>
+                </div>
+
+                <button
+                  type="submit"
+                  id="login-submit-btn"
+                  class="btn btn-primary w-100 py-2 mb-3"
+                >
                   Logga in
                 </button>
 
@@ -509,6 +526,11 @@
 
             <!-- Register Form  -->
             <div id="register-form" style="display: none">
+              <div
+                id="register-notification"
+                class="alert d-none mb-3"
+                role="alert"
+              ></div>
               <form>
                 <div class="position-relative mb-3">
                   <div class="form-floating">
