@@ -91,9 +91,14 @@ const productCategory = async (categoryId) => {
   updateProductContainer(
     data,
     `<div class="d-flex flex-column align-items-start mb-3">
-  <span class="badge bg-dark-subtle text-dark mb-2">KATEGORI</span>
-  <h2 class="fs-2 fw-bold text-dark">${category.name}</h2>
-</div>`,
+    <div class="d-flex align-items-center mb-2">
+      <span class="badge bg-dark-subtle text-dark">KATEGORI</span>
+      <a href="index.html" class="text-decoration-none text-secondary ms-2">
+        <i class="fas fa-times"></i>
+      </a>
+    </div>
+      <h2 class="fs-2 fw-bold text-dark mb-0">${category.name}</h2>
+    </div>`,
     "product-container"
   );
 };
