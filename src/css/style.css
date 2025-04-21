@@ -259,6 +259,14 @@ body {
   cursor: pointer;
 }
 
+#categories-list i {
+  width: 20px;
+}
+
+#categories-mobile-list i {
+  width: 25px;
+}
+
 /* PAYMENT ICONS CHECKOUT */
 
 .swishlogo {
